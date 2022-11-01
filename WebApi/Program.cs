@@ -1,5 +1,6 @@
 using Application.Interfaces.Contexts;
 using Domain.Users;
+using Infrastructure.EmailService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -58,7 +59,8 @@ builder.Services.Configure<IdentityOptions>(options =>
 //Db service
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 
-
+//Service email
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
