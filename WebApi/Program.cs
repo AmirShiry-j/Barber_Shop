@@ -5,9 +5,15 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Persistence.Contexts;
+using System.Runtime;
+using System.Text;
+using WebApi.Helpers;
 using WebApi.Tools.PersianError;
+using WebApi.Tools.TokenValidator;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -91,7 +97,36 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
+//Config JWT Authenfication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(jwtConfig =>
+{
+    jwtConfig.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidIssuer = JwtInfo.Issuer,
+        ValidAudience = JwtInfo.Audience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtInfo.SecretKey)),
+        ValidateIssuerSigningKey = true,
+        ValidateLifetime = true
+    };
+    jwtConfig.SaveToken = true;
+    jwtConfig.Events = new JwtBearerEvents
+    {
+        OnTokenValidated = context =>
+        {
+            //Dependent service token validator
+            var tokenValidatorService = context.HttpContext.RequestServices.GetRequiredService<ITokenValidator>();
 
+            //Enable it
+            return tokenValidatorService.Execute(context);
+        }
+    };
+});
 
 ////Services of DB
 //Db service
@@ -103,6 +138,9 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Services of token validator
+builder.Services.AddScoped<ITokenValidator, TokenValidator>();
 
 var app = builder.Build();
 
