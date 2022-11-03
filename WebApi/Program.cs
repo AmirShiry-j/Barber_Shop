@@ -1,4 +1,6 @@
 ﻿using Application.Interfaces.Contexts;
+using Application.TokenService;
+using Application.UserService;
 using Domain.Users;
 using Infrastructure.EmailService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -131,6 +133,15 @@ builder.Services.AddAuthentication(options =>
 ////Services of DB
 //Db service
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
+
+
+//Authorize and token services
+builder.Services.AddScoped<IUserTokenService, UserTokenService>();
+builder.Services.AddScoped<IUserAuthorizeService, UserAuthorizeService>();
+
+//User services
+builder.Services.AddScoped<IGetAllUserService, GetAllUserService>();
+
 
 //Service email
 builder.Services.AddScoped<IEmailService, EmailService>();

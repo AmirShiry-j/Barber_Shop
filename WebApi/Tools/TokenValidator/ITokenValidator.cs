@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Application.TokenService;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using WebApi.Tools.Hasher;
 
 namespace WebApi.Tools.TokenValidator
 {
@@ -10,8 +12,10 @@ namespace WebApi.Tools.TokenValidator
     }
     public class TokenValidator : ITokenValidator
     {
-        public TokenValidator()
+        private readonly IUserTokenService _userTokenService;
+        public TokenValidator(IUserTokenService userTokenService)
         {
+            _userTokenService = userTokenService;
         }
         public async Task Execute(TokenValidatedContext context)
         {
@@ -35,8 +39,29 @@ namespace WebApi.Tools.TokenValidator
             //Check token is JwtSecurityToken
             if (context.SecurityToken is JwtSecurityToken)
             {
+                //Convert to JwtSecurityToken
+                var jwtToken = context.SecurityToken as JwtSecurityToken;
 
-                return;
+                //Find Token
+                var tokenEntity = _userTokenService.GetToken(new SecurityHasher().GetSha256Hash(jwtToken.RawData));
+
+                //Check exist token in db
+                if (tokenEntity == null)
+                {
+                    context.Fail("Token is not exist in DataBase");
+                    return;
+                }
+
+                //Check expire time of token
+                if (tokenEntity.TokenExpireTime < DateTime.Now)
+                {
+                    //Delete token in db
+                    //_userTokenService.DeleteToken(tokenEntity);
+
+                    context.Fail("Token is Expired");
+                    return;
+                }
+
             }
             else
             {
