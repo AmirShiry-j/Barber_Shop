@@ -11,5 +11,8 @@ namespace Domain.Users
     {
         public string FullName { get; set; }
 
+        //Navs
+        public ICollection<Token> Tokens { get; set; }
+
     }
 }
