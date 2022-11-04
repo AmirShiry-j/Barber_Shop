@@ -377,7 +377,7 @@ namespace WebApi.Controllers
             };
 
             //Message for user
-            string message = "رمز عبور جدید به ایمیل شما ارسال شد. لطفا پس از ورود رمز عبور خود را تغییر دهید";
+            string message = "رمز عبور جدید به ایمیل شما ارسال شد. لطفا پس از ورود رمز عبور خود را تغییر دهید" + newPassword;
 
             return Ok(new { Message = message, Links = links });
         }
