@@ -74,7 +74,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Barber Shop", Version = "v1" });
 
     //برای نمایش Description کنترلر ها
-    //c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "WebApi.xml"), true);
+    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "WebApi.Barber.xml"), true);
 
     //For configure Authentication in swaager Ui
     var security = new OpenApiSecurityScheme

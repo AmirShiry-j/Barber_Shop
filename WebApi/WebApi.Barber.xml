@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:WebApi.Controllers.AccountController.Register(WebApi.ModelsAndDtoes.Account.RegisterDto)">
+            <summary>
+            ساختن حساب کاربری
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.AccountController.Login(WebApi.ModelsAndDtoes.Account.LoginDto)">
+            <summary>
+            ورود به حساب کاربری
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.AccountController.ConfirmEmail(System.String)">
+             <summary>
+            ارسال ایمیل برای تایید حساب کاربر
+             </summary>
+             <param name="Email"></param>
+             <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.AccountController.VerifyEmail(WebApi.ModelsAndDtoes.Account.VerifyEmailDto)">
+            <summary>
+            تایید ایمیل با کد ارسالی به ایمیل کاربر
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.AccountController.RefreshToken(System.String)">
+            <summary>
+            رفرش توکن
+            </summary>
+            <param name="RefreshToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.AccountController.ChangePassword(WebApi.ModelsAndDtoes.Account.ChangePasswordDto)">
+            <summary>
+            تغییر رمز عبور
+            </summary>
+            <param name="changePasswordDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.AccountController.Logout">
+            <summary>
+            برای خروج از حساب کاربری
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.AccountController.ForgetPassword(System.String)">
+            <summary>
+            فراموشی رمز عبور
+            </summary>
+            <param name="Email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.AccountController.CreateNewTokenForUser(Domain.Users.User)">
+            <summary>
+            متد ساخت توکن jwt و رفرش توکن
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
