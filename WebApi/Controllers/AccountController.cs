@@ -43,6 +43,8 @@ namespace WebApi.Controllers
             _signInManager = signInManager;
             _logger = logger;
             _emailService = emailService;
+            _userTokenService = userTokenService;
+            _userAuthorizeService = userAuthorizeService;
         }
 
         /// <summary>
