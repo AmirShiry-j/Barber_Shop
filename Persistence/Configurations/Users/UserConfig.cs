@@ -1,6 +1,7 @@
 ﻿using Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,12 @@ namespace Persistence.Configurations.Users
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            var converterGenderEnum = new Microsoft.EntityFrameworkCore.Storage.ValueConversion.EnumToStringConverter<Gender>();
+            var converterHewittEnum = new Microsoft.EntityFrameworkCore.Storage.ValueConversion.EnumToStringConverter<Hewitt>();
+
             builder.Property(p => p.FullName).IsRequired().HasMaxLength(50);
+            builder.Property(p => p.Gender).IsRequired().HasConversion(converterGenderEnum);
+            builder.Property(p => p.Hewitt).IsRequired().HasConversion(converterHewittEnum);
         }
     }
 }
