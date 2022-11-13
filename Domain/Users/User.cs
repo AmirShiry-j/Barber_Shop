@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Domain.Salons;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace Domain.Users
         public bool AcceptedAsBarber { get; set; }
         //Navs
         public ICollection<Token> Tokens { get; set; }
+        public Barber Barber { get; set; }
+        public int? BarberId { get; set; }
 
     }
     public enum Gender
