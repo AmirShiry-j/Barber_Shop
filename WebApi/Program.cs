@@ -2,6 +2,7 @@
 using Application.TokenService;
 using Application.UserService;
 using Domain.Users;
+using ExceptionHandling;
 using Infrastructure.EmailService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NLog.Web;
 using Persistence.Contexts;
 using System.Runtime;
 using System.Text;
@@ -18,6 +20,11 @@ using WebApi.Tools.PersianError;
 using WebApi.Tools.TokenValidator;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Nlog configs
+builder.Logging.ClearProviders();
+builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Information);
+builder.Host.UseNLog();
 
 IConfiguration Configuration = builder.Configuration;
 
@@ -99,6 +106,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
+
 //Config JWT Authenfication
 builder.Services.AddAuthentication(options =>
 {
@@ -145,6 +153,10 @@ builder.Services.AddScoped<IGetAllUserService, GetAllUserService>();
 
 //Service email
 builder.Services.AddScoped<IEmailService, EmailService>();
+//Service Handler
+builder.Services.AddSingleton<HandlerOptions>();
+
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -171,8 +183,21 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.UseDeveloperExceptionPage();
+}
+else
+if (app.Environment.IsProduction())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+
+    //For takes exeption
+    app.UseMiddleware<ExceptionHandlerMiddleware>();
 }
 
+
+app.UseHsts();
 app.UseHttpsRedirection();
 
 app.UseRouting();
