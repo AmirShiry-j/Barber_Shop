@@ -84,7 +84,7 @@ namespace WebApi.Controllers
                 };
 
                 //Initial message
-                string message = "کد تایید حساب کاربری به ایمیل شما ارسال شد. لطفا با وارد کردن کد ارسالی حساب خود را تایید کنید";
+                string message = "کد تایید حساب کاربری به ایمیل شما ارسال شد. لطفا با وارد کردن کد ارسالی حساب خود را تایید کنید " + code;
 
                 return Ok(new { Message = message, Link = link });
             }
@@ -196,15 +196,11 @@ namespace WebApi.Controllers
                 user.EmailConfirmed = true;
                 var resultConfirmedEmail = await _userManager.UpdateAsync(user);
 
-                //HATEOAS links
-                Link link = new Link
-                {
-                    HttpMethod = "Post",
-                    For = "Login",
-                    Url = Url.Action(nameof(Login), "Account", null, protocol: Request.Scheme)
-                };
 
-                return Ok(new { Link = link });
+                //Build and Get tokes
+                var tokens = await CreateNewTokenForUser(user);
+
+                return Ok(tokens);
             }
             else
             {
