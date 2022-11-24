@@ -1,9 +1,12 @@
 ﻿using Application.Interfaces.Contexts;
+using Application.SalonsService.Command;
+using Application.SalonsService.Query;
 using Application.TokenService;
 using Application.UserService;
 using Domain.Users;
 using ExceptionHandling;
 using Infrastructure.EmailService;
+using Infrastructure.MappingProfile;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -142,6 +145,11 @@ builder.Services.AddAuthentication(options =>
 //Db service
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 
+//AuthoMapper Profile
+builder.Services.AddAutoMapper(typeof(SalonMppingProfile));
+
+
+
 
 //Authorize and token services
 builder.Services.AddScoped<IUserTokenService, UserTokenService>();
@@ -149,6 +157,12 @@ builder.Services.AddScoped<IUserAuthorizeService, UserAuthorizeService>();
 
 //User services
 builder.Services.AddScoped<IGetAllUserService, GetAllUserService>();
+
+//Salon services
+builder.Services.AddScoped<IAddSalonService, AddSalonService>();
+builder.Services.AddScoped<IEditSalonService,EditSalonService>();
+builder.Services.AddScoped<IDeleteSalonService, DeleteSalonService>();
+builder.Services.AddScoped<IGetSalonByIdService, GetSalonByIdService>();
 
 
 //Service email
