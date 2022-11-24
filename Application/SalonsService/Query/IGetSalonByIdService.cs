@@ -1,6 +1,7 @@
 ﻿using Application.Common;
 using Application.Interfaces.Contexts;
 using Application.SalonsService.Command;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -18,9 +19,11 @@ namespace Application.SalonsService.Query
     public class GetSalonByIdService : IGetSalonByIdService
     {
         private readonly IDataBaseContext _dbContext;
-        public GetSalonByIdService(IDataBaseContext dbContext)
+        private readonly IMapper _mapper;
+        public GetSalonByIdService(IDataBaseContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
         public async Task<ResultDto<SalonDto>> Execute(int Id)
         {
@@ -31,17 +34,7 @@ namespace Application.SalonsService.Query
             if (salon != null)
             {
                 //Map to dto
-                var dto = new SalonDto
-                {
-                    Name = salon.Name,
-                    PhoneNumber = salon.PhoneNumber,
-                    Telphone = salon.Telphone,
-                    Id = salon.Id,
-                    OwnerFullName = salon.Owner.FullName,
-                    OwnerId = salon.OwnerId,
-                    Address = salon.Address,
-                    Description = salon.Description,
-                };
+                var dto = _mapper.Map<SalonDto>(salon);
 
                 return new ResultDto<SalonDto>
                 {
