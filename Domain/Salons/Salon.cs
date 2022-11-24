@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +19,7 @@ namespace Domain.Salons
         //Nav
         public ICollection<Barber> Barbers { get; set; }
         public ICollection<SalonImage> SalonImages { get; set; }
+        public User Owner { get; set; }
+        public Guid OwnerId { get; set; }
     }
 }

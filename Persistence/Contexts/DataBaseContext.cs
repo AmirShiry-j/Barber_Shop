@@ -58,6 +58,17 @@ namespace Persistence.Contexts
                 .HasForeignKey(p => p.SalonId)
                 .IsRequired(true);
 
+            builder.Entity<Salon>()
+                .HasOne(p=>p.Owner)
+                .WithOne(p=>p.Salon)
+                .HasForeignKey<Salon>(p=>p.OwnerId)
+                .IsRequired(true);
+
+            builder.Entity<User>()
+                .HasOne(p => p.Salon)
+                .WithOne(p => p.Owner)
+                .HasForeignKey<User>(p => p.SalonId)
+                .IsRequired(false);
 
             //Users
             builder.ApplyConfiguration(new UserConfig());

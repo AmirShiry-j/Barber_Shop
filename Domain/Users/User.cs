@@ -18,6 +18,8 @@ namespace Domain.Users
         public ICollection<Token> Tokens { get; set; }
         public Barber Barber { get; set; }
         public int? BarberId { get; set; }
+        public Salon Salon { get; set; }
+        public int? SalonId { get; set; }
 
     }
     public enum Gender
