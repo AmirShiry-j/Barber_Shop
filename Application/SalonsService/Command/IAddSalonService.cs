@@ -1,5 +1,6 @@
 ﻿using Application.Common;
 using Application.Interfaces.Contexts;
+using AutoMapper;
 using Domain.Salons;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,24 +18,18 @@ namespace Application.SalonsService.Command
     public class AddSalonService : IAddSalonService
     {
         ILogger<AddSalonService> _logger;
+        private readonly IMapper _mapper;
         private readonly IDataBaseContext _dbContext;
-        public AddSalonService(IDataBaseContext dbContext, ILogger<AddSalonService> logger)
+        public AddSalonService(IDataBaseContext dbContext, ILogger<AddSalonService> logger, IMapper mapper)
         {
             _dbContext = dbContext;
             _logger = logger;
+            _mapper = mapper;
         }
         public async Task<ResultDto<Salon>> Execute(CreateSalonDto dto)
         {
             //Map
-            var newSalon = new Salon
-            {
-                OwnerId=dto.UserId,
-                Address = dto.Address,
-                Description = dto.Description,
-                Name = dto.Name,
-                PhoneNumber = dto.PhoneNumber,
-                Telphone = dto.Telphone,
-            };
+            var newSalon = _mapper.Map<Salon>(dto);
 
             //Add to db
             _dbContext.Salons.Add(newSalon);

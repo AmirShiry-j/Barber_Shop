@@ -48,7 +48,8 @@ namespace Application.SalonsService.Command
                     return new ResultDto
                     {
                         IsSuccess = false,
-                        Message = "این یوزر مالک آرایشگاه نیست";
+                        Message = "این یوزر مالک آرایشگاه نیست"
+                    };
                 };
             }
             else//Is not exist
