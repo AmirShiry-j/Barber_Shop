@@ -64,7 +64,8 @@ namespace WebApi.Controllers
             {
                 Email = model.Email,
                 UserName = model.Email,
-                FullName = model.FullName
+                FullName = model.FullName,
+                Gender = (Domain.Users.Gender)model.Gender
             };
 
             //Register user
