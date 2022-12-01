@@ -15,6 +15,7 @@ namespace Application.Interfaces.Contexts
         DbSet<User> Users { get; set; }
         DbSet<Role> Roles { get; set; }
         DbSet<Token> Tokens { get; set; }
+        DbSet<Customer> Customers { get; set; }
         //Salons
         DbSet<Salon> Salons { get; set; }
         DbSet<Barber> Barbers { get; set; }

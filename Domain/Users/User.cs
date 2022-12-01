@@ -12,12 +12,16 @@ namespace Domain.Users
     {
         public string FullName { get; set; }
         public Gender Gender { get; set; }
-        public Hewitt Hewitt { get; set; }
         public bool AcceptedAsBarber { get; set; }
         //Navs
         public ICollection<Token> Tokens { get; set; }
+        //
         public Barber Barber { get; set; }
         public int? BarberId { get; set; }
+        //
+        public Customer Customer { get; set; }
+        public int? CustomerId { get; set; }
+        //
         public Salon Salon { get; set; }
         public int? SalonId { get; set; }
 
@@ -26,10 +30,5 @@ namespace Domain.Users
     {
         Male=1,
         Female=2
-    }
-    public enum Hewitt
-    {
-        Customer=1,
-        Barber=2
     }
 }

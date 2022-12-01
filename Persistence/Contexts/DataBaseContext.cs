@@ -23,11 +23,11 @@ namespace Persistence.Contexts
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Token> Tokens { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         //Salons
         public DbSet<Salon> Salons { get; set; }
         public DbSet<Barber> Barbers { get; set; }
         public DbSet<SalonImage> SalonImages { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -49,19 +49,19 @@ namespace Persistence.Contexts
             builder.Entity<User>()
                 .HasOne(p => p.Barber)
                 .WithOne(p => p.User)
-                .HasForeignKey<User>(p=>p.BarberId)
+                .HasForeignKey<User>(p => p.BarberId)
                 .IsRequired(false);
 
             builder.Entity<Salon>()
-                .HasMany(p=>p.SalonImages)
+                .HasMany(p => p.SalonImages)
                 .WithOne()
                 .HasForeignKey(p => p.SalonId)
                 .IsRequired(true);
 
             builder.Entity<Salon>()
-                .HasOne(p=>p.Owner)
-                .WithOne(p=>p.Salon)
-                .HasForeignKey<Salon>(p=>p.OwnerId)
+                .HasOne(p => p.Owner)
+                .WithOne(p => p.Salon)
+                .HasForeignKey<Salon>(p => p.OwnerId)
                 .IsRequired(true);
 
             builder.Entity<User>()
