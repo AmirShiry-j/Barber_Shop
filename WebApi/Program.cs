@@ -1,4 +1,5 @@
-﻿using Application.Interfaces.Contexts;
+﻿using Application.CustomerService.Command;
+using Application.Interfaces.Contexts;
 using Application.SalonsService.Command;
 using Application.SalonsService.Query;
 using Application.TokenService;
@@ -157,6 +158,9 @@ builder.Services.AddScoped<IUserAuthorizeService, UserAuthorizeService>();
 
 //User services
 builder.Services.AddScoped<IGetAllUserService, GetAllUserService>();
+
+//Customer Service
+builder.Services.AddScoped<IAddCustomerService, AddCustomerService>();
 
 //Salon services
 builder.Services.AddScoped<IAddSalonService, AddSalonService>();

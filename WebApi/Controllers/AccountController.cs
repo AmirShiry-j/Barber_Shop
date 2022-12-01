@@ -1,4 +1,5 @@
-﻿using Application.TokenService;
+﻿using Application.CustomerService.Command;
+using Application.TokenService;
 using Application.UserService;
 using Domain.Users;
 using Infrastructure.EmailService;
@@ -28,6 +29,7 @@ namespace WebApi.Controllers
         private readonly ILogger<AccountController> _logger;
         private readonly IUserAuthorizeService _userAuthorizeService;
         private readonly IUserTokenService _userTokenService;
+        private readonly IAddCustomerService _addCustomerService;
         private readonly IEmailService _emailService;
         public AccountController(UserManager<User> userManager,
             RoleManager<Role> roleManager,
@@ -35,6 +37,7 @@ namespace WebApi.Controllers
             ILogger<AccountController> logger,
             IUserTokenService userTokenService,
             IUserAuthorizeService userAuthorizeService,
+            IAddCustomerService addCustomerService,
             IEmailService emailService
             )
         {
@@ -45,6 +48,7 @@ namespace WebApi.Controllers
             _emailService = emailService;
             _userTokenService = userTokenService;
             _userAuthorizeService = userAuthorizeService;
+            _addCustomerService = addCustomerService;
         }
 
         /// <summary>
@@ -67,6 +71,9 @@ namespace WebApi.Controllers
             var resultRegister = await _userManager.CreateAsync(newUser, model.Password);
             if (resultRegister.Succeeded)
             {
+                //Insert a customer record for this user
+                var customerId = _addCustomerService.Execute(Guid.Parse(newUser.Id)).Result.Data;
+
                 //Confirmation email
                 string code = await _userManager.GenerateTwoFactorTokenAsync(newUser, "Email");
 
@@ -84,7 +91,7 @@ namespace WebApi.Controllers
                 };
 
                 //Initial message
-                string message = "کد تایید حساب کاربری به ایمیل شما ارسال شد. لطفا با وارد کردن کد ارسالی حساب خود را تایید کنید " + code;
+                string message = "کد تایید حساب کاربری به ایمیل شما ارسال شد. لطفا با وارد کردن کد ارسالی حساب خود را تایید کنید ";
 
                 return Ok(new { Message = message, Link = link, Code = code });
             }
