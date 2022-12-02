@@ -58,31 +58,10 @@ namespace WebApi.Controllers
             //Delete image profile user if has
             if (!string.IsNullOrEmpty(user.ImageName))
             {
-                //Delete old image file
-                string pathOldFile = Path.Combine(basePath, user.ImageName);
-                if (System.IO.File.Exists(pathOldFile))
-                {
-                    System.IO.File.Delete(pathOldFile);
-                    user.ImageName = null;
+                var resultDelete = await DeleteImageFile(user);
 
-                    //Update User (delete profile img)
-                    var resultUpdate1 = await _userManager.UpdateAsync(user);
-                    if (resultUpdate1.Succeeded == false)
-                    {
-                        return Problem();
-                    }
-                }
-                else
-                {
-                    user.ImageName = null;
-
-                    //Update User (delete profile img)
-                    var resultUpdate1 = await _userManager.UpdateAsync(user);
-                    if (resultUpdate1.Succeeded == false)
-                    {
-                        return Problem();
-                    }
-                }
+                if (resultDelete == false)
+                    return Problem();
             }
 
             ////Save Image in files and db
@@ -110,6 +89,70 @@ namespace WebApi.Controllers
 
             //Return success
             return Ok();
+        }
+
+        /// <summary>
+        /// حدف کردن عکس پروفایل
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> Delete()
+        {
+            //Find user
+            var userId = User.Claims?.FirstOrDefault(p => p.Type == "UserId")?.Value;
+            var user = await _userManager.FindByIdAsync(userId);
+
+            //Delete image if has
+            if(!string.IsNullOrEmpty(user.ImageName))
+            {
+                var resultDelete = await DeleteImageFile(user);
+
+                if (resultDelete==false)
+                    return Problem();
+            }
+                
+            //Return success
+            return Ok();
+        }
+
+        [NonAction]
+        public async Task<bool> DeleteImageFile(User user)
+        {
+            //Base Path Image
+            string basePath = Path.Combine(Directory.GetCurrentDirectory(), "Images/Profile");
+
+            //Delete image profile user if has
+            if (!string.IsNullOrEmpty(user.ImageName))
+            {
+                //Delete old image file
+                string pathOldFile = Path.Combine(basePath, user.ImageName);
+                if (System.IO.File.Exists(pathOldFile))
+                {
+                    System.IO.File.Delete(pathOldFile);
+                    user.ImageName = null;
+
+                    //Update User (delete profile img)
+                    var resultUpdate1 = await _userManager.UpdateAsync(user);
+                    if (resultUpdate1.Succeeded == false)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    user.ImageName = null;
+
+                    //Update User (delete profile img)
+                    var resultUpdate1 = await _userManager.UpdateAsync(user);
+                    if (resultUpdate1.Succeeded == false)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

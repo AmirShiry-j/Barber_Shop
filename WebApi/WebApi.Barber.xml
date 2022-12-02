@@ -142,5 +142,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.ProfileImageController.Delete">
+            <summary>
+            حدف کردن عکس پروفایل
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>
