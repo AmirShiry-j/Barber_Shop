@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,10 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20221202054631_for_correction_imageName")]
+    partial class for_correction_imageName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +47,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SalonId");
 
-                    b.ToTable("Barbers", (string)null);
+                    b.ToTable("Barbers");
                 });
 
             modelBuilder.Entity("Domain.Salons.Salon", b =>
@@ -83,7 +85,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Salons", (string)null);
+                    b.ToTable("Salons");
                 });
 
             modelBuilder.Entity("Domain.Salons.SalonImage", b =>
@@ -105,7 +107,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SalonId");
 
-                    b.ToTable("SalonImages", (string)null);
+                    b.ToTable("SalonImages");
                 });
 
             modelBuilder.Entity("Domain.Users.Customer", b =>
@@ -121,7 +123,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Domain.Users.Role", b =>
@@ -190,7 +192,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tokens", (string)null);
+                    b.ToTable("Tokens");
                 });
 
             modelBuilder.Entity("Domain.Users.User", b =>

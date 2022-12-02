@@ -17,6 +17,7 @@ namespace Persistence.Configurations.Users
             var converterGenderEnum = new Microsoft.EntityFrameworkCore.Storage.ValueConversion.EnumToStringConverter<Gender>();
 
             builder.Property(p => p.FullName).IsRequired().HasMaxLength(50);
+            builder.Property(p => p.ImageName).IsRequired(false);
             builder.Property(p => p.Gender).IsRequired().HasConversion(converterGenderEnum);
         }
     }

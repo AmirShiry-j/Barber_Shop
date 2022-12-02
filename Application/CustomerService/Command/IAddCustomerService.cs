@@ -35,6 +35,12 @@ namespace Application.CustomerService.Command
             _dbContext.Customers.Add(newCustomer);
             _dbContext.SaveChanges();
 
+            //Set Customerid in user table
+            var user=_dbContext.Users.Find(UserId.ToString());
+            user.CustomerId = newCustomer.Id;
+            _dbContext.SaveChanges();
+
+
             //Return CustomerId
             return new ResultDto<int>
             {

@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="CustomerService\Query\" />
+    <Folder Include="ProfileService\Command\" />
   </ItemGroup>
 
 </Project>

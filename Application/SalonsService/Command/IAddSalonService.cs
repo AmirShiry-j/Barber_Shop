@@ -1,5 +1,6 @@
 ﻿using Application.Common;
 using Application.Interfaces.Contexts;
+using Application.ProfileService.Query;
 using AutoMapper;
 using Domain.Salons;
 using Microsoft.Extensions.Logging;
@@ -20,7 +21,9 @@ namespace Application.SalonsService.Command
         ILogger<AddSalonService> _logger;
         private readonly IMapper _mapper;
         private readonly IDataBaseContext _dbContext;
-        public AddSalonService(IDataBaseContext dbContext, ILogger<AddSalonService> logger, IMapper mapper)
+        public AddSalonService(IDataBaseContext dbContext,
+            ILogger<AddSalonService> logger,
+            IMapper mapper)
         {
             _dbContext = dbContext;
             _logger = logger;

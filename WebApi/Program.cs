@@ -1,5 +1,6 @@
 ﻿using Application.CustomerService.Command;
 using Application.Interfaces.Contexts;
+using Application.ProfileService.Query;
 using Application.SalonsService.Command;
 using Application.SalonsService.Query;
 using Application.TokenService;
@@ -148,6 +149,7 @@ builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 
 //AuthoMapper Profile
 builder.Services.AddAutoMapper(typeof(SalonMppingProfile));
+builder.Services.AddAutoMapper(typeof(UserMappingProfile));
 
 
 
@@ -158,6 +160,8 @@ builder.Services.AddScoped<IUserAuthorizeService, UserAuthorizeService>();
 
 //User services
 builder.Services.AddScoped<IGetAllUserService, GetAllUserService>();
+builder.Services.AddScoped<IGetProfileService, GetProfileService>();
+
 
 //Customer Service
 builder.Services.AddScoped<IAddCustomerService, AddCustomerService>();
