@@ -45,19 +45,19 @@ namespace WebApi.Areas.Admin.Controllers
                     new Link
                     {
                         For="Details",
-                        HttpMethod="Get",
+                        HttpMethod=HttpMethod.Get.ToString(),
                         Url=Url.Action(nameof(Get),"Role",new {RoleId=p.Id, Area="Admin" },Request.Scheme)
                     },
                     new Link
                     {
                         For="Edit",
-                        HttpMethod="Put",
+                        HttpMethod=HttpMethod.Put.ToString(),
                         Url=Url.Action(nameof(Update),"Role",new {Area="Admin" },Request.Scheme)
                     },
                     new Link
                     {
                         For="Delete",
-                        HttpMethod="Delete",
+                        HttpMethod=HttpMethod.Delete.ToString(),
                         Url=Url.Action(nameof(Delete),"Role",new {RoleId=p.Id, Area="Admin" },Request.Scheme)
                     },
                 }
@@ -92,19 +92,19 @@ namespace WebApi.Areas.Admin.Controllers
                         new Link
                         {
                             For="Details",
-                            HttpMethod="Get",
+                            HttpMethod=HttpMethod.Get.ToString(),
                             Url=Url.Action(nameof(Get),"Role",new {RoleId=role.Id, Area="Admin" },Request.Scheme)
                         },
                         new Link
                         {
                             For="Edit",
-                            HttpMethod="Put",
+                            HttpMethod=HttpMethod.Put.ToString(),
                             Url=Url.Action(nameof(Update),"Role",new {Area="Admin" },Request.Scheme)
                         },
                         new Link
                         {
                             For="Delete",
-                            HttpMethod="Delete",
+                            HttpMethod=HttpMethod.Delete.ToString(),
                             Url=Url.Action(nameof(Delete),"Role",new {RoleId=role.Id, Area="Admin" },Request.Scheme)
                         },
                     }

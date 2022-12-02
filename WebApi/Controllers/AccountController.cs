@@ -87,7 +87,7 @@ namespace WebApi.Controllers
                 Link link = new Link
                 {
                     Url = Url.Action(nameof(VerifyEmail), "Account", null, protocol: Request.Scheme),
-                    HttpMethod = "Post",
+                    HttpMethod = HttpMethod.Post.ToString(),
                     For = "VerifyEmail"
                 };
 
@@ -174,7 +174,7 @@ namespace WebApi.Controllers
             Link link = new Link
             {
                 For = "VerifyEmail",
-                HttpMethod = "Post",
+                HttpMethod = HttpMethod.Post.ToString(),
                 Url = Url.Action(nameof(VerifyEmail), "Account", null, protocol: Request.Scheme)
             };
 
@@ -369,13 +369,13 @@ namespace WebApi.Controllers
                 new Link
                 {
                     For="Login",
-                    HttpMethod="Post",
-                    Url=Url.Action(nameof(Login),"Account",null,Request.Scheme)
+                    HttpMethod=HttpMethod.Post.ToString(),
+                    Url= Url.Action(nameof(Login),"Account",null,Request.Scheme)
                 },
                 new Link
                 {
                     For="ChangePassword",
-                    HttpMethod="Post",
+                    HttpMethod=HttpMethod.Post.ToString(),
                     Url=Url.Action(nameof(ChangePassword),"Account",null,Request.Scheme)
                 }
             };
