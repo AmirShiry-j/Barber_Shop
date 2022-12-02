@@ -123,5 +123,18 @@
             <param name="user"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.ProfileController.Get">
+            <summary>
+            بر گردوندن اطلاعات پروفایل
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.ProfileController.Put(WebApi.ModelsAndDtoes.Profile.EditProfileDto)">
+            <summary>
+            ویرایش اطلاعات پروفایل
+            </summary>
+            <param name="editPofileDto"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

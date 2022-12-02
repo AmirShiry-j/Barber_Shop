@@ -1,5 +1,6 @@
 ﻿using Application.CustomerService.Command;
 using Application.Interfaces.Contexts;
+using Application.ProfileService.Command;
 using Application.ProfileService.Query;
 using Application.SalonsService.Command;
 using Application.SalonsService.Query;
@@ -161,6 +162,7 @@ builder.Services.AddScoped<IUserAuthorizeService, UserAuthorizeService>();
 //User services
 builder.Services.AddScoped<IGetAllUserService, GetAllUserService>();
 builder.Services.AddScoped<IGetProfileService, GetProfileService>();
+builder.Services.AddScoped<IEditProfileService, EditProfileService>();
 
 
 //Customer Service

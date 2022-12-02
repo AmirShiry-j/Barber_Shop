@@ -2,6 +2,7 @@
 
 namespace WebApi.ModelsAndDtoes.Account
 {
+    
     public class RegisterDto
     {
         [Required]
@@ -26,10 +27,5 @@ namespace WebApi.ModelsAndDtoes.Account
         [Compare(nameof(Password))]
         [DataType(DataType.Password)]
         public string RePassword { get; set; }
-    }
-    public enum Gender
-    {
-        Male = 1,
-        Female = 2
     }
 }

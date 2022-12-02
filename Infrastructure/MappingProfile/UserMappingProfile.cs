@@ -1,4 +1,5 @@
-﻿using Application.ProfileService.Query;
+﻿using Application.ProfileService.Command;
+using Application.ProfileService.Query;
 using Application.SalonsService.Command;
 using AutoMapper;
 using Domain.Salons;
@@ -18,7 +19,8 @@ namespace Infrastructure.MappingProfile
             CreateMap<User, ProfileDto>()
                 .ForMember(profile => profile.UserId, user => user.MapFrom(p => p.Id)).ReverseMap();
 
- 
+            //CreateMap<,>().ReverseMap();
+
         }
     }
 }

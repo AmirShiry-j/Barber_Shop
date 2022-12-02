@@ -51,6 +51,7 @@ namespace Application.ProfileService.Query
         public string ImageName { get; set; }
         public int CustomerId { get; set; }
         public Gender Gender { get; set; }
+        public Link Link { get; set; }
     }
     public enum Gender
     {
