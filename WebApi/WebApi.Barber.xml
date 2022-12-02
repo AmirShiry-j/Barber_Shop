@@ -136,6 +136,12 @@
             <param name="editPofileDto"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.ProfileImageController.Get">
+            <summary>
+            بر گردوندن تصویر پروفایل
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.ProfileImageController.Put(Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
             آپدیت کردن عکس پروفایل

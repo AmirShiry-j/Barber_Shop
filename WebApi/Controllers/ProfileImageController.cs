@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
+using static System.Net.WebRequestMethods;
 
 namespace WebApi.Controllers
 {
@@ -41,6 +42,47 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
+        /// بر گردوندن تصویر پروفایل
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> Get()
+        {
+            //Base Path Image
+            string basePath = Path.Combine(Directory.GetCurrentDirectory(), "Images/Profile");
+
+            //Find user
+            var userId = User.Claims?.FirstOrDefault(p => p.Type == "UserId")?.Value;
+            var user = await _userManager.FindByIdAsync(userId);
+
+            //Check user has profile image
+            if (string.IsNullOrEmpty(user.ImageName))
+                return NotFound();
+
+            //file image
+            string pathFile = Path.Combine(basePath, user.ImageName);
+
+            //Does not find image file
+            if (System.IO.File.Exists(pathFile) == false)
+            {
+                //So make sure delete in db for user
+                await DeleteImageFile(user);
+            }
+
+
+            //Return image file
+            var imageFileStream = System.IO.File.OpenRead(pathFile);
+
+            var extension = Path.GetExtension(pathFile);
+            if (extension == ".jpg")
+                return File(imageFileStream, "image/jpeg");
+            else
+                return File(imageFileStream, "image/png");
+        }
+
+
+        /// <summary>
         /// آپدیت کردن عکس پروفایل
         /// </summary>
         /// <returns></returns>
@@ -48,6 +90,16 @@ namespace WebApi.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Put(IFormFile file)
         {
+            //Check size image
+            var megabyte = file.Length / (1024*1024);
+            if (megabyte > 10)
+                return BadRequest("حجم تصویر بیشتر از 10 مگابایت نمیتواند باشد");
+
+            //Check extension  jpg or png
+            var extension = Path.GetExtension(file.FileName);
+            if ((extension == ".jpg" || extension == ".png") == false)
+                return BadRequest("فرمت تصویر پروفایل میتواند jpg یا png باشد");
+
             //Base Path Image
             string basePath = Path.Combine(Directory.GetCurrentDirectory(), "Images/Profile");
 
@@ -104,14 +156,14 @@ namespace WebApi.Controllers
             var user = await _userManager.FindByIdAsync(userId);
 
             //Delete image if has
-            if(!string.IsNullOrEmpty(user.ImageName))
+            if (!string.IsNullOrEmpty(user.ImageName))
             {
                 var resultDelete = await DeleteImageFile(user);
 
-                if (resultDelete==false)
+                if (resultDelete == false)
                     return Problem();
             }
-                
+
             //Return success
             return Ok();
         }
