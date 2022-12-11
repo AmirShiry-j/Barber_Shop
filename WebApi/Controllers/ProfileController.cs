@@ -67,7 +67,7 @@ namespace WebApi.Controllers
             {
                 For = "Edit",
                 HttpMethod = HttpMethod.Put.ToString(),
-                Url = Url.Action(nameof(Put), "Profile",null, Request.Scheme)
+                Url = Url.Action(nameof(Put), "Profile", null, Request.Scheme)
             };
 
             return Ok(resultService.Data);
@@ -90,7 +90,7 @@ namespace WebApi.Controllers
             {
                 FullName = editPofileDto.FullName,
                 Gender = (Application.ProfileService.Command.Gender)editPofileDto.Gender,
-                PhoneNumber = editPofileDto.PhoneNumber
+                PhoneNumber = string.IsNullOrWhiteSpace(editPofileDto.PhoneNumber) ? null : editPofileDto.PhoneNumber
             };
 
             //Update prof
