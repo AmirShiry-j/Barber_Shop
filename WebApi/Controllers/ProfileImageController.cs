@@ -58,7 +58,7 @@ namespace WebApi.Controllers
 
             //Check user has profile image
             if (string.IsNullOrEmpty(user.ImageName))
-                return NotFound();
+                return NoContent();
 
             //file image
             string pathFile = Path.Combine(basePath, user.ImageName);
