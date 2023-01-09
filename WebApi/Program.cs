@@ -34,7 +34,17 @@ builder.Host.UseNLog();
 
 IConfiguration Configuration = builder.Configuration;
 
-// Add services to the container.
+//Add CORS configs
+//Get origins cores in appsetting
+var corsOrigins = Configuration.GetSection("CorsOrigins").Get<string[]>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        b => b.WithOrigins(corsOrigins)
+        .AllowAnyHeader()
+        .AllowAnyMethod());
+});
+
 
 //Config controller service
 builder.Services.AddControllers();
@@ -224,6 +234,7 @@ if (app.Environment.IsProduction())
 app.UseHsts();
 app.UseHttpsRedirection();
 
+app.UseCors("CorsPolicy");
 app.UseRouting();
 
 app.UseAuthentication();
