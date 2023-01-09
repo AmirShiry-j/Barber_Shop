@@ -92,7 +92,7 @@ namespace WebApi.Controllers
                 };
 
                 //Initial message
-                string message = "کد تایید حساب کاربری به ایمیل شما ارسال شد. لطفا با وارد کردن کد ارسالی حساب خود را تایید کنید ";
+                string message = "کد تایید حساب کاربری به ایمیل شما ارسال شد ";
 
                 return Ok(new { Message = message, Link = link, Code = code });
             }
