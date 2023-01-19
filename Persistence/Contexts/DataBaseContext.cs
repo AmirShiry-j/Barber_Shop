@@ -84,12 +84,7 @@ namespace Persistence.Contexts
             builder.Entity<Salon>()
                 .HasOne(p => p.Address)
                 .WithOne()
-                .HasForeignKey<Address>(p=>p.SalonId);
-
-            //builder.Entity<Address>()
-            //    .HasOne(p => p.City)
-            //    .WithOne()
-            //    .HasForeignKey<Address>(p => p.CityId);
+                .HasForeignKey<Salon>(p=>p.AddressId);
 
             //Users
             builder.ApplyConfiguration(new UserConfig());

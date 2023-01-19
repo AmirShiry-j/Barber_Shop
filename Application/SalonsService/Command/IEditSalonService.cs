@@ -40,7 +40,8 @@ namespace Application.SalonsService.Command
                     salon.Description = dto.Description;
                     salon.PhoneNumber = dto.PhoneNumber;
                     salon.Telphone = dto.Telphone;
-                    //salon.Address = dto.Address;
+                    salon.Address.FullAddress = dto.FullAddress;
+                    salon.Address.CityId = dto.CityId;
 
                     //Save in db
                     _dbContext.SaveChanges();
@@ -75,7 +76,8 @@ namespace Application.SalonsService.Command
         public Guid UserId { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
+        public int CityId { get; set; }
+        public string FullAddress { get; set; }
         public string Telphone { get; set; }
         public string PhoneNumber { get; set; }
         public string Description { get; set; }

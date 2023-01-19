@@ -16,7 +16,10 @@ namespace Infrastructure.MappingProfile
         {
             //For create salon
             CreateMap<Salon, CreateSalonDto>()
-                .ForMember(salon => salon.UserId, dto => dto.MapFrom(p => p.OwnerId)).ReverseMap();
+                .ForMember(salon => salon.UserId, dto => dto.MapFrom(p => p.OwnerId))
+                .ForMember(salon=>salon.FullAddress,dto=>dto.MapFrom(p=>p.Address.FullAddress))
+                .ForMember(salon=>salon.CityId,dto=>dto.MapFrom(p=>p.Address.CityId))
+                .ReverseMap();
 
             //For get salon
             CreateMap<Salon, SalonDto>()

@@ -3,6 +3,7 @@ using Application.Interfaces.Contexts;
 using Application.ProfileService.Query;
 using AutoMapper;
 using Domain.Salons;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -34,11 +35,30 @@ namespace Application.SalonsService.Command
             //Map
             var newSalon = _mapper.Map<Salon>(dto);
 
+            //Check if has CityId
+            var hasCity = _dbContext.Cities.Any(p => p.Id.Equals(dto.CityId));
+            if (hasCity == false)
+            {
+                return new ResultDto<Salon>
+                {
+                    IsSuccess = false,
+                    Message = "شهری با آیدی ارسال شده وجود ندارد"
+                };
+            }
+
             //Add to db
             _dbContext.Salons.Add(newSalon);
-
-            //Save in db
             _dbContext.SaveChanges();
+
+            //Save forenky for Salon
+            newSalon.AddressId = newSalon.Address.Id;
+            _dbContext.SaveChanges();
+
+            //Save forenky for user
+            var userOwner = _dbContext.Users.Find(dto.UserId.ToString());
+            userOwner.SalonId = newSalon.Id;
+            _dbContext.SaveChanges();
+
 
             return new ResultDto<Salon>
             {
@@ -51,7 +71,8 @@ namespace Application.SalonsService.Command
     {
         public Guid UserId { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
+        public int CityId { get; set; }
+        public string FullAddress { get; set; }
         public string Telphone { get; set; }
         public string PhoneNumber { get; set; }
         public string Description { get; set; }

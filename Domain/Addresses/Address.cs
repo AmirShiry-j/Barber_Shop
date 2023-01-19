@@ -17,7 +17,5 @@ namespace Domain.Addresses
         //
         public City City { get; set; }
         public int CityId { get; set; }
-
-        public int SalonId { get; set; }
     }
 }

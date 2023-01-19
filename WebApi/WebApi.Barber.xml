@@ -56,7 +56,7 @@
         </member>
         <member name="M:WebApi.Areas.Admin.Controllers.UserController.Get">
             <summary>
-            گرفتن لیست تمام کاربران
+            برگردوندن لیست تمام کاربران
             </summary>
             <returns></returns>
         </member>
@@ -159,6 +159,13 @@
             <summary>
             حدف کردن عکس پروفایل
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.SalonController.Post(WebApi.ModelsAndDtoes.Salon.CreateSalonApiDto)">
+            <summary>
+            برای ایجاد سالن آرایشی
+            </summary>
+            <param name="salonDto"></param>
             <returns></returns>
         </member>
         <member name="M:WebApi.Controllers.UnitedController.Get">
