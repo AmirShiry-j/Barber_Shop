@@ -123,6 +123,13 @@
             <param name="user"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.CityController.Get(System.Int32)">
+            <summary>
+            برگردوندن لیست شهر های هر استان برای کمبوباکس
+            </summary>
+            <param name="UnitedId"></param>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.ProfileController.Get">
             <summary>
             بر گردوندن اطلاعات پروفایل
@@ -151,6 +158,12 @@
         <member name="M:WebApi.Controllers.ProfileImageController.Delete">
             <summary>
             حدف کردن عکس پروفایل
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.UnitedController.Get">
+            <summary>
+            برگردوندن لیست استان ها برای کمبوباکس
             </summary>
             <returns></returns>
         </member>

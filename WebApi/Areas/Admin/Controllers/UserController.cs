@@ -24,7 +24,7 @@ namespace WebApi.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// گرفتن لیست تمام کاربران
+        /// برگردوندن لیست تمام کاربران
         /// </summary>
         /// <returns></returns>
         [HttpGet]

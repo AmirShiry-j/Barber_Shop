@@ -1,4 +1,5 @@
-﻿using Application.CustomerService.Command;
+﻿using Application.AddressesService.Query;
+using Application.CustomerService.Command;
 using Application.Interfaces.Contexts;
 using Application.ProfileService.Command;
 using Application.ProfileService.Query;
@@ -184,6 +185,9 @@ builder.Services.AddScoped<IEditSalonService,EditSalonService>();
 builder.Services.AddScoped<IDeleteSalonService, DeleteSalonService>();
 builder.Services.AddScoped<IGetSalonByIdService, GetSalonByIdService>();
 
+//Address services
+builder.Services.AddScoped<IGetUnitedsService, GetUnitedsService>();
+builder.Services.AddScoped<IGetCitiesService, GetCitiesService>();
 
 //Service email
 builder.Services.AddScoped<IEmailService, EmailService>();

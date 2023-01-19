@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="AddressesService\Command\" />
     <Folder Include="CustomerService\Query\" />
   </ItemGroup>
 
