@@ -1,4 +1,5 @@
-﻿using Domain.Salons;
+﻿using Domain.Addresses;
+using Domain.Salons;
 using Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,6 +21,10 @@ namespace Application.Interfaces.Contexts
         DbSet<Salon> Salons { get; set; }
         DbSet<Barber> Barbers { get; set; }
         DbSet<SalonImage> SalonImages { get; set; }
+        //Address
+        public DbSet<Address> addresses { get; set; }
+        public DbSet<United> Uniteds { get; set; }
+        public DbSet<City> Cities { get; set; }
         int SaveChanges();
     }
 }

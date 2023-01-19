@@ -13,10 +13,8 @@ namespace Persistence.Configurations.Salons
     {
         public void Configure(EntityTypeBuilder<Salon> builder)
         {
-            builder.Property(p => p.Address).IsRequired().HasMaxLength(100);
             builder.Property(p => p.Name).IsRequired().HasMaxLength(50);
             builder.Property(p => p.PhoneNumber).IsRequired();
-            //builder.Property(p => p.).IsRequired();
         }
     }
 }

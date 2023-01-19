@@ -40,7 +40,7 @@ namespace Application.SalonsService.Command
                     salon.Description = dto.Description;
                     salon.PhoneNumber = dto.PhoneNumber;
                     salon.Telphone = dto.Telphone;
-                    salon.Address = dto.Address;
+                    //salon.Address = dto.Address;
 
                     //Save in db
                     _dbContext.SaveChanges();

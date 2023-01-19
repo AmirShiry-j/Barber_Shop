@@ -1,4 +1,5 @@
-﻿using Domain.Users;
+﻿using Domain.Addresses;
+using Domain.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Domain.Salons
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
+
         public string Telphone { get; set; }
         public string PhoneNumber { get; set; }
         public string Description { get; set; }
@@ -21,5 +22,7 @@ namespace Domain.Salons
         public ICollection<SalonImage> SalonImages { get; set; }
         public User Owner { get; set; }
         public Guid OwnerId { get; set; }
+        public Address Address { get; set; }
+        public int AddressId { get; set; }
     }
 }

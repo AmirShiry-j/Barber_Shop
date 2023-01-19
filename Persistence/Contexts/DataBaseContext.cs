@@ -1,8 +1,10 @@
 ﻿using Application.Interfaces.Contexts;
+using Domain.Addresses;
 using Domain.Salons;
 using Domain.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Persistence.Configurations.Addresses;
 using Persistence.Configurations.Salons;
 using Persistence.Configurations.Users;
 using System;
@@ -28,6 +30,10 @@ namespace Persistence.Contexts
         public DbSet<Salon> Salons { get; set; }
         public DbSet<Barber> Barbers { get; set; }
         public DbSet<SalonImage> SalonImages { get; set; }
+        //Address
+        public DbSet<Address> addresses { get; set; }
+        public DbSet<United> Uniteds { get; set; }
+        public DbSet<City> Cities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -70,6 +76,18 @@ namespace Persistence.Contexts
                 .HasForeignKey<User>(p => p.SalonId)
                 .IsRequired(false);
 
+            //For Address
+
+            builder.Entity<Salon>()
+                .HasOne(p => p.Address)
+                .WithOne()
+                .HasForeignKey<Address>(p=>p.SalonId);
+
+            builder.Entity<Address>()
+                .HasOne(p => p.City)
+                .WithOne()
+                .HasForeignKey<Address>(p => p.CityId);
+
             //Users
             builder.ApplyConfiguration(new UserConfig());
             builder.ApplyConfiguration(new RoleConfig());
@@ -78,7 +96,10 @@ namespace Persistence.Contexts
             builder.ApplyConfiguration(new BarberConfig());
             builder.ApplyConfiguration(new SalonConfig());
             builder.ApplyConfiguration(new SalonImageConfig());
-
+            //Addresses
+            builder.ApplyConfiguration(new AddressConfig());
+            builder.ApplyConfiguration(new UnitedConfig());
+            builder.ApplyConfiguration(new CityConfig());
 
             base.OnModelCreating(builder);
         }
