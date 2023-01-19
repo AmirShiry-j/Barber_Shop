@@ -77,16 +77,19 @@ namespace Persistence.Contexts
                 .IsRequired(false);
 
             //For Address
+            builder.Entity<Address>()
+                .HasOne(p => p.City)
+                .WithMany();
 
             builder.Entity<Salon>()
                 .HasOne(p => p.Address)
                 .WithOne()
                 .HasForeignKey<Address>(p=>p.SalonId);
 
-            builder.Entity<Address>()
-                .HasOne(p => p.City)
-                .WithOne()
-                .HasForeignKey<Address>(p => p.CityId);
+            //builder.Entity<Address>()
+            //    .HasOne(p => p.City)
+            //    .WithOne()
+            //    .HasForeignKey<Address>(p => p.CityId);
 
             //Users
             builder.ApplyConfiguration(new UserConfig());
