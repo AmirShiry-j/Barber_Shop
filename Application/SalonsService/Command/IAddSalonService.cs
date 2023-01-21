@@ -46,6 +46,15 @@ namespace Application.SalonsService.Command
                 };
             }
 
+            var userHasSalonBefor = _dbContext.Salons.Where(p => p.OwnerId.Equals(dto.UserId)).Any();
+            if (userHasSalonBefor == true)
+            {
+                return new ResultDto<Salon>
+                {
+                    IsSuccess = false,
+                    Message = "شما قبلا یک آرایشگاه برای خود ایجاد کرده اید"
+                };
+            }
 
             //Add to db
             _dbContext.Salons.Add(newSalon);
