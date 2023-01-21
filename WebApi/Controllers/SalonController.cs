@@ -53,7 +53,69 @@ namespace WebApi.Controllers
 
             if (resultService.IsSuccess)
             {
-                return Created("temp",null);
+                return Created("temp", null);
+            }
+            else
+            {
+                return BadRequest(resultService.Message);
+            }
+        }
+
+        /// <summary>
+        /// برای ویرایش کردن سالن آرایشی
+        /// </summary>
+        /// <param name="salonDto"></param>
+        /// <returns></returns>
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPut("{SalonId}")]
+        public async Task<IActionResult> Put(EditSalonApiDto salonDto)
+        {
+            //Get UserId
+            var userId = User.Claims?.FirstOrDefault(p => p.Type == "UserId")?.Value;
+
+            var modelService = new EditSalonDto
+            {
+                Id = salonDto.Id,
+                CityId = salonDto.CityId,
+                Description = salonDto.Description,
+                FullAddress = salonDto.FullAddress,
+                Name = salonDto.Name,
+                PhoneNumber = salonDto.PhoneNumber,
+                Telphone = salonDto.Telphone,
+                UserId = userId
+            };
+
+            //Edit salon by service
+            var resultService = await _editSalonService.Execute(modelService);
+
+            if (resultService.IsSuccess)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest(resultService.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// برای حذف کردن یک سالن آرایشی
+        /// </summary>
+        /// <returns></returns>
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpDelete]
+        public async Task<IActionResult> Delete()
+        {
+            //Get UserId
+            var userId = User.Claims?.FirstOrDefault(p => p.Type == "UserId")?.Value;
+
+            //Delete by service
+            var resultService = await _deleteSalonService.Execute(userId);
+
+            if (resultService.IsSuccess)
+            {
+                return Ok();
             }
             else
             {

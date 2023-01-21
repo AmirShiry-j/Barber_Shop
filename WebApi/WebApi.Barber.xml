@@ -168,6 +168,12 @@
             <param name="salonDto"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.SalonController.Delete">
+            <summary>
+            برای حذف کردن یک سالن آرایشی
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.UnitedController.Get">
             <summary>
             برگردوندن لیست استان ها برای کمبوباکس
