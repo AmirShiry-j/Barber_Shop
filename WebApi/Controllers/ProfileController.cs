@@ -58,7 +58,7 @@ namespace WebApi.Controllers
             }
 
             //Get Profil infoes
-            var resultService = await _getProfileService.Execute(Guid.Parse(userId));
+            var resultService = await _getProfileService.Execute(userId);
             if (resultService.IsSuccess == false)
                 return Problem();
 

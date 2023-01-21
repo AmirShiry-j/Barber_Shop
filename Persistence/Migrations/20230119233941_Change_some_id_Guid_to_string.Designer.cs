@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,10 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230119233941_Change_some_id_Guid_to_string")]
+    partial class Change_some_id_Guid_to_string
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,7 +43,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("addresses", (string)null);
+                    b.ToTable("addresses");
                 });
 
             modelBuilder.Entity("Domain.Addresses.City", b =>
@@ -64,7 +66,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UnitedId");
 
-                    b.ToTable("Cities", (string)null);
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("Domain.Addresses.United", b =>
@@ -79,7 +81,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Uniteds", (string)null);
+                    b.ToTable("Uniteds");
                 });
 
             modelBuilder.Entity("Domain.Salons.Barber", b =>
@@ -106,7 +108,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SalonId");
 
-                    b.ToTable("Barbers", (string)null);
+                    b.ToTable("Barbers");
                 });
 
             modelBuilder.Entity("Domain.Salons.Salon", b =>
@@ -146,7 +148,7 @@ namespace Persistence.Migrations
                     b.HasIndex("AddressId")
                         .IsUnique();
 
-                    b.ToTable("Salons", (string)null);
+                    b.ToTable("Salons");
                 });
 
             modelBuilder.Entity("Domain.Salons.SalonImage", b =>
@@ -168,7 +170,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SalonId");
 
-                    b.ToTable("SalonImages", (string)null);
+                    b.ToTable("SalonImages");
                 });
 
             modelBuilder.Entity("Domain.Users.Customer", b =>
@@ -188,7 +190,7 @@ namespace Persistence.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Domain.Users.Role", b =>
@@ -257,7 +259,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tokens", (string)null);
+                    b.ToTable("Tokens");
                 });
 
             modelBuilder.Entity("Domain.Users.User", b =>

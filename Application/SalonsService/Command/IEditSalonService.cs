@@ -73,7 +73,7 @@ namespace Application.SalonsService.Command
     }
     public class EditSalonDto
     {
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public int CityId { get; set; }

@@ -46,6 +46,7 @@ namespace Application.SalonsService.Command
                 };
             }
 
+
             //Add to db
             _dbContext.Salons.Add(newSalon);
             _dbContext.SaveChanges();
@@ -69,7 +70,7 @@ namespace Application.SalonsService.Command
     }
     public class CreateSalonDto
     {
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public string Name { get; set; }
         public int CityId { get; set; }
         public string FullAddress { get; set; }

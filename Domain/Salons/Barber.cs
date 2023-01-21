@@ -14,7 +14,7 @@ namespace Domain.Salons
 
         //Nav
         public User User { get; set; }
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public Salon Salon { get; set; }
         public int? SalonId { get; set; }
 

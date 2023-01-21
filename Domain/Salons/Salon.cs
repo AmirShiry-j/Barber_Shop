@@ -21,7 +21,7 @@ namespace Domain.Salons
         public ICollection<Barber> Barbers { get; set; }
         public ICollection<SalonImage> SalonImages { get; set; }
         public User Owner { get; set; }
-        public Guid OwnerId { get; set; }
+        public string OwnerId { get; set; }
         public Address Address { get; set; }
         public int AddressId { get; set; }
     }

@@ -14,7 +14,7 @@ namespace Application.ProfileService.Query
 {
     public interface IGetProfileService
     {
-        public Task<ResultDto<ProfileDto>> Execute(Guid UserId);
+        public Task<ResultDto<ProfileDto>> Execute(string UserId);
     }
     public class GetProfileService : IGetProfileService
     {
@@ -29,7 +29,7 @@ namespace Application.ProfileService.Query
             _userManager = userManager;
             _mapper = mapper;
         }
-        public async Task<ResultDto<ProfileDto>> Execute(Guid UserId)
+        public async Task<ResultDto<ProfileDto>> Execute(string UserId)
         {
             var user = await _userManager.FindByIdAsync(UserId.ToString());
 

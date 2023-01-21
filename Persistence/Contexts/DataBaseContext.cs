@@ -74,8 +74,13 @@ namespace Persistence.Contexts
                 .HasOne(p => p.Salon)
                 .WithOne(p => p.Owner)
                 .HasForeignKey<User>(p => p.SalonId)
-                .IsRequired(false);
+                .IsRequired(true);
 
+            builder.Entity<User>()
+                .HasOne(p => p.Customer)
+                .WithOne(p => p.User)
+                .HasForeignKey<Customer>(p => p.UserId)
+                .IsRequired(true);
             //For Address
             builder.Entity<Address>()
                 .HasOne(p => p.City)
@@ -90,6 +95,7 @@ namespace Persistence.Contexts
             builder.ApplyConfiguration(new UserConfig());
             builder.ApplyConfiguration(new RoleConfig());
             builder.ApplyConfiguration(new TokenConfig());
+            builder.ApplyConfiguration(new CustomerConfig());
             //Salons
             builder.ApplyConfiguration(new BarberConfig());
             builder.ApplyConfiguration(new SalonConfig());

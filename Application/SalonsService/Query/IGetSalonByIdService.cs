@@ -61,7 +61,7 @@ namespace Application.SalonsService.Query
         public string PhoneNumber { get; set; }
         public string Description { get; set; }
         public string OwnerFullName { get; set; }
-        public Guid OwnerId { get; set; }
+        public string OwnerId { get; set; }
 
     }
 }

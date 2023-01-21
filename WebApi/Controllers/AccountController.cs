@@ -73,7 +73,7 @@ namespace WebApi.Controllers
             if (resultRegister.Succeeded)
             {
                 //Insert a customer record for this user
-                var customerId = _addCustomerService.Execute(Guid.Parse(newUser.Id)).Result.Data;
+                var customerId = _addCustomerService.Execute(newUser.Id).Result.Data;
 
                 //Confirmation email
                 string code = await _userManager.GenerateTwoFactorTokenAsync(newUser, "Email");

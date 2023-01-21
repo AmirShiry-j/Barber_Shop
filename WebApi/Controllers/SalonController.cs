@@ -45,7 +45,7 @@ namespace WebApi.Controllers
                 FullAddress = salonDto.FullAddress,
                 PhoneNumber = salonDto.PhoneNumber,
                 Telphone = salonDto.Telphone,
-                UserId = Guid.Parse(userId)
+                UserId = userId
             };
 
             //Create salon by service

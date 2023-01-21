@@ -11,7 +11,7 @@ namespace Application.SalonsService.Command
 {
     public interface IDeleteSalonService
     {
-        public Task<ResultDto> Execute(Guid UserId, int SalonId);
+        public Task<ResultDto> Execute(string UserId, int SalonId);
     }
 
     public class DeleteSalonService : IDeleteSalonService
@@ -23,7 +23,7 @@ namespace Application.SalonsService.Command
             _dbContext = dbContext;
             _logger = logger;
         }
-        public async Task<ResultDto> Execute(Guid UserId, int SalonId)
+        public async Task<ResultDto> Execute(string UserId, int SalonId)
         {
             //Get salon from db
             var salon = _dbContext.Salons.Find(SalonId);
