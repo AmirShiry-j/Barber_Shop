@@ -1,9 +1,14 @@
 ﻿using Application.SalonsService.Command;
+using Application.SalonsService.Query;
+using Domain.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.ModelsAndDtoes.Salon;
+using Application.Common;
+using System.Data;
+using Domain.Salons;
 
 namespace WebApi.Controllers
 {
@@ -15,13 +20,85 @@ namespace WebApi.Controllers
         private readonly IAddSalonService _addSalonService;
         private readonly IEditSalonService _editSalonService;
         private readonly IDeleteSalonService _deleteSalonService;
+        private readonly IGetSalonByIdService _getSalonByIdService;
+        private readonly IGetAllSalonsService _getAllSalonsService;
         public SalonController(IAddSalonService addSalonService,
             IEditSalonService editSalonService,
-            IDeleteSalonService deleteSalonService)
+            IDeleteSalonService deleteSalonService,
+            IGetSalonByIdService getSalonByIdService,
+            IGetAllSalonsService getAllSalonsService
+            )
         {
             _editSalonService = editSalonService;
             _addSalonService = addSalonService;
             _deleteSalonService = deleteSalonService;
+            _getSalonByIdService = getSalonByIdService;
+            _getAllSalonsService = getAllSalonsService;
+        }
+
+        /// <summary>
+        /// برگردوندن لیست همه ی سالن های آرایشی (موقت)
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            //Get data from service
+            var resultService = await _getAllSalonsService.Execute();
+
+            foreach (var salon in resultService.Data)
+            {
+                salon.Link = new Link
+                {
+                    For = "Details",
+                    HttpMethod = HttpMethod.Get.ToString(),
+                    Url = Url.Action(nameof(Get), "Salon", new { SalonId = salon.Id }, Request.Scheme)
+                };
+            }
+
+            return Ok(resultService.Data);
+        }
+
+        /// <summary>
+        /// برگردوندن اطلاعات سالن آرایشی با آیدی
+        /// </summary>
+        /// <param name="SalonId"></param>
+        /// <returns></returns>
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("{SalonId}")]
+        public async Task<IActionResult> Get(int SalonId)
+        {
+            //Get UserId
+            var userId = User.Claims?.FirstOrDefault(p => p.Type == "UserId")?.Value;
+
+            //Get data from service
+            var resultService = await _getSalonByIdService.Execute(SalonId);
+
+            if (resultService.IsSuccess)
+            {
+                //HATEOAS links
+                resultService.Data.Links = new List<Link>
+                {
+                    new Link
+                    {
+                        For="Edit",
+                        HttpMethod=HttpMethod.Put.ToString(),
+                        Url=Url.Action(nameof(Put),"Salon",null,Request.Scheme)
+                    },
+                    new Link
+                    {
+                        For="Delete",
+                        HttpMethod=HttpMethod.Delete.ToString(),
+                        Url=Url.Action(nameof(Delete),"Salon",new {SalonId=SalonId },Request.Scheme)
+                    },
+                };
+
+                return Ok(resultService.Data);
+            }
+            else
+            {
+                return BadRequest(resultService.Message);
+            }
         }
 
         /// <summary>
@@ -53,7 +130,10 @@ namespace WebApi.Controllers
 
             if (resultService.IsSuccess)
             {
-                return Created("temp", null);
+                //HATEOAS links
+                string url = Url.Action(nameof(Get), "Salon", new { SalonId = resultService.Data.Id }, Request.Scheme);
+
+                return Created(url, null);
             }
             else
             {

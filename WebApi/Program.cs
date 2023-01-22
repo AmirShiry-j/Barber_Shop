@@ -184,6 +184,7 @@ builder.Services.AddScoped<IAddSalonService, AddSalonService>();
 builder.Services.AddScoped<IEditSalonService,EditSalonService>();
 builder.Services.AddScoped<IDeleteSalonService, DeleteSalonService>();
 builder.Services.AddScoped<IGetSalonByIdService, GetSalonByIdService>();
+builder.Services.AddScoped<IGetAllSalonsService, GetAllSalonsService>();
 
 //Address services
 builder.Services.AddScoped<IGetUnitedsService, GetUnitedsService>();

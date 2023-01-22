@@ -161,6 +161,19 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.SalonController.Get">
+            <summary>
+            برگردوندن لیست همه ی سالن های آرایشی (موقت)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.SalonController.Get(System.Int32)">
+            <summary>
+            برگردوندن اطلاعات سالن آرایشی با آیدی
+            </summary>
+            <param name="SalonId"></param>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.SalonController.Post(WebApi.ModelsAndDtoes.Salon.CreateSalonApiDto)">
             <summary>
             برای ایجاد سالن آرایشی

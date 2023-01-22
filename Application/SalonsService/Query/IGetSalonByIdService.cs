@@ -28,7 +28,12 @@ namespace Application.SalonsService.Query
         public async Task<ResultDto<SalonDto>> Execute(int Id)
         {
             //Get Salon
-            var salon = _dbContext.Salons.Where(p => p.Id.Equals(Id)).Include(p => p.Owner).FirstOrDefault();
+            var salon = _dbContext.Salons.Where(p => p.Id.Equals(Id))
+                .Include(p => p.Owner)
+                .Include(p => p.Address)
+                .ThenInclude(p => p.City)
+                .ThenInclude(p => p.United)
+                .FirstOrDefault();
 
             //Check is exist
             if (salon != null)
@@ -55,13 +60,19 @@ namespace Application.SalonsService.Query
     public class SalonDto
     {
         public int Id { get; set; }
+        public string OwnerId { get; set; }
+        public string OwnerFullName { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
+        public string United { get; set; }
+        public int UnitedId { get; set; }
+        public string City { get; set; }
+        public int CityId { get; set; }
+        public string FullAddress { get; set; }
         public string Telphone { get; set; }
         public string PhoneNumber { get; set; }
         public string Description { get; set; }
-        public string OwnerFullName { get; set; }
-        public string OwnerId { get; set; }
+
+        public List<Link> Links { get; set; }
 
     }
 }
