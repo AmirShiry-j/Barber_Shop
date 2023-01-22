@@ -168,7 +168,14 @@
             <param name="salonDto"></param>
             <returns></returns>
         </member>
-        <member name="M:WebApi.Controllers.SalonController.Delete">
+        <member name="M:WebApi.Controllers.SalonController.Put(WebApi.ModelsAndDtoes.Salon.EditSalonApiDto)">
+            <summary>
+            برای ویرایش کردن سالن آرایشی
+            </summary>
+            <param name="salonDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.SalonController.Delete(System.Int32)">
             <summary>
             برای حذف کردن یک سالن آرایشی
             </summary>

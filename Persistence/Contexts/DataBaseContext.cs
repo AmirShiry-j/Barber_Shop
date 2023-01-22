@@ -64,17 +64,22 @@ namespace Persistence.Contexts
                 .HasForeignKey(p => p.SalonId)
                 .IsRequired(true);
 
-            builder.Entity<Salon>()
-                .HasOne(p => p.Owner)
-                .WithOne(p => p.Salon)
-                .HasForeignKey<Salon>(p => p.OwnerId)
-                .IsRequired(true);
+            //Salon and owner
 
             builder.Entity<User>()
-                .HasOne(p => p.Salon)
+                .HasOne<Salon>()
                 .WithOne(p => p.Owner)
-                .HasForeignKey<User>(p => p.SalonId)
-                .IsRequired(true);
+                .HasForeignKey<Salon>(p =>p.OwnerId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //builder.Entity<Salon>()
+            //    .HasOne(p => p.Owner)
+            //    .WithOne(p => p.Salon)
+            //    .HasForeignKey<Salon>(p => p.OwnerId)
+            //    .IsRequired(true)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            //
 
             builder.Entity<User>()
                 .HasOne(p => p.Customer)
@@ -89,7 +94,7 @@ namespace Persistence.Contexts
             builder.Entity<Salon>()
                 .HasOne(p => p.Address)
                 .WithOne()
-                .HasForeignKey<Salon>(p=>p.AddressId);
+                .HasForeignKey<Salon>(p => p.AddressId);
 
             //Users
             builder.ApplyConfiguration(new UserConfig());

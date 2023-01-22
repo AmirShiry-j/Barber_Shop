@@ -15,6 +15,7 @@ namespace Persistence.Configurations.Salons
         {
             builder.Property(p => p.Name).IsRequired().HasMaxLength(50);
             builder.Property(p => p.PhoneNumber).IsRequired();
+            builder.Property(p => p.OwnerId).IsRequired();
         }
     }
 }

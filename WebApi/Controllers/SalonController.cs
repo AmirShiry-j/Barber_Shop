@@ -67,7 +67,7 @@ namespace WebApi.Controllers
         /// <param name="salonDto"></param>
         /// <returns></returns>
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPut("{SalonId}")]
+        [HttpPut]
         public async Task<IActionResult> Put(EditSalonApiDto salonDto)
         {
             //Get UserId
@@ -104,14 +104,14 @@ namespace WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpDelete]
-        public async Task<IActionResult> Delete()
+        [HttpDelete("{SalonId}")]
+        public async Task<IActionResult> Delete(int SalonId)
         {
             //Get UserId
             var userId = User.Claims?.FirstOrDefault(p => p.Type == "UserId")?.Value;
 
             //Delete by service
-            var resultService = await _deleteSalonService.Execute(userId);
+            var resultService = await _deleteSalonService.Execute(userId, SalonId);
 
             if (resultService.IsSuccess)
             {

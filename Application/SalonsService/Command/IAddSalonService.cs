@@ -64,11 +64,6 @@ namespace Application.SalonsService.Command
             newSalon.AddressId = newSalon.Address.Id;
             _dbContext.SaveChanges();
 
-            //Save forenky for user
-            var userOwner = _dbContext.Users.Find(dto.UserId.ToString());
-            userOwner.SalonId = newSalon.Id;
-            _dbContext.SaveChanges();
-
 
             return new ResultDto<Salon>
             {

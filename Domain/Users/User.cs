@@ -22,9 +22,6 @@ namespace Domain.Users
         //
         public Customer Customer { get; set; }
         public int? CustomerId { get; set; }
-        //
-        public Salon Salon { get; set; }
-        public int? SalonId { get; set; }
 
     }
     public enum Gender

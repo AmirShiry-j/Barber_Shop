@@ -1,6 +1,7 @@
 ﻿using Application.Common;
 using Application.Interfaces.Contexts;
 using Domain.Salons;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -26,42 +27,21 @@ namespace Application.SalonsService.Command
         public async Task<ResultDto> Execute(EditSalonDto dto)
         {
             //Get in db
-            var salon = _dbContext.Salons.Find(dto.Id);
+            var salon = _dbContext.Salons.Where(p => p.Id.Equals(dto.Id)).Include(p => p.Address).FirstOrDefault();
+
+            //Check if has CityId
+            var hasCity = _dbContext.Cities.Any(p => p.Id.Equals(dto.CityId));
+            if (hasCity == false)
+            {
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    Message = "شهری با آیدی ارسال شده وجود ندارد"
+                };
+            }
 
             //Check in exist
-            if (salon != null)
-            {
-
-                //Check user is owner
-                if (dto.UserId == salon.OwnerId)
-                {
-                    //Update salon
-                    salon.Name = dto.Name;
-                    salon.Description = dto.Description;
-                    salon.PhoneNumber = dto.PhoneNumber;
-                    salon.Telphone = dto.Telphone;
-                    salon.Address.FullAddress = dto.FullAddress;
-                    salon.Address.CityId = dto.CityId;
-
-                    //Save in db
-                    _dbContext.SaveChanges();
-
-                    return new ResultDto
-                    {
-                        IsSuccess = true
-                    };
-                }
-                else
-                {
-                    return new ResultDto
-                    {
-                        IsSuccess = false,
-                        Message = "این  یوزر مالک آرایشگاه نیست"
-                    };
-                }
-
-            }
-            else//Is not exist
+            if (salon == null)
             {
                 return new ResultDto
                 {
@@ -69,6 +49,34 @@ namespace Application.SalonsService.Command
                     Message = "Salon is not Exist"
                 };
             }
+
+            //Check user is owner
+            if (dto.UserId != salon.OwnerId)
+            {
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    Message = "این  یوزر مالک آرایشگاه نیست"
+                };
+
+            }
+
+            //Update salon
+            salon.Name = dto.Name;
+            salon.Description = dto.Description;
+            salon.PhoneNumber = dto.PhoneNumber;
+            salon.Telphone = dto.Telphone;
+            salon.Address.FullAddress = dto.FullAddress;
+            salon.Address.CityId = dto.CityId;
+
+            //Save in db
+            _dbContext.SaveChanges();
+
+            return new ResultDto
+            {
+                IsSuccess = true
+            };
+
         }
     }
     public class EditSalonDto
