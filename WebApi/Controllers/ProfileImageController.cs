@@ -6,6 +6,7 @@ using Domain.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
@@ -63,6 +64,11 @@ namespace WebApi.Controllers
             //file image
             string pathFile = Path.Combine(basePath, user.ImageName);
 
+            //Build url of image
+            string url = Request.GetDisplayUrl();
+            string domainName = url.Substring(0, url.IndexOf("/api"));
+            string imageUrl = domainName + "/Images/Profile/" + user.ImageName;
+
             //Does not find image file
             if (System.IO.File.Exists(pathFile) == false)
             {
@@ -72,13 +78,15 @@ namespace WebApi.Controllers
 
 
             //Return image file
-            var imageFileStream = System.IO.File.OpenRead(pathFile);
+            //var imageFileStream = System.IO.File.OpenRead(pathFile);
 
-            var extension = Path.GetExtension(pathFile);
-            if (extension == ".jpg")
-                return File(imageFileStream, "image/jpeg");
-            else
-                return File(imageFileStream, "image/png");
+            //var extension = Path.GetExtension(pathFile);
+            //if (extension == ".jpg")
+            //    return File(imageFileStream, "image/jpeg");
+            //else
+            //    return File(imageFileStream, "image/png");
+
+            return Ok(new { ImageUrl = imageUrl, ImageName = user.ImageName });
         }
 
 
@@ -91,7 +99,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> Put(IFormFile file)
         {
             //Check size image
-            var megabyte = file.Length / (1024*1024);
+            var megabyte = file.Length / (1024 * 1024);
             if (megabyte > 10)
                 return BadRequest("حجم تصویر بیشتر از 10 مگابایت نمیتواند باشد");
 
