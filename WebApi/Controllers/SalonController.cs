@@ -64,13 +64,9 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="SalonId"></param>
         /// <returns></returns>
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("{SalonId}")]
         public async Task<IActionResult> Get(int SalonId)
         {
-            //Get UserId
-            var userId = User.Claims?.FirstOrDefault(p => p.Type == "UserId")?.Value;
-
             //Get data from service
             var resultService = await _getSalonByIdService.Execute(SalonId);
 
