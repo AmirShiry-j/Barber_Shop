@@ -56,7 +56,7 @@
         </member>
         <member name="M:WebApi.Areas.Admin.Controllers.UserController.Get">
             <summary>
-            برگردوندن لیست تمام کاربران
+            برگردوندن لیست تمام کاربران (موقت)
             </summary>
             <returns></returns>
         </member>
