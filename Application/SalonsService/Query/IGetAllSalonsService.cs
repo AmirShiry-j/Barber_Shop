@@ -25,12 +25,16 @@ namespace Application.SalonsService.Query
         }
         public async Task<ResultDto<List<SalonMainInfoDto>>> Execute()
         {
-            var salons = _dbContext.Salons.Include(p => p.Address).Include(p => p.Owner).Select(p => new SalonMainInfoDto
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description
-            }).ToList();
+            var salons = _dbContext.Salons.Include(p => p.Address)
+                .ThenInclude(p => p.City)
+                .Include(p => p.Owner).Select(p => new SalonMainInfoDto
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    CityId = p.Address.CityId,
+                    CityName = p.Address.City.Name
+                }).ToList();
 
             return new ResultDto<List<SalonMainInfoDto>>
             {
@@ -42,6 +46,8 @@ namespace Application.SalonsService.Query
     public class SalonMainInfoDto
     {
         public int Id { get; set; }
+        public int CityId { get; set; }
+        public string CityName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public Link Link { get; set; }
