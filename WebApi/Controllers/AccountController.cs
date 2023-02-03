@@ -456,7 +456,7 @@ namespace WebApi.Controllers
             await _userTokenService.SaveToken(userToken);
 
             //Map tokens for send
-            var tokens = new TokenDto() { Token = jwtToken, RefreshToken = refreshToken };
+            var tokens = new TokenDto() { Token = jwtToken, RefreshToken = refreshToken, TokenExpireTime = expireTime, RefreshTokenExpireTime = refreshTokenExpireTime };
 
             return tokens;
         }
