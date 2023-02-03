@@ -161,9 +161,9 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WebApi.Controllers.SalonController.Get">
+        <member name="M:WebApi.Controllers.SalonController.Get(WebApi.ModelsAndDtoes.Salon.SearchSalonApiDto)">
             <summary>
-            برگردوندن لیست همه ی سالن های آرایشی (موقت)
+            برگردوندن لیست همه ی سالن های آرایشی
             </summary>
             <returns></returns>
         </member>

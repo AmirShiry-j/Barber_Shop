@@ -37,16 +37,27 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// برگردوندن لیست همه ی سالن های آرایشی (موقت)
+        /// برگردوندن لیست همه ی سالن های آرایشی
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] SearchSalonApiDto searchSalonApiDto)
         {
-            //Get data from service
-            var resultService = await _getAllSalonsService.Execute();
+            //map
+            var inputService = new SearchSalonDto
+            {
+                CityId = searchSalonApiDto.CityId,
+                CountInPage = searchSalonApiDto.CountInPage,
+                ForGender = searchSalonApiDto.ForGender != null ? (Application.SalonsService.Command.ForGender)searchSalonApiDto.ForGender : null,
+                Page = searchSalonApiDto.Page,
+                SalonName = searchSalonApiDto.SalonName,
+                UnitedId = searchSalonApiDto.UnitedId
+            };
 
-            foreach (var salon in resultService.Data)
+            //Get data from service
+            var resultService = await _getAllSalonsService.Execute(inputService);
+
+            foreach (var salon in resultService.Data.Salons)
             {
                 salon.Link = new Link
                 {
