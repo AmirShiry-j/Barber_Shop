@@ -98,7 +98,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// برای ایجاد سالن آرایشی
+        /// برای ایجاد سالن آرایشی (Auth)
         /// </summary>
         /// <param name="salonDto"></param>
         /// <returns></returns>
@@ -138,7 +138,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// برای ویرایش کردن سالن آرایشی
+        /// برای ویرایش کردن سالن آرایشی (Auth)
         /// </summary>
         /// <param name="salonDto"></param>
         /// <returns></returns>
@@ -176,7 +176,7 @@ namespace WebApi.Controllers
 
 
         /// <summary>
-        /// برای حذف کردن یک سالن آرایشی
+        /// برای حذف کردن یک سالن آرایشی (Auth)
         /// </summary>
         /// <returns></returns>
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

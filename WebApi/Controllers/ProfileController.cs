@@ -44,7 +44,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// بر گردوندن اطلاعات پروفایل
+        /// بر گردوندن اطلاعات پروفایل (Auth)
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -74,7 +74,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// ویرایش اطلاعات پروفایل
+        /// ویرایش اطلاعات پروفایل (Auth)
         /// </summary>
         /// <param name="editPofileDto"></param>
         /// <returns></returns>

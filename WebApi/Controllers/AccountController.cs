@@ -250,7 +250,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// تغییر رمز عبور
+        /// تغییر رمز عبور (Auth)
         /// </summary>
         /// <param name="changePasswordDto"></param>
         /// <returns></returns>
@@ -287,7 +287,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// برای خروج از حساب کاربری
+        /// برای خروج از حساب کاربری (Auth)
         /// </summary>
         /// <param name="UserId"></param>
         /// <returns></returns>

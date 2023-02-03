@@ -43,7 +43,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// بر گردوندن تصویر پروفایل
+        /// بر گردوندن تصویر پروفایل (Auth)
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -91,7 +91,7 @@ namespace WebApi.Controllers
 
 
         /// <summary>
-        /// آپدیت کردن عکس پروفایل
+        /// آپدیت کردن عکس پروفایل (Auth)
         /// </summary>
         /// <returns></returns>
         [HttpPut]
@@ -152,7 +152,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// حدف کردن عکس پروفایل
+        /// حدف کردن عکس پروفایل (Auth)
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
