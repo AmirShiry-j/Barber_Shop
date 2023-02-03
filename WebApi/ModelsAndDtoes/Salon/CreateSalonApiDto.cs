@@ -20,5 +20,9 @@ namespace WebApi.ModelsAndDtoes.Salon
         [Required]
         [MaxLength(255)]
         public string Description { get; set; }
+        [Required]
+        [Range(1, 2)]
+        public ForGenderApi ForGender { get; set; }
     }
+
 }

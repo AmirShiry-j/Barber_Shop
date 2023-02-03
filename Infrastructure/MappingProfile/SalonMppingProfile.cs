@@ -19,6 +19,7 @@ namespace Infrastructure.MappingProfile
                 .ForMember(salon => salon.UserId, dto => dto.MapFrom(p => p.OwnerId))
                 .ForMember(salon=>salon.FullAddress,dto=>dto.MapFrom(p=>p.Address.FullAddress))
                 .ForMember(salon=>salon.CityId,dto=>dto.MapFrom(p=>p.Address.CityId))
+                .ForMember(salon=>salon.ForGender,dto=>dto.MapFrom(p=>p.ForGender))
                 .ReverseMap();
 
             //For get salon
@@ -30,6 +31,7 @@ namespace Infrastructure.MappingProfile
                 .ForMember(dto => dto.City, salon => salon.MapFrom(p => p.Address.City.Name))
                 .ForMember(dto => dto.CityId , salon => salon.MapFrom(p => p.Address.City.Id))
                 .ForMember(dto => dto.FullAddress, salon => salon.MapFrom(p => p.Address.FullAddress))
+                .ForMember(dto => dto.ForGender, salon => salon.MapFrom(p => p.ForGender))
                 .ReverseMap();
 
         }

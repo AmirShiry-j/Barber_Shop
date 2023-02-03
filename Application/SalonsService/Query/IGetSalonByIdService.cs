@@ -71,6 +71,7 @@ namespace Application.SalonsService.Query
         public string Telphone { get; set; }
         public string PhoneNumber { get; set; }
         public string Description { get; set; }
+        public ForGender ForGender { get; set; }
 
         public List<Link> Links { get; set; }
 

@@ -13,9 +13,12 @@ namespace Persistence.Configurations.Salons
     {
         public void Configure(EntityTypeBuilder<Salon> builder)
         {
+            var converterForGenderEnum = new Microsoft.EntityFrameworkCore.Storage.ValueConversion.EnumToStringConverter<ForGender>();
+
             builder.Property(p => p.Name).IsRequired().HasMaxLength(50);
             builder.Property(p => p.PhoneNumber).IsRequired();
             builder.Property(p => p.OwnerId).IsRequired();
+            builder.Property(p => p.ForGender).IsRequired().HasConversion(converterForGenderEnum);
         }
     }
 }

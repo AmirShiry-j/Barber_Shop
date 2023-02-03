@@ -118,7 +118,8 @@ namespace WebApi.Controllers
                 FullAddress = salonDto.FullAddress,
                 PhoneNumber = salonDto.PhoneNumber,
                 Telphone = salonDto.Telphone,
-                UserId = userId
+                UserId = userId,
+                ForGender = (Application.SalonsService.Command.ForGender)salonDto.ForGender
             };
 
             //Create salon by service
@@ -158,7 +159,8 @@ namespace WebApi.Controllers
                 Name = salonDto.Name,
                 PhoneNumber = salonDto.PhoneNumber,
                 Telphone = salonDto.Telphone,
-                UserId = userId
+                UserId = userId,
+                ForGender = (Application.SalonsService.Command.ForGender)salonDto.ForGender
             };
 
             //Edit salon by service

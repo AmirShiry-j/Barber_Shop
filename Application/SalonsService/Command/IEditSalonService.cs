@@ -68,6 +68,7 @@ namespace Application.SalonsService.Command
             salon.Telphone = dto.Telphone;
             salon.Address.FullAddress = dto.FullAddress;
             salon.Address.CityId = dto.CityId;
+            salon.ForGender = (Domain.Salons.ForGender) dto.ForGender;
 
             //Save in db
             _dbContext.SaveChanges();
@@ -89,5 +90,8 @@ namespace Application.SalonsService.Command
         public string Telphone { get; set; }
         public string PhoneNumber { get; set; }
         public string Description { get; set; }
+        public ForGender ForGender { get; set; }
+
+
     }
 }
