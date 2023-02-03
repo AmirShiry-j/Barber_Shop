@@ -128,7 +128,7 @@ namespace WebApi.Controllers
                 Description = salonDto.Description,
                 FullAddress = salonDto.FullAddress,
                 PhoneNumber = salonDto.PhoneNumber,
-                Telphone = salonDto.Telphone,
+                Telphone = string.IsNullOrWhiteSpace(salonDto.Telphone) ? null : salonDto.Telphone,
                 UserId = userId,
                 ForGender = (Application.SalonsService.Command.ForGender)salonDto.ForGender
             };
@@ -169,7 +169,7 @@ namespace WebApi.Controllers
                 FullAddress = salonDto.FullAddress,
                 Name = salonDto.Name,
                 PhoneNumber = salonDto.PhoneNumber,
-                Telphone = salonDto.Telphone,
+                Telphone = string.IsNullOrWhiteSpace(salonDto.Telphone) ? null : salonDto.Telphone,
                 UserId = userId,
                 ForGender = (Application.SalonsService.Command.ForGender)salonDto.ForGender
             };

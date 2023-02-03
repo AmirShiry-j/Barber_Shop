@@ -13,9 +13,9 @@ namespace WebApi.ModelsAndDtoes.Salon
         [Required]
         [MaxLength(255)]
         public string FullAddress { get; set; }
-        [Required]
+
         [RegularExpression("[0-9]+")]
-        public string Telphone { get; set; }
+        public string? Telphone { get; set; }
         [Required]
         [RegularExpression("(09)[0-9]{9}")]
         public string PhoneNumber { get; set; }
