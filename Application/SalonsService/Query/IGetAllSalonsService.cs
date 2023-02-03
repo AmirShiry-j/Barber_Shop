@@ -41,8 +41,8 @@ namespace Application.SalonsService.Query
             //Filter ForGender
             if (searchSalonDto.ForGender != null)
             {
-                var gender = searchSalonDto.ForGender.Value.ToString();
-                prSalon = prSalon.And(x => x.ForGender.Equals((Domain.Salons.ForGender)searchSalonDto.ForGender.Value));
+                var gender = (Domain.Salons.ForGender)searchSalonDto.ForGender.Value;
+                prSalon = prSalon.And(x => x.ForGender == gender);
             }
             //Filter UnitedId
             if (searchSalonDto.UnitedId != null)
@@ -61,6 +61,9 @@ namespace Application.SalonsService.Query
                 .ThenInclude(p => p.United)
                 .Include(p => p.Owner)
                 .Where(prSalon)
+                //For Pagination
+                .Skip((searchSalonDto.Page.Value - 1) * searchSalonDto.CountInPage.Value)
+                .Take(searchSalonDto.CountInPage.Value)
                 .Select(p => new SalonMainInfoDto
                 {
                     Id = p.Id,
@@ -70,10 +73,8 @@ namespace Application.SalonsService.Query
                     CityName = p.Address.City.Name,
                     UnitedId = p.Address.City.UnitedId,
                     UnitedName = p.Address.City.United.Name,
+                    ForGender = p.ForGender.ToString() == "ForMen" ? Command.ForGender.ForMen : Command.ForGender.ForWomen
                 })
-                //For Pagination
-                .Skip((searchSalonDto.Page.Value - 1) * searchSalonDto.CountInPage.Value)
-                .Take(searchSalonDto.CountInPage.Value)
                 .ToList();
 
             //For Pagination
@@ -117,6 +118,7 @@ namespace Application.SalonsService.Query
         public string UnitedName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public Command.ForGender ForGender { get; set; }
         public Link Link { get; set; }
     }
 }

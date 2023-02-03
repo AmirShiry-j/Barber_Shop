@@ -83,9 +83,4 @@ namespace Application.SalonsService.Command
         public string Description { get; set; }
         public ForGender ForGender { get; set; }
     }
-    public enum ForGender
-    {
-        ForMen = 1,
-        ForWomen = 2
-    }
 }
