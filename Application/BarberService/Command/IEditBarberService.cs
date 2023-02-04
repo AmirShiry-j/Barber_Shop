@@ -6,6 +6,7 @@ using Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,6 +56,7 @@ namespace Application.BarberService.Command
             //Update barber infoes
             barber.Description = dto.Description;
             barber.SalonId = dto.SalonId;
+            barber.PhoneNumber = dto.PhoneNumber;
 
             _dbContext.SaveChanges();
 
@@ -70,6 +72,7 @@ namespace Application.BarberService.Command
     {
         public string Description { get; set; }
         public string UserId { get; set; }
+        public string PhoneNumber { get; set; }
         public int? SalonId { get; set; }
     }
 }

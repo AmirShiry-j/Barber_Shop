@@ -120,6 +120,7 @@ namespace WebApi.Controllers
                 Description = createBarberDto.Description,
                 UserId = userId,
                 SalonId = createBarberDto.SalonId,
+                PhoneNumber=createBarberDto.PhoneNumber,
             };
 
             //Create Barber by service
@@ -156,7 +157,8 @@ namespace WebApi.Controllers
             {
                 Description = editBarberApiDto.Description,
                 SalonId = editBarberApiDto.SalonId,
-                UserId = userId
+                UserId = userId,
+                PhoneNumber=editBarberApiDto.PhoneNumber
             };
 
             //Edit Barber by service

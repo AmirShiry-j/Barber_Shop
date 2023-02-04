@@ -6,6 +6,7 @@ using Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,6 +49,7 @@ namespace Application.BarberService.Command
                 UserId = dto.UserId,
                 Description = dto.Description,
                 SalonId = dto.SalonId,
+                PhoneNumber = dto.PhoneNumber,
             };
 
             //Find Salon
@@ -80,6 +82,7 @@ namespace Application.BarberService.Command
     {
         public string Description { get; set; }
 
+        public string PhoneNumber { get; set; }
         //Nav
         public string UserId { get; set; }
         public int? SalonId { get; set; }
