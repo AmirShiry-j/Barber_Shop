@@ -123,6 +123,12 @@
             <param name="user"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.BarberController.GetAll">
+            <summary>
+            بر گردوندن لیست تمام آرایشگر ها (موقت)
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.BarberController.Get(System.Int32)">
             <summary>
             برگردوندن مشخصات مربوط به یک آرایشگر

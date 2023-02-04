@@ -194,6 +194,7 @@ builder.Services.AddScoped<IEditBarberService, EditBarberService>();
 builder.Services.AddScoped<IDeleteBarberService, DeleteBarberService>();
 builder.Services.AddScoped<IGetBarberInfoByUserIdService, GetBarberInfoByUserIdService>();
 builder.Services.AddScoped<IGetBaberInformationByBarberIdService, GetBaberInformationByBarberIdService>();
+builder.Services.AddScoped<IGetBarbersService, GetBarbersService>();
 
 //Address services
 builder.Services.AddScoped<IGetUnitedsService, GetUnitedsService>();

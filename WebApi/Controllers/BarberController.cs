@@ -23,11 +23,13 @@ namespace WebApi.Controllers
         private readonly IDeleteBarberService _deleteBarberService;
         private readonly IGetBarberInfoByUserIdService _getBarberInfoByUserIdService;
         private readonly IGetBaberInformationByBarberIdService _getBaberInformationByBarberIdService;
+        private readonly IGetBarbersService _getBarbersService;
         public BarberController(IAddBarberService addBarberService,
             IEditBarberService editBarberService,
             IDeleteBarberService deleteBarberService,
             IGetBarberInfoByUserIdService getBarberInfoByUserIdService,
-            IGetBaberInformationByBarberIdService getBaberInformationByBarberIdService
+            IGetBaberInformationByBarberIdService getBaberInformationByBarberIdService,
+            IGetBarbersService getBarbersService
             )
         {
             _editBarberService = editBarberService;
@@ -35,6 +37,21 @@ namespace WebApi.Controllers
             _deleteBarberService = deleteBarberService;
             _getBarberInfoByUserIdService = getBarberInfoByUserIdService;
             _getBaberInformationByBarberIdService = getBaberInformationByBarberIdService;
+            _getBarbersService = getBarbersService;
+        }
+
+        /// <summary>
+        /// بر گردوندن لیست تمام آرایشگر ها (موقت)
+        /// </summary>
+        /// <returns></returns>
+        [ApiVersion("1")]
+        [HttpGet("~/api/v{version:apiVersion}/[controller]/[action]")]
+        public async Task<IActionResult> GetAll()
+        {
+            //Barber by service
+            var resultService = await _getBarbersService.Execute();
+
+            return Ok(resultService.Data);
         }
 
 
@@ -119,7 +136,7 @@ namespace WebApi.Controllers
                 Description = createBarberDto.Description,
                 UserId = userId,
                 SalonId = createBarberDto.SalonId,
-                PhoneNumber=createBarberDto.PhoneNumber,
+                PhoneNumber = createBarberDto.PhoneNumber,
             };
 
             //Create Barber by service
@@ -157,7 +174,7 @@ namespace WebApi.Controllers
                 Description = editBarberApiDto.Description,
                 SalonId = editBarberApiDto.SalonId,
                 UserId = userId,
-                PhoneNumber=editBarberApiDto.PhoneNumber
+                PhoneNumber = editBarberApiDto.PhoneNumber
             };
 
             //Edit Barber by service
