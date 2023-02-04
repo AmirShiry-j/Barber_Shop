@@ -56,7 +56,10 @@ namespace Persistence.Contexts
                 .HasOne(p => p.Barber)
                 .WithOne(p => p.User)
                 .HasForeignKey<User>(p => p.BarberId)
-                .IsRequired(false);
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
+            
+
 
             builder.Entity<Salon>()
                 .HasMany(p => p.SalonImages)
@@ -69,7 +72,7 @@ namespace Persistence.Contexts
             builder.Entity<User>()
                 .HasOne<Salon>()
                 .WithOne(p => p.Owner)
-                .HasForeignKey<Salon>(p =>p.OwnerId)
+                .HasForeignKey<Salon>(p => p.OwnerId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             //builder.Entity<Salon>()

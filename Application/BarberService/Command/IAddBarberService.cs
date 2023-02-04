@@ -3,6 +3,7 @@ using Application.Interfaces.Contexts;
 using AutoMapper;
 using Domain.Salons;
 using Domain.Users;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Application.BarberService.Command
 {
     public interface IAddBarberService
     {
-        Task<ResultDto<Barber>> Execute(User user, CreateBarberDto dto);
+        Task<ResultDto<Barber>> Execute(CreateBarberDto dto);
     }
 
     public class AddBarberService: IAddBarberService
@@ -26,8 +27,20 @@ namespace Application.BarberService.Command
             _mapper = mapper;
         }
 
-        public async Task<ResultDto<Barber>> Execute(User user,CreateBarberDto dto)
+        public async Task<ResultDto<Barber>> Execute(CreateBarberDto dto)
         {
+            //has barber before?
+            var user = _dbContext.Users.Where(p => p.Id.Equals(dto.UserId)).Include(p => p.Barber).FirstOrDefault();
+            if (user.Barber != null)
+            {
+                return new ResultDto<Barber>
+                {
+                    IsSuccess = false,
+                    Message = "شما قبلا به عنوان آرایشگر ثبت نام کرده اید"
+                };
+            }
+
+
             //map new
             var newBarber = new
                 Barber
@@ -37,8 +50,23 @@ namespace Application.BarberService.Command
                 SalonId = dto.SalonId,
             };
 
+            //Find Salon
+            var salon = _dbContext.Salons.Where(p => p.Id.Equals(dto.SalonId)).FirstOrDefault();
+            if (salon == null)
+            {
+                return new ResultDto<Barber>
+                {
+                    IsSuccess = false,
+                    Message = "سالنی با این آیدی موجود نیست"
+                };
+            }
+
             //save in db
             _dbContext.Barbers.Add(newBarber);
+            _dbContext.SaveChanges();
+
+            //set forenkey for user
+            user.BarberId = newBarber.Id;
             _dbContext.SaveChanges();
 
             return new ResultDto<Barber>

@@ -2,6 +2,7 @@
 using Application.Interfaces.Contexts;
 using AutoMapper;
 using Domain.Users;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Application.BarberService.Command
 {
     public interface IDeleteBarberService
     {
-        Task<ResultDto> Execute(User user);
+        Task<ResultDto> Execute(string UserId);
     }
     public class DeleteBarberService : IDeleteBarberService
     {
@@ -24,10 +25,10 @@ namespace Application.BarberService.Command
             _mapper = mapper;
         }
 
-        public async Task<ResultDto> Execute(User user)
+        public async Task<ResultDto> Execute(string UserId)
         {
-            //get barber
-            var barber = _dbContext.Barbers.Where(p => p.UserId.Equals(user.Id)).FirstOrDefault();
+          //Find barber
+            var barber = _dbContext.Users.Where(p => p.Id.Equals(UserId)).Include(p => p.Barber).Select(p => p.Barber).FirstOrDefault();
 
             if (barber == null)
             {

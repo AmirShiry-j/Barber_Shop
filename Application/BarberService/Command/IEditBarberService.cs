@@ -14,7 +14,7 @@ namespace Application.BarberService.Command
 {
     public interface IEditBarberService
     {
-        Task<ResultDto> Execute(User user, EditBarberDto dto);
+        Task<ResultDto> Execute(EditBarberDto dto);
     }
     public class EditBarberService : IEditBarberService
     {
@@ -26,10 +26,10 @@ namespace Application.BarberService.Command
             _mapper = mapper;
         }
 
-        public async Task<ResultDto> Execute(User user, EditBarberDto dto)
+        public async Task<ResultDto> Execute(EditBarberDto dto)
         {
             //Find barber
-            var barber = _dbContext.Barbers.Find(dto.Id);
+            var barber = _dbContext.Barbers.Where(p => p.UserId.Equals(dto.UserId)).FirstOrDefault();
 
             //Check has barber
             if (barber == null)
@@ -37,17 +37,18 @@ namespace Application.BarberService.Command
                 return new ResultDto
                 {
                     IsSuccess = false,
-                    Message = "this barberid is not exist"
+                    Message = "شما قبلا به عنوان آرایشگر ثبت نام نکرده اید"
                 };
             }
 
-            //Check baberid is for user authozed
-            if (user.Id != barber.UserId)
+            //Find Salon
+            var salon = _dbContext.Salons.Where(p => p.Id.Equals(dto.SalonId)).FirstOrDefault();
+            if (salon == null)
             {
                 return new ResultDto
                 {
-                    IsSuccess=false,
-                    Message="آیدی ارسالی متعلق به یوزر نیست"
+                    IsSuccess = false,
+                    Message = "سالنی با این آیدی موجود نیست"
                 };
             }
 
@@ -67,7 +68,6 @@ namespace Application.BarberService.Command
 
     public class EditBarberDto
     {
-        public int Id { get; set; }
         public string Description { get; set; }
         public string UserId { get; set; }
         public int? SalonId { get; set; }
