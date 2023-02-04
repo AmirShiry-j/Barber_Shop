@@ -38,7 +38,6 @@ namespace WebApi.Controllers
         }
 
 
-
         /// <summary>
         /// برگردوندن مشخصات مربوط به یک آرایشگر
         /// </summary>

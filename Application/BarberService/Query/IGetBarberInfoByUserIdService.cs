@@ -48,7 +48,7 @@ namespace Application.BarberService.Query
                 BarberId = user.BarberId.Value,
                 Description = user.Barber.Description,
                 SalonId = user.Barber.SalonId.Value,
-                PhoneNumber = user.PhoneNumber
+                PhoneNumber = user.Barber.PhoneNumber
             };
 
             return new ResultDto<BarberInfoDto>
