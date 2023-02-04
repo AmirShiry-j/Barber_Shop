@@ -1,5 +1,6 @@
 ﻿using Application.AddressesService.Query;
 using Application.BarberService.Command;
+using Application.BarberService.Query;
 using Application.CustomerService.Command;
 using Application.Interfaces.Contexts;
 using Application.ProfileService.Command;
@@ -191,6 +192,8 @@ builder.Services.AddScoped<IGetAllSalonsService, GetAllSalonsService>();
 builder.Services.AddScoped<IAddBarberService, AddBarberService>();
 builder.Services.AddScoped<IEditBarberService, EditBarberService>();
 builder.Services.AddScoped<IDeleteBarberService, DeleteBarberService>();
+builder.Services.AddScoped<IGetBarberInfoByUserIdService, GetBarberInfoByUserIdService>();
+builder.Services.AddScoped<IGetBaberInformationByBarberIdService, GetBaberInformationByBarberIdService>();
 
 //Address services
 builder.Services.AddScoped<IGetUnitedsService, GetUnitedsService>();

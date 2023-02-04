@@ -123,6 +123,39 @@
             <param name="user"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.BarberController.Get(System.Int32)">
+            <summary>
+            برگردوندن مشخصات مربوط به یک آرایشگر
+            </summary>
+            <param name="BarberId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.BarberController.Get">
+            <summary>
+            برگردوندن اطلاعات مربوط به آرایشگری (Auth)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.BarberController.Post(WebApi.ModelsAndDtoes.Barber.CreateBarberApiDto)">
+            <summary>
+            ثبت نام کردن به عنوان آرایشگر (Auth)
+            </summary>
+            <param name="createBarberDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.BarberController.Put(WebApi.ModelsAndDtoes.Barber.EditBarberApiDto)">
+            <summary>
+            ویرایش اطلاعات مربوط به آرایشگری (Auth)
+            </summary>
+            <param name="editBarberApiDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.BarberController.Delete">
+            <summary>
+            تغییر عنوان کاربری از آرایشگر به کاربر عادی (Auth)
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.CityController.Get(System.Int32)">
             <summary>
             برگردوندن لیست شهر های هر استان برای کمبوباکس

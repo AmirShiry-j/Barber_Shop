@@ -1,5 +1,9 @@
 ﻿using Application.BarberService.Command;
+using Application.BarberService.Query;
+using Application.Common;
 using Application.SalonsService.Command;
+using Domain.Salons;
+using Domain.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -17,16 +21,92 @@ namespace WebApi.Controllers
         private readonly IAddBarberService _addBarberService;
         private readonly IEditBarberService _editBarberService;
         private readonly IDeleteBarberService _deleteBarberService;
+        private readonly IGetBarberInfoByUserIdService _getBarberInfoByUserIdService;
+        private readonly IGetBaberInformationByBarberIdService _getBaberInformationByBarberIdService;
         public BarberController(IAddBarberService addBarberService,
             IEditBarberService editBarberService,
-            IDeleteBarberService deleteBarberService
+            IDeleteBarberService deleteBarberService,
+            IGetBarberInfoByUserIdService getBarberInfoByUserIdService,
+            IGetBaberInformationByBarberIdService getBaberInformationByBarberIdService
             )
         {
             _editBarberService = editBarberService;
             _addBarberService = addBarberService;
             _deleteBarberService = deleteBarberService;
+            _getBarberInfoByUserIdService = getBarberInfoByUserIdService;
+            _getBaberInformationByBarberIdService = getBaberInformationByBarberIdService;
         }
 
+
+
+        /// <summary>
+        /// برگردوندن مشخصات مربوط به یک آرایشگر
+        /// </summary>
+        /// <param name="BarberId"></param>
+        /// <returns></returns>
+        [HttpGet("{BarberId}")]
+        public async Task<IActionResult> Get(int BarberId)
+        {
+            //Barber by service
+            var resultService = await _getBaberInformationByBarberIdService.Execute(BarberId);
+
+            if (resultService.IsSuccess)
+            {
+                return Ok(resultService.Data);
+            }
+            else
+            {
+                return BadRequest(resultService.Message);
+            }
+        }
+
+        /// <summary>
+        /// برگردوندن اطلاعات مربوط به آرایشگری (Auth)
+        /// </summary>
+        /// <returns></returns>
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            //Get UserId
+            var userId = User.Claims?.FirstOrDefault(p => p.Type == "UserId")?.Value;
+
+            //Barber by service
+            var resultService = await _getBarberInfoByUserIdService.Execute(userId);
+
+            if (resultService.IsSuccess)
+            {
+                //HATEOAS links
+                resultService.Data.Links = new List<Link>
+                {
+                    new Link
+                    {
+                        For="Edit",
+                        HttpMethod=HttpMethod.Put.ToString(),
+                        Url=Url.Action(nameof(Put),"Barber",null,Request.Scheme)
+                    },
+                    new Link
+                    {
+                        For="Delete",
+                        HttpMethod=HttpMethod.Delete.ToString(),
+                        Url=Url.Action(nameof(Delete),"Barber",null,Request.Scheme)
+                    },
+                };
+
+                return Ok(resultService.Data);
+            }
+            else
+            {
+                return BadRequest(resultService.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// ثبت نام کردن به عنوان آرایشگر (Auth)
+        /// </summary>
+        /// <param name="createBarberDto"></param>
+        /// <returns></returns>
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task<IActionResult> Post(CreateBarberApiDto createBarberDto)
@@ -48,9 +128,9 @@ namespace WebApi.Controllers
             if (resultService.IsSuccess)
             {
                 //HATEOAS links
-                //string url = Url.Action(nameof(Get), "Barber", new { SalonId = resultService.Data.Id }, Request.Scheme);
+                string url = Url.Action(nameof(Get), "Barber", null, Request.Scheme);
 
-                return Created("", "شما به عنوان یک آرایشگر ثبت شدید");
+                return Created(url, "شما به عنوان یک آرایشگر ثبت شدید");
             }
             else
             {
@@ -58,6 +138,12 @@ namespace WebApi.Controllers
             }
         }
 
+
+        /// <summary>
+        /// ویرایش اطلاعات مربوط به آرایشگری (Auth)
+        /// </summary>
+        /// <param name="editBarberApiDto"></param>
+        /// <returns></returns>
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut]
         public async Task<IActionResult> Put(EditBarberApiDto editBarberApiDto)
@@ -86,6 +172,10 @@ namespace WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// تغییر عنوان کاربری از آرایشگر به کاربر عادی (Auth)
+        /// </summary>
+        /// <returns></returns>
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete]
         public async Task<IActionResult> Delete()

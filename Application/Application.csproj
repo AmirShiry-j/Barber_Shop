@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <Folder Include="AddressesService\Command\" />
-    <Folder Include="BarberService\Query\" />
     <Folder Include="CustomerService\Query\" />
   </ItemGroup>
 
