@@ -78,7 +78,7 @@ namespace Application.SalonsService.Query
                 .ToList();
 
             //For Pagination
-            int CountAllItems = _dbContext.Salons.Count();
+            int CountAllItems = _dbContext.Salons.Where(prSalon).Count();
 
             return new ResultDto<ResultSearchDto>
             {
