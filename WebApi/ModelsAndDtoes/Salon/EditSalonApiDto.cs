@@ -9,6 +9,7 @@ namespace WebApi.ModelsAndDtoes.Salon
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
+        [Required]
         public int CityId { get; set; }
         [Required]
         [MaxLength(255)]
