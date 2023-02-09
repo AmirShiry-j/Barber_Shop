@@ -36,6 +36,16 @@ namespace Application.SalonImageService.Command
                 };
             }
 
+            //Check user is owner Salon
+            if (salon.OwnerId != Dto.UserId)
+            {
+                return new ResultDto<int>
+                {
+                    IsSuccess = false,
+                    Message = "شما مالک این سالن آرایشی نیستید"
+                };
+            }
+
             //Check Limited 5 Image for every Salon
             var countImage = _dbContext.SalonImages.Where(p => p.SalonId.Equals(Dto.SalonId)).Count();
             if (countImage >= 5)
@@ -67,6 +77,7 @@ namespace Application.SalonImageService.Command
     }
     public class CreateSalonImageDto
     {
+        public string UserId { get; set; }
         public string Name { get; set; }
         public int SalonId { get; set; }
     }

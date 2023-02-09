@@ -1,5 +1,6 @@
 ﻿using Application.Common;
 using Application.Interfaces.Contexts;
+using Domain.Salons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Application.SalonImageService.Command
 {
-    internal interface IDeleteSalonImageByNameService
+    public interface IDeleteSalonImageByNameService
     {
-        Task<ResultDto> Execute(string Name);
+        Task<ResultDto> Execute(string Name, string UserId);
     }
     public class DeleteSalonImageByNameService : IDeleteSalonImageByNameService
     {
@@ -19,10 +20,21 @@ namespace Application.SalonImageService.Command
         {
             _dbContext = dbContext;
         }
-        public async Task<ResultDto> Execute(string Name)
+        public async Task<ResultDto> Execute(string Name, string UserId)
         {
             //Find Image
             var salonImage = _dbContext.SalonImages.Where(p => p.Name.Equals(Name)).FirstOrDefault();
+            var salon = _dbContext.Salons.Find(salonImage.SalonId);
+
+            //Check user is owner Salon
+            if (salon.OwnerId != UserId)
+            {
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    Message = "شما مالک این سالن آرایشی نیستید"
+                };
+            }
 
             //Check is exist
             if (salonImage == null)

@@ -5,6 +5,8 @@ using Application.CustomerService.Command;
 using Application.Interfaces.Contexts;
 using Application.ProfileService.Command;
 using Application.ProfileService.Query;
+using Application.SalonImageService.Command;
+using Application.SalonImageService.Query;
 using Application.SalonsService.Command;
 using Application.SalonsService.Query;
 using Application.TokenService;
@@ -188,6 +190,13 @@ builder.Services.AddScoped<IEditSalonService,EditSalonService>();
 builder.Services.AddScoped<IDeleteSalonService, DeleteSalonService>();
 builder.Services.AddScoped<IGetSalonByIdService, GetSalonByIdService>();
 builder.Services.AddScoped<IGetAllSalonsService, GetAllSalonsService>();
+
+//SalonImage sevices
+builder.Services.AddScoped<IAddSalonImageService, AddSalonImageService>();
+builder.Services.AddScoped<IDeleteSalonImageByNameService, DeleteSalonImageByNameService>();
+builder.Services.AddScoped<IGetSalonImagesBySalonIdService, GetSalonImagesBySalonIdService>();
+
+
 //Barber services
 builder.Services.AddScoped<IAddBarberService, AddBarberService>();
 builder.Services.AddScoped<IEditBarberService, EditBarberService>();
@@ -234,6 +243,13 @@ app.UseStaticFiles(new StaticFileOptions()
         Path.Combine(Directory.GetCurrentDirectory(), "Images/Profile")
     ),
     RequestPath = "/Images/Profile"
+});
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "Images/SalonImage")
+    ),
+    RequestPath = "/Images/SalonImage"
 });
 
 // Configure the HTTP request pipeline.

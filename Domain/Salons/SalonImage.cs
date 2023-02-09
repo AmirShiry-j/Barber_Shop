@@ -14,5 +14,6 @@ namespace Domain.Salons
         //Nav rel
         public int SalonId { get; set; }
 
+
     }
 }
