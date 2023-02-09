@@ -18,7 +18,6 @@
   <ItemGroup>
     <Folder Include="AddressesService\Command\" />
     <Folder Include="CustomerService\Query\" />
-    <Folder Include="SalonImageService\Query\" />
   </ItemGroup>
 
 </Project>
