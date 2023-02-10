@@ -9,6 +9,7 @@ using WebApi.ModelsAndDtoes.Salon;
 using Application.Common;
 using System.Data;
 using Domain.Salons;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace WebApi.Controllers
 {
@@ -57,8 +58,19 @@ namespace WebApi.Controllers
             //Get data from service
             var resultService = await _getAllSalonsService.Execute(inputService);
 
+            //HATEAOS
+            //Build url of image
+            string url = Request.GetDisplayUrl();
+            string domainName = url.Substring(0, url.IndexOf("/api"));
+
             foreach (var salon in resultService.Data.Salons)
             {
+                if (salon.ImageName != null)
+                {
+                    string imageUrl = domainName + "/Images/SalonImage/" + salon.ImageName;
+                    salon.UrlImageName = imageUrl;
+                }
+
                 salon.Link = new Link
                 {
                     For = "Details",
@@ -84,6 +96,16 @@ namespace WebApi.Controllers
             if (resultService.IsSuccess)
             {
                 //HATEOAS links
+                //Build url of image
+                string url = Request.GetDisplayUrl();
+                string domainName = url.Substring(0, url.IndexOf("/api"));
+                //For images
+                foreach (var image in resultService.Data.Images)
+                {
+                    string imageUrl = domainName + "/Images/SalonImage/" + image.Name;
+                    image.UrlImage = imageUrl;
+                }
+                //For Self
                 resultService.Data.Links = new List<Link>
                 {
                     new Link

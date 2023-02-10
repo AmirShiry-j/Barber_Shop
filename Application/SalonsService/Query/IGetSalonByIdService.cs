@@ -33,6 +33,7 @@ namespace Application.SalonsService.Query
                 .Include(p => p.Address)
                 .ThenInclude(p => p.City)
                 .ThenInclude(p => p.United)
+                .Include(p => p.SalonImages)
                 .FirstOrDefault();
 
             //Check is exist
@@ -40,6 +41,11 @@ namespace Application.SalonsService.Query
             {
                 //Map to dto
                 var dto = _mapper.Map<SalonDto>(salon);
+
+                dto.Images = salon.SalonImages.Select(p => new ImageDto
+                {
+                    Name = p.Name
+                }).ToList();
 
                 return new ResultDto<SalonDto>
                 {
@@ -72,8 +78,15 @@ namespace Application.SalonsService.Query
         public string PhoneNumber { get; set; }
         public string Description { get; set; }
         public ForGender ForGender { get; set; }
-
+        public List<ImageDto> Images { get; set; }
         public List<Link> Links { get; set; }
+
+    }
+
+    public class ImageDto
+    {
+        public string Name { get; set; }
+        public string UrlImage { get; set; }
 
     }
 }

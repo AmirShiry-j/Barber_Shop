@@ -59,6 +59,7 @@ namespace Application.SalonsService.Query
                 .Include(p => p.Address)
                 .ThenInclude(p => p.City)
                 .ThenInclude(p => p.United)
+                .Include(p => p.SalonImages)
                 .Include(p => p.Owner)
                 .Where(prSalon)
                 //For Pagination
@@ -73,7 +74,8 @@ namespace Application.SalonsService.Query
                     CityName = p.Address.City.Name,
                     UnitedId = p.Address.City.UnitedId,
                     UnitedName = p.Address.City.United.Name,
-                    ForGender = p.ForGender.ToString() == "ForMen" ? Command.ForGender.ForMen : Command.ForGender.ForWomen
+                    ForGender = p.ForGender.ToString() == "ForMen" ? Command.ForGender.ForMen : Command.ForGender.ForWomen,
+                    ImageName = p.SalonImages.FirstOrDefault() == null ? null : p.SalonImages.FirstOrDefault().Name.ToString()
                 })
                 .ToList();
 
@@ -119,6 +121,8 @@ namespace Application.SalonsService.Query
         public string Name { get; set; }
         public string Description { get; set; }
         public Command.ForGender ForGender { get; set; }
+        public string ImageName { get; set; }
+        public string UrlImageName { get; set; }
         public Link Link { get; set; }
     }
 }
