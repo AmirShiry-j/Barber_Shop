@@ -29,6 +29,11 @@ namespace WebApi.Controllers
             _deleteSalonImageByNameService = deleteSalonImageByNameService;
         }
 
+        /// <summary>
+        /// برگردوندن تصاویر سالن آرایشی (Auth)
+        /// </summary>
+        /// <param name="SalonId"></param>
+        /// <returns></returns>
         [HttpGet("{SalonId}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Get(int SalonId)
@@ -63,6 +68,12 @@ namespace WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// اضافه کردن تصویر به سالن آرایشی (Auth)
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="SalonId"></param>
+        /// <returns></returns>
         [HttpPost("{SalonId}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Post(IFormFile file, int SalonId)
@@ -123,6 +134,11 @@ namespace WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// حذف یک تصویر از سالن آرایشی (Auth)
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
         [HttpDelete("{Name}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Delete(string Name)

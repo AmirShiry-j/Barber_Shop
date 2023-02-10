@@ -233,6 +233,28 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.SalonImageController.Get(System.Int32)">
+            <summary>
+            برگردوندن تصاویر سالن آرایشی (Auth)
+            </summary>
+            <param name="SalonId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.SalonImageController.Post(Microsoft.AspNetCore.Http.IFormFile,System.Int32)">
+            <summary>
+            اضافه کردن تصویر به سالن آرایشی (Auth)
+            </summary>
+            <param name="file"></param>
+            <param name="SalonId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.SalonImageController.Delete(System.String)">
+            <summary>
+            حذف یک تصویر از سالن آرایشی (Auth)
+            </summary>
+            <param name="Name"></param>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.UnitedController.Get">
             <summary>
             برگردوندن لیست استان ها برای کمبوباکس
