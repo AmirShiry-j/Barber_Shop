@@ -5,6 +5,7 @@ using Domain.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,6 +40,21 @@ namespace WebApi.Controllers
             var resultService = await _getSalonImagesBySalonIdService.Execute(SalonId, userId);
             if (resultService.IsSuccess)
             {
+                if (resultService.Data.Any() == false)
+                {
+                    return NoContent();
+                }
+
+                //HATEAOS
+                //Build url of image
+                string url = Request.GetDisplayUrl();
+                string domainName = url.Substring(0, url.IndexOf("/api"));
+                foreach (var imageOb in resultService.Data)
+                {
+                    string imageUrl = domainName + "/Images/SalonImage/" + imageOb.Name;
+                    imageOb.Url = imageUrl;
+                }
+
                 return Ok(resultService.Data);
             }
             else
@@ -94,7 +110,12 @@ namespace WebApi.Controllers
 
             if (resultService.IsSuccess)
             {
-                return Ok(resultService.Data);
+                //Build url of image
+                string url = Request.GetDisplayUrl();
+                string domainName = url.Substring(0, url.IndexOf("/api"));
+                string imageUrl = domainName + "/Images/SalonImage/" + resultService.Data;
+
+                return Created(imageUrl, null);
             }
             else
             {

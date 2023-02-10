@@ -24,6 +24,16 @@ namespace Application.SalonImageService.Command
         {
             //Find Image
             var salonImage = _dbContext.SalonImages.Where(p => p.Name.Equals(Name)).FirstOrDefault();
+
+            //Check is exist image
+            if (salonImage == null)
+            {
+                return new ResultDto
+                {
+                    Message = "تصویری با این نام موجود نیست"
+                };
+            }
+
             var salon = _dbContext.Salons.Find(salonImage.SalonId);
 
             //Check user is owner Salon

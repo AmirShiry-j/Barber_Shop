@@ -14,7 +14,7 @@ namespace Application.SalonImageService.Command
 {
     public interface IAddSalonImageService
     {
-        Task<ResultDto<int>> Execute(CreateSalonImageDto Dto);
+        Task<ResultDto<string>> Execute(CreateSalonImageDto Dto);
     }
     public class AddSalonImageService : IAddSalonImageService
     {
@@ -23,13 +23,13 @@ namespace Application.SalonImageService.Command
         {
             _dbContext = dbContext;
         }
-        public async Task<ResultDto<int>> Execute(CreateSalonImageDto Dto)
+        public async Task<ResultDto<string>> Execute(CreateSalonImageDto Dto)
         {
             //Check is exist salonid
             var salon = _dbContext.Salons.Find(Dto.SalonId);
             if (salon == null)
             {
-                return new ResultDto<int>
+                return new ResultDto<string>
                 {
                     IsSuccess = false,
                     Message = "سالنی با این آیدی موجود نیست"
@@ -39,7 +39,7 @@ namespace Application.SalonImageService.Command
             //Check user is owner Salon
             if (salon.OwnerId != Dto.UserId)
             {
-                return new ResultDto<int>
+                return new ResultDto<string>
                 {
                     IsSuccess = false,
                     Message = "شما مالک این سالن آرایشی نیستید"
@@ -50,7 +50,7 @@ namespace Application.SalonImageService.Command
             var countImage = _dbContext.SalonImages.Where(p => p.SalonId.Equals(Dto.SalonId)).Count();
             if (countImage >= 5)
             {
-                return new ResultDto<int>
+                return new ResultDto<string>
                 {
                     IsSuccess = false,
                     Message = "بیشتر از 5 تصویر برای هر سالن نمیتوان ذخیره کرده"
@@ -68,10 +68,10 @@ namespace Application.SalonImageService.Command
             _dbContext.SalonImages.Add(newSalonImage);
             _dbContext.SaveChanges();
 
-            return new ResultDto<int>
+            return new ResultDto<string>
             {
                 IsSuccess = true,
-                Data = newSalonImage.Id
+                Data = newSalonImage.Name
             };
         }
     }

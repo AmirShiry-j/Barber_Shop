@@ -20,7 +20,7 @@ namespace Application.SalonImageService.Query
         {
             _dbContext = dbContext;
         }
-        public async Task<ResultDto<List<SalonImageDto>>> Execute(int SalonId,string UserId)
+        public async Task<ResultDto<List<SalonImageDto>>> Execute(int SalonId, string UserId)
         {
             //Check is exist salonid
             var salon = _dbContext.Salons.Find(SalonId);
@@ -59,5 +59,6 @@ namespace Application.SalonImageService.Query
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Url { get; set; }
     }
 }
