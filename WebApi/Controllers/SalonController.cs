@@ -10,6 +10,7 @@ using Application.Common;
 using System.Data;
 using Domain.Salons;
 using Microsoft.AspNetCore.Http.Extensions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WebApi.Controllers
 {
@@ -95,15 +96,22 @@ namespace WebApi.Controllers
 
             if (resultService.IsSuccess)
             {
-                //HATEOAS links
+                ////HATEOAS links
                 //Build url of image
                 string url = Request.GetDisplayUrl();
                 string domainName = url.Substring(0, url.IndexOf("/api"));
-                //For images
+                ////For images
+                //salon
                 foreach (var image in resultService.Data.Images)
                 {
                     string imageUrl = domainName + "/Images/SalonImage/" + image.Name;
                     image.UrlImage = imageUrl;
+                }
+                //barber
+                foreach (var barber in resultService.Data.Barbers)
+                {
+                    string imageUrl = domainName + "/Images/Profile/" + barber.ProfileImageName;
+                    barber.UrlProfileImage = imageUrl;
                 }
                 //For Self
                 resultService.Data.Links = new List<Link>
