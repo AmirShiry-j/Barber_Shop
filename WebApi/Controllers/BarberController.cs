@@ -71,10 +71,14 @@ namespace WebApi.Controllers
             {
                 //HATEAOS
                 //Build url of image
-                string url = Request.GetDisplayUrl();
-                string domainName = url.Substring(0, url.IndexOf("/api"));
-                resultService.Data.UrlImage = domainName + "/Images/Profile/" + resultService.Data.ImageName;
-
+                if(!string.IsNullOrEmpty(resultService.Data.UrlImage))
+                {
+                    string url = Request.GetDisplayUrl();
+                    string domainName = url.Substring(0, url.IndexOf("/api"));
+                    resultService.Data.UrlImage = domainName + "/Images/Profile/" + resultService.Data.ImageName;
+                }
+                //for Salon
+                resultService.Data.UrlSalon = Url.Action(nameof(Get), "Salon", new { SalonId = resultService.Data.SalonId }, Request.Scheme);
 
                 return Ok(resultService.Data);
             }

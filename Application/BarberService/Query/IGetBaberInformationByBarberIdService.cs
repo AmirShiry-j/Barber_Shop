@@ -67,6 +67,7 @@ namespace Application.BarberService.Query
         public string PhoneNumber { get; set; }
         public string Description { get; set; }
         public int SalonId { get; set; }
+        public string UrlSalon { get; set; }
         public string ImageName { get; set; }
         public string UrlImage { get; set; }
     }
