@@ -112,6 +112,8 @@ namespace WebApi.Controllers
                 {
                     string imageUrl = domainName + "/Images/Profile/" + barber.ProfileImageName;
                     barber.UrlProfileImage = imageUrl;
+                    var UrlBarber = Url.Action(nameof(Get), "Barber", new { BarberId = barber.BarberId }, Request.Scheme);
+                    barber.UrlProfileBarber = UrlBarber;
                 }
                 //For Self
                 resultService.Data.Links = new List<Link>

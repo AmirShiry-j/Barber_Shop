@@ -48,7 +48,8 @@ namespace Application.BarberService.Query
                 FullName = barber.User.FullName,
                 Description = barber.Description,
                 SalonId = barber.SalonId.Value,
-                PhoneNumber = barber.PhoneNumber
+                PhoneNumber = barber.PhoneNumber,
+                ImageName=barber.User.ImageName
             };
 
             return new ResultDto<BarberDto>
@@ -66,5 +67,7 @@ namespace Application.BarberService.Query
         public string PhoneNumber { get; set; }
         public string Description { get; set; }
         public int SalonId { get; set; }
+        public string ImageName { get; set; }
+        public string UrlImage { get; set; }
     }
 }

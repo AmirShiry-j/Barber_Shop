@@ -45,11 +45,6 @@ namespace Application.SalonsService.Query
                 //Map to dto
                 var dto = _mapper.Map<SalonDetailDto>(salon);
 
-                //dto.Images = salon.SalonImages.Select(p => new ImageDto
-                //{
-                //    Name = p.Name
-                //}).ToList();
-
                 return new ResultDto<SalonDetailDto>
                 {
                     IsSuccess = true,
@@ -99,5 +94,6 @@ namespace Application.SalonsService.Query
         public string FullName { get; set; }
         public string ProfileImageName { get; set; }
         public string UrlProfileImage { get; set; }
+        public string UrlProfileBarber { get; set; }
     }
 }

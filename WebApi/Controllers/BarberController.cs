@@ -7,6 +7,7 @@ using Domain.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.ModelsAndDtoes.Barber;
 using WebApi.ModelsAndDtoes.Salon;
@@ -68,6 +69,13 @@ namespace WebApi.Controllers
 
             if (resultService.IsSuccess)
             {
+                //HATEAOS
+                //Build url of image
+                string url = Request.GetDisplayUrl();
+                string domainName = url.Substring(0, url.IndexOf("/api"));
+                resultService.Data.UrlImage = domainName + "/Images/Profile/" + resultService.Data.ImageName;
+
+
                 return Ok(resultService.Data);
             }
             else
