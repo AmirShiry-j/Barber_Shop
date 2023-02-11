@@ -110,8 +110,12 @@ namespace WebApi.Controllers
                 //barber
                 foreach (var barber in resultService.Data.Barbers)
                 {
-                    string imageUrl = domainName + "/Images/Profile/" + barber.ProfileImageName;
-                    barber.UrlProfileImage = imageUrl;
+                    if (!string.IsNullOrEmpty(barber.ProfileImageName))
+                    {
+                        string imageUrl = domainName + "/Images/Profile/" + barber.ProfileImageName;
+                        barber.UrlProfileImage = imageUrl;
+                    }
+
                     var UrlBarber = Url.Action(nameof(Get), "Barber", new { BarberId = barber.BarberId }, Request.Scheme);
                     barber.UrlProfileBarber = UrlBarber;
                 }
