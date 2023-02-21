@@ -78,6 +78,15 @@ namespace WebApi.Controllers
                     HttpMethod = HttpMethod.Get.ToString(),
                     Url = Url.Action(nameof(Get), "Salon", new { SalonId = salon.Id }, Request.Scheme)
                 };
+
+                foreach (var barber in salon.Barbers)
+                {
+                    string imageUrl = domainName + "/Images/Profile/" + barber.ProfileImageName;
+                    barber.UrlProfileImage = imageUrl;
+
+                    var UrlBarber = Url.Action(nameof(Get), "Barber", new { BarberId = barber.BarberId }, Request.Scheme);
+                    barber.UrlProfileBarber = UrlBarber;
+                }
             }
 
             return Ok(resultService.Data);

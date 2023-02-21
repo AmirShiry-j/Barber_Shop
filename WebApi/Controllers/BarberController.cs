@@ -71,7 +71,7 @@ namespace WebApi.Controllers
             {
                 //HATEAOS
                 //Build url of image
-                if(!string.IsNullOrEmpty(resultService.Data.UrlImage))
+                if(!string.IsNullOrEmpty(resultService.Data.ImageName))
                 {
                     string url = Request.GetDisplayUrl();
                     string domainName = url.Substring(0, url.IndexOf("/api"));

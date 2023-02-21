@@ -61,7 +61,10 @@ namespace Application.SalonsService.Query
                 .ThenInclude(p => p.United)
                 .Include(p => p.SalonImages)
                 .Include(p => p.Owner)
+                .Include(p => p.Barbers)
+                .ThenInclude(p => p.User)
                 .Where(prSalon)
+                .OrderByDescending(p => p.Id)
                 //For Pagination
                 .Skip((searchSalonDto.Page.Value - 1) * searchSalonDto.CountInPage.Value)
                 .Take(searchSalonDto.CountInPage.Value)
@@ -75,7 +78,8 @@ namespace Application.SalonsService.Query
                     UnitedId = p.Address.City.UnitedId,
                     UnitedName = p.Address.City.United.Name,
                     ForGender = p.ForGender.ToString() == "ForMen" ? Command.ForGender.ForMen : Command.ForGender.ForWomen,
-                    ImageName = p.SalonImages.FirstOrDefault() == null ? null : p.SalonImages.FirstOrDefault().Name.ToString()
+                    ImageName = p.SalonImages.FirstOrDefault() == null ? null : p.SalonImages.FirstOrDefault().Name.ToString(),
+                    Barbers = p.Barbers.Select(b => new BarberMainInfoDto { BarberId = b.Id, FullName = b.User.FullName, ProfileImageName = b.User.ImageName }).ToList()
                 })
                 .ToList();
 
@@ -120,9 +124,18 @@ namespace Application.SalonsService.Query
         public string UnitedName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public List<BarberMainInfoDto> Barbers { get; set; }
         public Command.ForGender ForGender { get; set; }
         public string ImageName { get; set; }
         public string UrlImageName { get; set; }
         public Link Link { get; set; }
+    }
+    public class BarberMainInfoDto
+    {
+        public int BarberId { get; set; }
+        public string FullName { get; set; }
+        public string ProfileImageName { get; set; }
+        public string UrlProfileImage { get; set; }
+        public string UrlProfileBarber { get; set; }
     }
 }

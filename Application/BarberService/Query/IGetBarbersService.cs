@@ -26,12 +26,14 @@ namespace Application.BarberService.Query
         }
         public async Task<ResultDto<List<BarberMainInfoDto>>> Execute()
         {
-            var barbers = _dbContext.Barbers.Include(p => p.User).Select(p => new BarberMainInfoDto
-            {
-                BarberId = p.Id,
-                Description = p.Description,
-                FullName = p.User.FullName,
-            }).ToList();
+            var barbers = _dbContext.Barbers.Include(p => p.User)
+                .OrderByDescending(p => p.Id)
+                .Select(p => new BarberMainInfoDto
+                {
+                    BarberId = p.Id,
+                    Description = p.Description,
+                    FullName = p.User.FullName,
+                }).ToList();
 
             return new ResultDto<List<BarberMainInfoDto>>
             {
