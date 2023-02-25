@@ -58,8 +58,13 @@ namespace Persistence.Contexts
                 .HasForeignKey<User>(p => p.BarberId)
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.SetNull);
-            
 
+            builder.Entity<Barber>()
+    .HasOne(p=>p.Salon)
+    .WithMany(p => p.Barbers)
+    .HasForeignKey(p => p.SalonId)
+    .IsRequired(false)
+    .OnDelete(DeleteBehavior.SetNull);
 
             builder.Entity<Salon>()
                 .HasMany(p => p.SalonImages)
