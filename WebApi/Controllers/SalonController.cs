@@ -11,6 +11,7 @@ using System.Data;
 using Domain.Salons;
 using Microsoft.AspNetCore.Http.Extensions;
 using static System.Net.Mime.MediaTypeNames;
+using System.Xml.Linq;
 
 namespace WebApi.Controllers
 {
@@ -249,6 +250,21 @@ namespace WebApi.Controllers
 
             if (resultService.IsSuccess)
             {
+                ////Delete Image files of salon
+
+                //Base Path Image
+                string basePath = Path.Combine(Directory.GetCurrentDirectory(), "Images/SalonImage");
+
+                foreach (var imgName in resultService.Data)
+                {
+                    //Delete old image file
+                    string pathImg = Path.Combine(basePath, imgName);
+                    if (System.IO.File.Exists(pathImg))
+                    {
+                        System.IO.File.Delete(pathImg);
+                    }
+                }
+
                 return Ok();
             }
             else

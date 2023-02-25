@@ -12,7 +12,7 @@ namespace Application.SalonsService.Command
 {
     public interface IDeleteSalonService
     {
-        public Task<ResultDto> Execute(string UserId, int SalonId);
+        public Task<ResultDto<List<string>>> Execute(string UserId, int SalonId);
     }
 
     public class DeleteSalonService : IDeleteSalonService
@@ -24,15 +24,15 @@ namespace Application.SalonsService.Command
             _dbContext = dbContext;
             _logger = logger;
         }
-        public async Task<ResultDto> Execute(string UserId, int SalonId)
+        public async Task<ResultDto<List<string>>> Execute(string UserId, int SalonId)
         {
             //Get salon from db
-            var salon = _dbContext.Salons.Find(SalonId);
+            var salon = _dbContext.Salons.Where(p => p.Id.Equals(SalonId)).Include(p => p.SalonImages).FirstOrDefault();
 
             //Check is exist
             if (salon == null)
             {
-                return new ResultDto
+                return new ResultDto<List<string>>
                 {
                     IsSuccess = false,
                     Message = "شما سالن آرایشی ثبت نکرده اید"
@@ -43,7 +43,7 @@ namespace Application.SalonsService.Command
             if (salon.OwnerId != UserId)
             {
 
-                return new ResultDto
+                return new ResultDto<List<string>>
                 {
                     IsSuccess = false,
                     Message = "این  یوزر مالک آرایشگاه نیست"
@@ -54,9 +54,10 @@ namespace Application.SalonsService.Command
             _dbContext.Salons.Remove(salon);
             _dbContext.SaveChanges();
 
-            return new ResultDto
+            return new ResultDto<List<string>>
             {
                 IsSuccess = true,
+                Data = salon.SalonImages?.Select(p => p.Name).ToList()
             };
 
         }
