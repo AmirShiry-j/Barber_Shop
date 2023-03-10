@@ -22,6 +22,106 @@ namespace Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Domain.Addresses.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FullAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("addresses");
+                });
+
+            modelBuilder.Entity("Domain.Addresses.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("UnitedId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UnitedId");
+
+                    b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("Domain.Addresses.United", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Uniteds");
+                });
+
+            modelBuilder.Entity("Domain.Comments.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("BarberId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Confirmation")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("SuggestionMode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("TimeCreate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BarberId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Domain.Salons.Barber", b =>
                 {
                     b.Property<int>("Id")
@@ -35,17 +135,27 @@ namespace Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("SalonId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<DateTime>("TimeCreate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SalonId");
 
-                    b.ToTable("Barbers", (string)null);
+                    b.ToTable("Barbers");
                 });
 
             modelBuilder.Entity("Domain.Salons.Salon", b =>
@@ -56,12 +166,14 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ForGender")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -70,20 +182,31 @@ namespace Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid>("OwnerId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telphone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeCreate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Salons", (string)null);
+                    b.HasIndex("AddressId")
+                        .IsUnique();
+
+                    b.HasIndex("OwnerId")
+                        .IsUnique();
+
+                    b.ToTable("Salons");
                 });
 
             modelBuilder.Entity("Domain.Salons.SalonImage", b =>
@@ -105,7 +228,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SalonId");
 
-                    b.ToTable("SalonImages", (string)null);
+                    b.ToTable("SalonImages");
                 });
 
             modelBuilder.Entity("Domain.Users.Customer", b =>
@@ -116,12 +239,16 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers", (string)null);
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Domain.Users.Role", b =>
@@ -144,6 +271,11 @@ namespace Persistence.Migrations
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime>("TimeCreate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.HasKey("Id");
 
@@ -190,7 +322,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tokens", (string)null);
+                    b.ToTable("Tokens");
                 });
 
             modelBuilder.Entity("Domain.Users.User", b =>
@@ -256,11 +388,13 @@ namespace Persistence.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("SalonId")
-                        .HasColumnType("int");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeCreate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -275,10 +409,6 @@ namespace Persistence.Migrations
                         .IsUnique()
                         .HasFilter("[BarberId] IS NOT NULL");
 
-                    b.HasIndex("CustomerId")
-                        .IsUnique()
-                        .HasFilter("[CustomerId] IS NOT NULL");
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -286,10 +416,6 @@ namespace Persistence.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("SalonId")
-                        .IsUnique()
-                        .HasFilter("[SalonId] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -400,13 +526,74 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Addresses.Address", b =>
+                {
+                    b.HasOne("Domain.Addresses.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("Domain.Addresses.City", b =>
+                {
+                    b.HasOne("Domain.Addresses.United", "United")
+                        .WithMany("Cities")
+                        .HasForeignKey("UnitedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("United");
+                });
+
+            modelBuilder.Entity("Domain.Comments.Comment", b =>
+                {
+                    b.HasOne("Domain.Salons.Barber", "Barber")
+                        .WithMany()
+                        .HasForeignKey("BarberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Barber");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.Salons.Barber", b =>
                 {
                     b.HasOne("Domain.Salons.Salon", "Salon")
                         .WithMany("Barbers")
-                        .HasForeignKey("SalonId");
+                        .HasForeignKey("SalonId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Salon");
+                });
+
+            modelBuilder.Entity("Domain.Salons.Salon", b =>
+                {
+                    b.HasOne("Domain.Addresses.Address", "Address")
+                        .WithOne()
+                        .HasForeignKey("Domain.Salons.Salon", "AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Users.User", "Owner")
+                        .WithOne()
+                        .HasForeignKey("Domain.Salons.Salon", "OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
+
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("Domain.Salons.SalonImage", b =>
@@ -416,6 +603,17 @@ namespace Persistence.Migrations
                         .HasForeignKey("SalonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Users.Customer", b =>
+                {
+                    b.HasOne("Domain.Users.User", "User")
+                        .WithOne("Customer")
+                        .HasForeignKey("Domain.Users.Customer", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Users.Token", b =>
@@ -433,21 +631,10 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Salons.Barber", "Barber")
                         .WithOne("User")
-                        .HasForeignKey("Domain.Users.User", "BarberId");
-
-                    b.HasOne("Domain.Users.Customer", "Customer")
-                        .WithOne("User")
-                        .HasForeignKey("Domain.Users.User", "CustomerId");
-
-                    b.HasOne("Domain.Salons.Salon", "Salon")
-                        .WithOne("Owner")
-                        .HasForeignKey("Domain.Users.User", "SalonId");
+                        .HasForeignKey("Domain.Users.User", "BarberId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Barber");
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Salon");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -501,6 +688,11 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Addresses.United", b =>
+                {
+                    b.Navigation("Cities");
+                });
+
             modelBuilder.Entity("Domain.Salons.Barber", b =>
                 {
                     b.Navigation("User")
@@ -511,20 +703,14 @@ namespace Persistence.Migrations
                 {
                     b.Navigation("Barbers");
 
-                    b.Navigation("Owner")
-                        .IsRequired();
-
                     b.Navigation("SalonImages");
-                });
-
-            modelBuilder.Entity("Domain.Users.Customer", b =>
-                {
-                    b.Navigation("User")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Users.User", b =>
                 {
+                    b.Navigation("Customer")
+                        .IsRequired();
+
                     b.Navigation("Tokens");
                 });
 #pragma warning restore 612, 618

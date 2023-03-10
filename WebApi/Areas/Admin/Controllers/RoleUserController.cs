@@ -27,7 +27,7 @@ namespace WebApi.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// اضافه کردن نقش به یک کاربر
+        /// اضافه کردن نقش به یک کاربر (Auth)
         /// </summary>
         /// <param name="RoleId"></param>
         /// <param name="UserId"></param>
@@ -64,7 +64,7 @@ namespace WebApi.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// ریمو کردن یک نقش از کاربر
+        /// ریمو کردن یک نقش از کاربر (Auth)
         /// </summary>
         /// <param name="RoleId"></param>
         /// <param name="UserId"></param>

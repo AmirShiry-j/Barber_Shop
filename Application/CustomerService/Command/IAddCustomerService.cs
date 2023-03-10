@@ -14,7 +14,7 @@ namespace Application.CustomerService.Command
 {
     public interface IAddCustomerService
     {
-        Task<ResultDto<int>> Execute(Guid UserId);
+        Task<ResultDto<int>> Execute(string UserId);
     }
     public class AddCustomerService: IAddCustomerService
     {
@@ -23,7 +23,7 @@ namespace Application.CustomerService.Command
         {
             _dbContext = dbContext;
         }
-        public async Task<ResultDto<int>> Execute(Guid UserId)
+        public async Task<ResultDto<int>> Execute(string UserId)
         {
             //Map 
             var newCustomer = new Customer

@@ -27,7 +27,7 @@ namespace WebApi.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// برگردوندن لیست نقش ها در سایت
+        /// برگردوندن لیست نقش ها در سایت (Auth)
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -67,7 +67,7 @@ namespace WebApi.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// برگشت یک نقش سایت به وسیله آیدی اون
+        /// برگشت یک نقش سایت به وسیله آیدی اون (Auth)
         /// </summary>
         /// <param name="RoleId"></param>
         /// <returns></returns>
@@ -115,7 +115,7 @@ namespace WebApi.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// اضافه کردن نقش جدید به سایت
+        /// اضافه کردن نقش جدید به سایت (Auth)
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -148,7 +148,7 @@ namespace WebApi.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// ویرایش اطلاعات نقش 
+        /// ویرایش اطلاعات نقش  (Auth)
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -204,7 +204,7 @@ namespace WebApi.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// حذف یک نقش از سایت
+        /// حذف یک نقش از سایت (Auth)
         /// </summary>
         /// <param name="RoleId"></param>
         /// <returns></returns>

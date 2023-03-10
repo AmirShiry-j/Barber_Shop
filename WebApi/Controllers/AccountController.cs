@@ -73,7 +73,7 @@ namespace WebApi.Controllers
             if (resultRegister.Succeeded)
             {
                 //Insert a customer record for this user
-                var customerId = _addCustomerService.Execute(Guid.Parse(newUser.Id)).Result.Data;
+                var customerId = _addCustomerService.Execute(newUser.Id).Result.Data;
 
                 //Confirmation email
                 string code = await _userManager.GenerateTwoFactorTokenAsync(newUser, "Email");
@@ -92,7 +92,7 @@ namespace WebApi.Controllers
                 };
 
                 //Initial message
-                string message = "کد تایید حساب کاربری به ایمیل شما ارسال شد. لطفا با وارد کردن کد ارسالی حساب خود را تایید کنید ";
+                string message = "کد تایید حساب کاربری به ایمیل شما ارسال شد ";
 
                 return Ok(new { Message = message, Link = link, Code = code });
             }
@@ -250,7 +250,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// تغییر رمز عبور
+        /// تغییر رمز عبور (Auth)
         /// </summary>
         /// <param name="changePasswordDto"></param>
         /// <returns></returns>
@@ -287,7 +287,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// برای خروج از حساب کاربری
+        /// برای خروج از حساب کاربری (Auth)
         /// </summary>
         /// <param name="UserId"></param>
         /// <returns></returns>
@@ -456,7 +456,7 @@ namespace WebApi.Controllers
             await _userTokenService.SaveToken(userToken);
 
             //Map tokens for send
-            var tokens = new TokenDto() { Token = jwtToken, RefreshToken = refreshToken };
+            var tokens = new TokenDto() { Token = jwtToken, RefreshToken = refreshToken, TokenExpireTime = expireTime, RefreshTokenExpireTime = refreshTokenExpireTime };
 
             return tokens;
         }

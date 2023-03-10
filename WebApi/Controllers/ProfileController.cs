@@ -44,7 +44,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// بر گردوندن اطلاعات پروفایل
+        /// بر گردوندن اطلاعات پروفایل (Auth)
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -58,7 +58,7 @@ namespace WebApi.Controllers
             }
 
             //Get Profil infoes
-            var resultService = await _getProfileService.Execute(Guid.Parse(userId));
+            var resultService = await _getProfileService.Execute(userId);
             if (resultService.IsSuccess == false)
                 return Problem();
 
@@ -74,7 +74,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// ویرایش اطلاعات پروفایل
+        /// ویرایش اطلاعات پروفایل (Auth)
         /// </summary>
         /// <param name="editPofileDto"></param>
         /// <returns></returns>

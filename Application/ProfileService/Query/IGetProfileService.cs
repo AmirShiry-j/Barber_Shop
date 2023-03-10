@@ -14,7 +14,7 @@ namespace Application.ProfileService.Query
 {
     public interface IGetProfileService
     {
-        public Task<ResultDto<ProfileDto>> Execute(Guid UserId);
+        public Task<ResultDto<ProfileDto>> Execute(string UserId);
     }
     public class GetProfileService : IGetProfileService
     {
@@ -29,11 +29,19 @@ namespace Application.ProfileService.Query
             _userManager = userManager;
             _mapper = mapper;
         }
-        public async Task<ResultDto<ProfileDto>> Execute(Guid UserId)
+        public async Task<ResultDto<ProfileDto>> Execute(string UserId)
         {
             var user = await _userManager.FindByIdAsync(UserId.ToString());
 
             var profileDto = _mapper.Map<ProfileDto>(user);
+
+            //User has owner salon?
+            var salonOwner = _dbContext.Salons.Where(p => p.OwnerId == UserId).FirstOrDefault();
+            if (salonOwner != null)
+            {
+                profileDto.HasOwner = true;
+                profileDto.SalonId = salonOwner.Id;
+            }
 
             return new ResultDto<ProfileDto>
             {
@@ -51,6 +59,8 @@ namespace Application.ProfileService.Query
         public string ImageName { get; set; }
         public int CustomerId { get; set; }
         public Gender Gender { get; set; }
+        public bool HasOwner { get; set; }
+        public int SalonId { get; set; }
         public Link Link { get; set; }
     }
     public enum Gender

@@ -11,6 +11,6 @@ namespace Domain.Users
         public int Id { get; set; }
         //Navs
         public User User { get; set; }
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
     }
 }

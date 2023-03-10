@@ -14,7 +14,9 @@ namespace Persistence.Configurations.Salons
         public void Configure(EntityTypeBuilder<Barber> builder)
         {
             builder.Property(p => p.UserId).IsRequired();
+            builder.Property(p => p.PhoneNumber).IsRequired();
             builder.Property(p => p.Description).HasMaxLength(100);
+            builder.Property(p => p.TimeCreate).HasDefaultValueSql("getdate()");
         }
     }
 }

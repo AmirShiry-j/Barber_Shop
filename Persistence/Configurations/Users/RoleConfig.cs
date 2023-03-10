@@ -14,6 +14,7 @@ namespace Persistence.Configurations.Users
         public void Configure(EntityTypeBuilder<Role> builder)
         {
             builder.Property(x => x.Description).IsRequired();
+            builder.Property(p => p.TimeCreate).HasDefaultValueSql("getdate()");
         }
     }
 }

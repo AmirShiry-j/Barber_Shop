@@ -1,4 +1,5 @@
-﻿using Domain.Salons;
+﻿using Domain.Common;
+using Domain.Salons;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Users
 {
-    public class User : IdentityUser
+    public class User : IdentityUser, BaseProps
     {
         public string FullName { get; set; }
         public Gender Gender { get; set; }
@@ -22,14 +23,11 @@ namespace Domain.Users
         //
         public Customer Customer { get; set; }
         public int? CustomerId { get; set; }
-        //
-        public Salon Salon { get; set; }
-        public int? SalonId { get; set; }
-
+        public DateTime TimeCreate { get; set; }
     }
     public enum Gender
     {
-        Male=1,
-        Female=2
+        Male = 1,
+        Female = 2
     }
 }

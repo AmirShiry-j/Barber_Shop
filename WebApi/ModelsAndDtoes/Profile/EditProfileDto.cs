@@ -14,8 +14,7 @@ namespace WebApi.ModelsAndDtoes.Profile
         [Range(1, 2)]
         public Gender Gender { get; set; }
 
-        [AllowNull]
         [RegularExpression("(09)[0-9]{9}")]
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
     }
 }

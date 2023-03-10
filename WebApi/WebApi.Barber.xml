@@ -6,41 +6,41 @@
     <members>
         <member name="M:WebApi.Areas.Admin.Controllers.RoleController.Get">
             <summary>
-            برگردوندن لیست نقش ها در سایت
+            برگردوندن لیست نقش ها در سایت (Auth)
             </summary>
             <returns></returns>
         </member>
         <member name="M:WebApi.Areas.Admin.Controllers.RoleController.Get(System.String)">
             <summary>
-            برگشت یک نقش سایت به وسیله آیدی اون
+            برگشت یک نقش سایت به وسیله آیدی اون (Auth)
             </summary>
             <param name="RoleId"></param>
             <returns></returns>
         </member>
         <member name="M:WebApi.Areas.Admin.Controllers.RoleController.Create(WebApi.Areas.Admin.ModelsAndDtoes.Roles.CreateRoleDto)">
             <summary>
-            اضافه کردن نقش جدید به سایت
+            اضافه کردن نقش جدید به سایت (Auth)
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
         <member name="M:WebApi.Areas.Admin.Controllers.RoleController.Update(WebApi.Areas.Admin.ModelsAndDtoes.Roles.EditRoleDto)">
             <summary>
-            ویرایش اطلاعات نقش 
+            ویرایش اطلاعات نقش  (Auth)
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
         <member name="M:WebApi.Areas.Admin.Controllers.RoleController.Delete(System.String)">
             <summary>
-            حذف یک نقش از سایت
+            حذف یک نقش از سایت (Auth)
             </summary>
             <param name="RoleId"></param>
             <returns></returns>
         </member>
         <member name="M:WebApi.Areas.Admin.Controllers.RoleUserController.Post(System.String,System.String)">
             <summary>
-            اضافه کردن نقش به یک کاربر
+            اضافه کردن نقش به یک کاربر (Auth)
             </summary>
             <param name="RoleId"></param>
             <param name="UserId"></param>
@@ -48,7 +48,7 @@
         </member>
         <member name="M:WebApi.Areas.Admin.Controllers.RoleUserController.Delete(System.String,System.String)">
             <summary>
-            ریمو کردن یک نقش از کاربر
+            ریمو کردن یک نقش از کاربر (Auth)
             </summary>
             <param name="RoleId"></param>
             <param name="UserId"></param>
@@ -56,7 +56,7 @@
         </member>
         <member name="M:WebApi.Areas.Admin.Controllers.UserController.Get">
             <summary>
-            گرفتن لیست تمام کاربران
+            برگردوندن لیست تمام کاربران (موقت) (Auth)
             </summary>
             <returns></returns>
         </member>
@@ -97,14 +97,14 @@
         </member>
         <member name="M:WebApi.Controllers.AccountController.ChangePassword(WebApi.ModelsAndDtoes.Account.ChangePasswordDto)">
             <summary>
-            تغییر رمز عبور
+            تغییر رمز عبور (Auth)
             </summary>
             <param name="changePasswordDto"></param>
             <returns></returns>
         </member>
         <member name="M:WebApi.Controllers.AccountController.Logout">
             <summary>
-            برای خروج از حساب کاربری
+            برای خروج از حساب کاربری (Auth)
             </summary>
             <param name="UserId"></param>
             <returns></returns>
@@ -123,34 +123,148 @@
             <param name="user"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.BarberController.GetAll">
+            <summary>
+            بر گردوندن لیست تمام آرایشگر ها (موقت)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.BarberController.Get(System.Int32)">
+            <summary>
+            برگردوندن مشخصات مربوط به یک آرایشگر
+            </summary>
+            <param name="BarberId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.BarberController.Get">
+            <summary>
+            برگردوندن اطلاعات مربوط به آرایشگری (Auth)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.BarberController.Post(WebApi.ModelsAndDtoes.Barber.CreateBarberApiDto)">
+            <summary>
+            ثبت نام کردن به عنوان آرایشگر (Auth)
+            </summary>
+            <param name="createBarberDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.BarberController.Put(WebApi.ModelsAndDtoes.Barber.EditBarberApiDto)">
+            <summary>
+            ویرایش اطلاعات مربوط به آرایشگری (Auth)
+            </summary>
+            <param name="editBarberApiDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.BarberController.Delete">
+            <summary>
+            تغییر عنوان کاربری از آرایشگر به کاربر عادی (Auth)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.CityController.Get(System.Int32)">
+            <summary>
+            برگردوندن لیست شهر های هر استان برای کمبوباکس
+            </summary>
+            <param name="UnitedId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.CommentController.Post(WebApi.ModelsAndDtoes.Comment.CreateCommentApiDto)">
+            <summary>
+            برای ثبت یک نظر توسط کاربر (Auth)
+            </summary>
+            <param name="createCommentDto"></param>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.ProfileController.Get">
             <summary>
-            بر گردوندن اطلاعات پروفایل
+            بر گردوندن اطلاعات پروفایل (Auth)
             </summary>
             <returns></returns>
         </member>
         <member name="M:WebApi.Controllers.ProfileController.Put(WebApi.ModelsAndDtoes.Profile.EditProfileDto)">
             <summary>
-            ویرایش اطلاعات پروفایل
+            ویرایش اطلاعات پروفایل (Auth)
             </summary>
             <param name="editPofileDto"></param>
             <returns></returns>
         </member>
         <member name="M:WebApi.Controllers.ProfileImageController.Get">
             <summary>
-            بر گردوندن تصویر پروفایل
+            بر گردوندن تصویر پروفایل (Auth)
             </summary>
             <returns></returns>
         </member>
         <member name="M:WebApi.Controllers.ProfileImageController.Put(Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
-            آپدیت کردن عکس پروفایل
+            آپدیت کردن عکس پروفایل (Auth)
             </summary>
             <returns></returns>
         </member>
         <member name="M:WebApi.Controllers.ProfileImageController.Delete">
             <summary>
-            حدف کردن عکس پروفایل
+            حدف کردن عکس پروفایل (Auth)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.SalonController.Get(WebApi.ModelsAndDtoes.Salon.SearchSalonApiDto)">
+            <summary>
+            برگردوندن لیست همه ی سالن های آرایشی
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.SalonController.Get(System.Int32)">
+            <summary>
+            برگردوندن اطلاعات سالن آرایشی با آیدی
+            </summary>
+            <param name="SalonId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.SalonController.Post(WebApi.ModelsAndDtoes.Salon.CreateSalonApiDto)">
+            <summary>
+            برای ایجاد سالن آرایشی (Auth)
+            </summary>
+            <param name="salonDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.SalonController.Put(WebApi.ModelsAndDtoes.Salon.EditSalonApiDto)">
+            <summary>
+            برای ویرایش کردن سالن آرایشی (Auth)
+            </summary>
+            <param name="salonDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.SalonController.Delete(System.Int32)">
+            <summary>
+            برای حذف کردن یک سالن آرایشی (Auth)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.SalonImageController.Get(System.Int32)">
+            <summary>
+            برگردوندن تصاویر سالن آرایشی (Auth)
+            </summary>
+            <param name="SalonId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.SalonImageController.Post(Microsoft.AspNetCore.Http.IFormFile,System.Int32)">
+            <summary>
+            اضافه کردن تصویر به سالن آرایشی (Auth)
+            </summary>
+            <param name="file"></param>
+            <param name="SalonId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.SalonImageController.Delete(System.String)">
+            <summary>
+            حذف یک تصویر از سالن آرایشی (Auth)
+            </summary>
+            <param name="Name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.UnitedController.Get">
+            <summary>
+            برگردوندن لیست استان ها برای کمبوباکس
             </summary>
             <returns></returns>
         </member>

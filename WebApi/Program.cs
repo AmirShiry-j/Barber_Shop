@@ -1,7 +1,13 @@
-﻿using Application.CustomerService.Command;
+﻿using Application.AddressesService.Query;
+using Application.BarberService.Command;
+using Application.BarberService.Query;
+using Application.CommentService.Command;
+using Application.CustomerService.Command;
 using Application.Interfaces.Contexts;
 using Application.ProfileService.Command;
 using Application.ProfileService.Query;
+using Application.SalonImageService.Command;
+using Application.SalonImageService.Query;
 using Application.SalonsService.Command;
 using Application.SalonsService.Query;
 using Application.TokenService;
@@ -14,6 +20,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -34,7 +41,17 @@ builder.Host.UseNLog();
 
 IConfiguration Configuration = builder.Configuration;
 
-// Add services to the container.
+//Add CORS configs
+//Get origins cores in appsetting
+var corsOrigins = Configuration.GetSection("CorsOrigins").Get<string[]>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        b => b.WithOrigins(corsOrigins)
+        .AllowAnyHeader()
+        .AllowAnyMethod());
+});
+
 
 //Config controller service
 builder.Services.AddControllers();
@@ -173,6 +190,28 @@ builder.Services.AddScoped<IAddSalonService, AddSalonService>();
 builder.Services.AddScoped<IEditSalonService,EditSalonService>();
 builder.Services.AddScoped<IDeleteSalonService, DeleteSalonService>();
 builder.Services.AddScoped<IGetSalonByIdService, GetSalonByIdService>();
+builder.Services.AddScoped<IGetAllSalonsService, GetAllSalonsService>();
+
+//SalonImage sevices
+builder.Services.AddScoped<IAddSalonImageService, AddSalonImageService>();
+builder.Services.AddScoped<IDeleteSalonImageByNameService, DeleteSalonImageByNameService>();
+builder.Services.AddScoped<IGetSalonImagesBySalonIdService, GetSalonImagesBySalonIdService>();
+
+
+//Barber services
+builder.Services.AddScoped<IAddBarberService, AddBarberService>();
+builder.Services.AddScoped<IEditBarberService, EditBarberService>();
+builder.Services.AddScoped<IDeleteBarberService, DeleteBarberService>();
+builder.Services.AddScoped<IGetBarberInfoByUserIdService, GetBarberInfoByUserIdService>();
+builder.Services.AddScoped<IGetBaberInformationByBarberIdService, GetBaberInformationByBarberIdService>();
+builder.Services.AddScoped<IGetBarbersService, GetBarbersService>();
+
+//Address services
+builder.Services.AddScoped<IGetUnitedsService, GetUnitedsService>();
+builder.Services.AddScoped<IGetCitiesService, GetCitiesService>();
+
+//Comment services
+builder.Services.AddScoped<IAddCommendService, AddCommendService>();
 
 
 //Service email
@@ -202,6 +241,22 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty;
 });
 
+//Create Static files
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "Images/Profile")
+    ),
+    RequestPath = "/Images/Profile"
+});
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "Images/SalonImage")
+    ),
+    RequestPath = "/Images/SalonImage"
+});
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -224,6 +279,7 @@ if (app.Environment.IsProduction())
 app.UseHsts();
 app.UseHttpsRedirection();
 
+app.UseCors("CorsPolicy");
 app.UseRouting();
 
 app.UseAuthentication();

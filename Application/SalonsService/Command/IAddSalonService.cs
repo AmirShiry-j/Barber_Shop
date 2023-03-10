@@ -3,6 +3,7 @@ using Application.Interfaces.Contexts;
 using Application.ProfileService.Query;
 using AutoMapper;
 using Domain.Salons;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -34,11 +35,35 @@ namespace Application.SalonsService.Command
             //Map
             var newSalon = _mapper.Map<Salon>(dto);
 
+            //Check if has CityId
+            var hasCity = _dbContext.Cities.Any(p => p.Id.Equals(dto.CityId));
+            if (hasCity == false)
+            {
+                return new ResultDto<Salon>
+                {
+                    IsSuccess = false,
+                    Message = "شهری با آیدی ارسال شده وجود ندارد"
+                };
+            }
+
+            var userHasSalonBefor = _dbContext.Salons.Where(p => p.OwnerId.Equals(dto.UserId)).Any();
+            if (userHasSalonBefor == true)
+            {
+                return new ResultDto<Salon>
+                {
+                    IsSuccess = false,
+                    Message = "شما قبلا یک آرایشگاه برای خود ایجاد کرده اید"
+                };
+            }
+
             //Add to db
             _dbContext.Salons.Add(newSalon);
-
-            //Save in db
             _dbContext.SaveChanges();
+
+            //Save forenky for Salon
+            newSalon.AddressId = newSalon.Address.Id;
+            _dbContext.SaveChanges();
+
 
             return new ResultDto<Salon>
             {
@@ -49,11 +74,13 @@ namespace Application.SalonsService.Command
     }
     public class CreateSalonDto
     {
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
+        public int CityId { get; set; }
+        public string FullAddress { get; set; }
         public string Telphone { get; set; }
         public string PhoneNumber { get; set; }
         public string Description { get; set; }
+        public ForGender ForGender { get; set; }
     }
 }
