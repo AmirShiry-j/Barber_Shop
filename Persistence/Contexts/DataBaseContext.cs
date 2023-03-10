@@ -1,10 +1,12 @@
 ﻿using Application.Interfaces.Contexts;
 using Domain.Addresses;
+using Domain.Comments;
 using Domain.Salons;
 using Domain.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configurations.Addresses;
+using Persistence.Configurations.Comments;
 using Persistence.Configurations.Salons;
 using Persistence.Configurations.Users;
 using System;
@@ -34,6 +36,8 @@ namespace Persistence.Contexts
         public DbSet<Address> addresses { get; set; }
         public DbSet<United> Uniteds { get; set; }
         public DbSet<City> Cities { get; set; }
+        //Comment
+        public DbSet<Comment> Comments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -117,6 +121,8 @@ namespace Persistence.Contexts
             builder.ApplyConfiguration(new AddressConfig());
             builder.ApplyConfiguration(new UnitedConfig());
             builder.ApplyConfiguration(new CityConfig());
+            //Comments
+            builder.ApplyConfiguration(new CommentConfig());
 
             base.OnModelCreating(builder);
         }

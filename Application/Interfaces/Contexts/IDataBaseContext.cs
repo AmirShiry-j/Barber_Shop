@@ -1,4 +1,5 @@
 ﻿using Domain.Addresses;
+using Domain.Comments;
 using Domain.Salons;
 using Domain.Users;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,8 @@ namespace Application.Interfaces.Contexts
         public DbSet<Address> addresses { get; set; }
         public DbSet<United> Uniteds { get; set; }
         public DbSet<City> Cities { get; set; }
+        //Comments
+        public DbSet<Comment> Comments { get; set; }
         int SaveChanges();
     }
 }
