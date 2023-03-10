@@ -169,6 +169,13 @@
             <param name="UnitedId"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.CommentController.Post(WebApi.ModelsAndDtoes.Comment.CreateCommentApiDto)">
+            <summary>
+            برای ثبت یک نظر توسط کاربر (Auth)
+            </summary>
+            <param name="createCommentDto"></param>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.ProfileController.Get">
             <summary>
             بر گردوندن اطلاعات پروفایل (Auth)

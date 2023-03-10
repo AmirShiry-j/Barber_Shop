@@ -1,6 +1,7 @@
 ﻿using Application.AddressesService.Query;
 using Application.BarberService.Command;
 using Application.BarberService.Query;
+using Application.CommentService.Command;
 using Application.CustomerService.Command;
 using Application.Interfaces.Contexts;
 using Application.ProfileService.Command;
@@ -208,6 +209,10 @@ builder.Services.AddScoped<IGetBarbersService, GetBarbersService>();
 //Address services
 builder.Services.AddScoped<IGetUnitedsService, GetUnitedsService>();
 builder.Services.AddScoped<IGetCitiesService, GetCitiesService>();
+
+//Comment services
+builder.Services.AddScoped<IAddCommendService, AddCommendService>();
+
 
 //Service email
 builder.Services.AddScoped<IEmailService, EmailService>();
