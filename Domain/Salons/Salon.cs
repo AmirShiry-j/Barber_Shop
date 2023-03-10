@@ -1,4 +1,5 @@
 ﻿using Domain.Addresses;
+using Domain.Common;
 using Domain.Users;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Salons
 {
-    public class Salon
+    public class Salon : BaseProps
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -17,7 +18,7 @@ namespace Domain.Salons
         public string PhoneNumber { get; set; }
         public string Description { get; set; }
         public ForGender ForGender { get; set; }
-        
+
         //Nav
         public ICollection<Barber> Barbers { get; set; }
         public ICollection<SalonImage> SalonImages { get; set; }
@@ -25,6 +26,7 @@ namespace Domain.Salons
         public string OwnerId { get; set; }
         public Address Address { get; set; }
         public int AddressId { get; set; }
+        public DateTime TimeCreate { get; set; }
     }
     public enum ForGender
     {

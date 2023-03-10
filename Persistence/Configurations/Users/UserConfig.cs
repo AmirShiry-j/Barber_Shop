@@ -19,6 +19,7 @@ namespace Persistence.Configurations.Users
             builder.Property(p => p.FullName).IsRequired().HasMaxLength(50);
             builder.Property(p => p.ImageName).IsRequired(false);
             builder.Property(p => p.Gender).IsRequired().HasConversion(converterGenderEnum);
+            builder.Property(p => p.TimeCreate).HasDefaultValueSql("getdate()");
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Persistence.Configurations.Salons
             builder.Property(p => p.PhoneNumber).IsRequired();
             builder.Property(p => p.OwnerId).IsRequired();
             builder.Property(p => p.ForGender).IsRequired().HasConversion(converterForGenderEnum);
+            builder.Property(p => p.TimeCreate).HasDefaultValueSql("getdate()");
         }
     }
 }

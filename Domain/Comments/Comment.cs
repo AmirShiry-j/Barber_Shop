@@ -1,4 +1,5 @@
-﻿using Domain.Salons;
+﻿using Domain.Common;
+using Domain.Salons;
 using Domain.Users;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Comments
 {
-    public class Comment
+    public class Comment : BaseProps
     {
         public int Id { get; set; }
         public string Text { get; set; }
