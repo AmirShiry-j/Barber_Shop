@@ -176,6 +176,13 @@
             <param name="createCommentDto"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.CommentController.Get(WebApi.ModelsAndDtoes.Comment.SearchCommentApiDto)">
+            <summary>
+            برای دریافت نظرات ثبت شده برای آرایشگران یک سالن آرایشی
+            </summary>
+            <param name="searchCommentApiDto"></param>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.ProfileController.Get">
             <summary>
             بر گردوندن اطلاعات پروفایل (Auth)

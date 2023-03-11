@@ -2,6 +2,7 @@
 using Application.BarberService.Command;
 using Application.BarberService.Query;
 using Application.CommentService.Command;
+using Application.CommentService.Query;
 using Application.CustomerService.Command;
 using Application.Interfaces.Contexts;
 using Application.ProfileService.Command;
@@ -212,7 +213,7 @@ builder.Services.AddScoped<IGetCitiesService, GetCitiesService>();
 
 //Comment services
 builder.Services.AddScoped<IAddCommendService, AddCommendService>();
-
+builder.Services.AddScoped<IGetCommentsBySalonIdService, GetCommentsBySalonIdService>();
 
 //Service email
 builder.Services.AddScoped<IEmailService, EmailService>();
