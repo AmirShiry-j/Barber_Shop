@@ -15,34 +15,63 @@ using System.Threading.Tasks;
 
 namespace Application.CommentService.Query
 {
-    public interface IGetCommentsBySalonIdService
+    public interface IGetCommentsService
     {
         Task<ResultDto<ResultSearchCommentDto>> Execute(SearchCommentDto dto);
     }
-    public class GetCommentsBySalonIdService : IGetCommentsBySalonIdService
+    public class GetCommentsService : IGetCommentsService
     {
         private readonly IDataBaseContext _dbContext;
         private readonly IMapper _mapper;
-        public GetCommentsBySalonIdService(IDataBaseContext dbContext, IMapper mapper)
+        public GetCommentsService(IDataBaseContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
         }
         public async Task<ResultDto<ResultSearchCommentDto>> Execute(SearchCommentDto dto)
         {
-            //check salon id exist
-            var salon = _dbContext.Salons.Find(dto.SalonId);
-            if (salon == null)
+            var barberIds = new List<int>();
+
+            if (dto.BarberId != null)
+            {
+                //check Barber id exist
+                var salon = _dbContext.Barbers.Find(dto.BarberId);
+                if (salon == null)
+                {
+                    return new ResultDto<ResultSearchCommentDto>
+                    {
+                        IsSuccess = false,
+                        Message = "آرایشگری با این آیدی موجود نیست"
+                    };
+                }
+
+                barberIds.Add(dto.BarberId.Value);
+            }
+            else if (dto.SalonId != null)
+            {
+                //check salon id exist
+                var salon = _dbContext.Salons.Find(dto.SalonId);
+                if (salon == null)
+                {
+                    return new ResultDto<ResultSearchCommentDto>
+                    {
+                        IsSuccess = false,
+                        Message = "سالنی با این آیدی موجود نیست"
+                    };
+                }
+
+                //get barberids
+                barberIds = _dbContext.Barbers.Where(p => p.SalonId.Equals(dto.SalonId)).Select(p => p.Id).ToList();
+
+            }
+            else
             {
                 return new ResultDto<ResultSearchCommentDto>
                 {
                     IsSuccess = false,
-                    Message = "سالنی با این آیدی موجود نیست"
+                    Message = "باید حداقل یکی از مقادیر، آیدی سالن آرایشی یا آیدی آرایشگر ارسال شود"
                 };
             }
-
-            //get barberids
-            var barberIds = _dbContext.Barbers.Where(p => p.SalonId.Equals(dto.SalonId)).Select(p => p.Id).ToList();
 
             //Check has berber
             if (barberIds.Count == 0)
@@ -95,7 +124,8 @@ namespace Application.CommentService.Query
     {
         public int? Page { get; set; } = 1;
         public int? CountInPage { get; set; } = 10;
-        public int SalonId { get; set; }
+        public int? SalonId { get; set; }
+        public int? BarberId { get; set; }
     }
     public class ResultSearchCommentDto
     {

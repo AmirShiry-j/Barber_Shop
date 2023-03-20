@@ -213,7 +213,7 @@ builder.Services.AddScoped<IGetCitiesService, GetCitiesService>();
 
 //Comment services
 builder.Services.AddScoped<IAddCommendService, AddCommendService>();
-builder.Services.AddScoped<IGetCommentsBySalonIdService, GetCommentsBySalonIdService>();
+builder.Services.AddScoped<IGetCommentsService, GetCommentsService>();
 
 //Service email
 builder.Services.AddScoped<IEmailService, EmailService>();

@@ -6,7 +6,9 @@ namespace WebApi.ModelsAndDtoes.Comment
     {
         public int? Page { get; set; } = 1;
         public int? CountInPage { get; set; } = 10;
-        [Required]
-        public int SalonId { get; set; }
+
+        //One of the following two values ​​must have a value
+        public int? SalonId { get; set; }
+        public int? BarberId { get; set; }
     }
 }

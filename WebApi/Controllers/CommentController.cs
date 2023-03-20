@@ -18,16 +18,16 @@ namespace WebApi.Controllers
     public class CommentController : ControllerBase
     {
         private readonly IAddCommendService _addCommendService;
-        private readonly IGetCommentsBySalonIdService _getCommentsBySalonIdService;
+        private readonly IGetCommentsService _getCommentsService;
         public CommentController(IAddCommendService addCommendService,
-            IGetCommentsBySalonIdService getCommentsBySalonIdService)
+            IGetCommentsService getCommentsService)
         {
             _addCommendService = addCommendService;
-            _getCommentsBySalonIdService = getCommentsBySalonIdService;
+            _getCommentsService = getCommentsService;
         }
 
         /// <summary>
-        /// برای ثبت یک نظر توسط کاربر (Auth)
+        /// برای ثبت یک نظر در مورد آرایشگر توسط کاربر (Auth)
         /// </summary>
         /// <param name="createCommentDto"></param>
         /// <returns></returns>
@@ -68,12 +68,20 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] SearchCommentApiDto searchCommentApiDto)
         {
+            //Validate 
+            //One of the following two values ​​must have a value
+            if (searchCommentApiDto.SalonId == null && searchCommentApiDto.BarberId == null)
+            {
+                return BadRequest("باید حداقل یکی از مقادیر، آیدی سالن آرایشی یا آیدی آرایشگر ارسال شود");
+            }
+
             //map to model
             var model = new SearchCommentDto
             {
                 CountInPage = searchCommentApiDto.CountInPage,
                 Page = searchCommentApiDto.Page,
-                SalonId = searchCommentApiDto.SalonId
+                SalonId = searchCommentApiDto.SalonId,
+                BarberId = searchCommentApiDto.BarberId
             };
 
             //result service
