@@ -55,5 +55,6 @@ namespace Application.FavoriteBarberService.Query
         public string NameProfileImage { get; set; }
         public string UrlProfileImage { get; set; }
         public string UrlProfileBarber { get; set; }
+        public Link Link { get; set; }
     }
 }

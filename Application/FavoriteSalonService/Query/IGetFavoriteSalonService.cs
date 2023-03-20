@@ -53,5 +53,6 @@ namespace Application.FavoriteSalonService.Query
         public string NameSalonImage { get; set; }
         public string UrlSalonImage { get; set; }
         public string UrlSalon { get; set; }
+        public Link Link { get; set; }
     }
 }

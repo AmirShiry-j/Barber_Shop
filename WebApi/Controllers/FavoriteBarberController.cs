@@ -58,6 +58,16 @@ namespace WebApi.Controllers
 
                     //Hatheoas for profile Barber
                     barberDto.UrlProfileBarber = Url.Action(nameof(Get), "Barber", new { BarberId = barberDto.BarberId }, Request.Scheme);
+
+                    //Hateaos for Remove favorite
+                    var linkRemove = new Application.Common.Link
+                    {
+                        For = "Remove",
+                        HttpMethod = HttpMethod.Delete.ToString(),
+                        Url = Url.Action(nameof(Delete), "FavoriteBarber", new { BarberId = barberDto.BarberId }, Request.Scheme)
+                    };
+                    barberDto.Link = linkRemove;
+
                 }
 
                 return Ok(resultService.Data);
