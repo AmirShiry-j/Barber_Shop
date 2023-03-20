@@ -23,6 +23,7 @@ namespace Application.Interfaces.Contexts
         DbSet<Barber> Barbers { get; set; }
         DbSet<SalonImage> SalonImages { get; set; }
         DbSet<FavoriteBarber> FavoriteBarbers { get; set; }
+        DbSet<FavoriteSalon> FavoriteSalons { get; set; }
         //Address
         public DbSet<Address> addresses { get; set; }
         public DbSet<United> Uniteds { get; set; }

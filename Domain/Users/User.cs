@@ -26,6 +26,7 @@ namespace Domain.Users
         public DateTime TimeCreate { get; set; }
 
         public ICollection<FavoriteBarber> FavoriteBarbers { get; set; }
+        public ICollection<FavoriteSalon> FavoriteSalons { get; set; }
     }
     public enum Gender
     {

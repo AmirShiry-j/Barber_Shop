@@ -33,6 +33,7 @@ namespace Persistence.Contexts
         public DbSet<Barber> Barbers { get; set; }
         public DbSet<SalonImage> SalonImages { get; set; }
         public DbSet<FavoriteBarber> FavoriteBarbers { get; set; }
+        public DbSet<FavoriteSalon> FavoriteSalons { get; set; }
         //Address
         public DbSet<Address> addresses { get; set; }
         public DbSet<United> Uniteds { get; set; }
@@ -108,6 +109,13 @@ namespace Persistence.Contexts
                 .HasOne(p => p.Address)
                 .WithOne()
                 .HasForeignKey<Salon>(p => p.AddressId);
+
+
+            builder.Entity<FavoriteSalon>()
+                .HasOne(p => p.Salon)
+                .WithMany()
+                .HasForeignKey(p => p.SalonId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             //Users
             builder.ApplyConfiguration(new UserConfig());
