@@ -183,6 +183,12 @@
             <param name="searchCommentApiDto"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.FavoriteBarberController.Get">
+            <summary>
+            بر گردوندن آرایشگر های مورد علاقه کاربر
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.FavoriteBarberController.Post(System.Int32)">
             <summary>
             برای اضافه کردن آرایشگر به علاقه مندی های کاربر

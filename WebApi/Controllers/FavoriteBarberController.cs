@@ -1,9 +1,13 @@
 ﻿using Application.FavoriteBarberService.Command;
+using Application.FavoriteBarberService.Query;
 using Application.SalonsService.Command;
+using Domain.Salons;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.ModelsAndDtoes.Common;
 using WebApi.ModelsAndDtoes.Salon;
 
 namespace WebApi.Controllers
@@ -16,12 +20,53 @@ namespace WebApi.Controllers
     {
         private readonly IAddFavoriteBarberService _addFavoriteBarberService;
         private readonly IRemoveFavoriteBarberService _removeFavoriteService;
-        public FavoriteBarberController(IRemoveFavoriteBarberService removeFavoriteService, IAddFavoriteBarberService addFavoriteBarberService)
+        private readonly IGetFavoriteBarberService _getFavoriteBarberService;
+        public FavoriteBarberController(IRemoveFavoriteBarberService removeFavoriteService,
+            IAddFavoriteBarberService addFavoriteBarberService,
+            IGetFavoriteBarberService getFavoriteBarberService
+            )
         {
             _removeFavoriteService = removeFavoriteService;
             _addFavoriteBarberService = addFavoriteBarberService;
+            _getFavoriteBarberService = getFavoriteBarberService;
         }
 
+        /// <summary>
+        /// بر گردوندن آرایشگر های مورد علاقه کاربر
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            //Get UserId
+            var userId = User.Claims?.FirstOrDefault(p => p.Type == "UserId")?.Value;
+
+            //Get data from service
+            var resultService = await _getFavoriteBarberService.Execute(userId);
+            if (resultService.IsSuccess)
+            {
+                string url = Request.GetDisplayUrl();
+                string domainName = url.Substring(0, url.IndexOf("/api"));
+
+                foreach (var barberDto in resultService.Data)
+                {
+                    //Hatheoas for image profile
+                    if (string.IsNullOrWhiteSpace(barberDto.NameProfileImage) == false)
+                    {
+                        barberDto.UrlProfileImage = domainName + "/Images/Profile/" + barberDto.NameProfileImage;
+                    }
+
+                    //Hatheoas for profile Barber
+                    barberDto.UrlProfileBarber = Url.Action(nameof(Get), "Barber", new { BarberId = barberDto.BarberId }, Request.Scheme);
+                }
+
+                return Ok(resultService.Data);
+            }
+            else
+            {
+                return BadRequest(resultService.Message);
+            }
+        }
         /// <summary>
         /// برای اضافه کردن آرایشگر به علاقه مندی های کاربر
         /// </summary>
@@ -37,7 +82,15 @@ namespace WebApi.Controllers
             var resultService = await _addFavoriteBarberService.Execute(userId, BarberId);
             if (resultService.IsSuccess)
             {
-                return Ok();
+                //Hateaos
+                var linkRemove = new Link
+                {
+                    For = "Remove",
+                    HttpMethod = HttpMethod.Delete.ToString(),
+                    Url = Url.Action(nameof(Delete), "FavoriteBarber", new { BarberId = BarberId }, Request.Scheme)
+                };
+
+                return Ok(linkRemove);
             }
             else
             {
