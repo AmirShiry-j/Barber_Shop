@@ -19,6 +19,7 @@
     <Folder Include="AddressesService\Command\" />
     <Folder Include="CommentService\Query\" />
     <Folder Include="CustomerService\Query\" />
+    <Folder Include="FavoriteBarberService\Query\" />
   </ItemGroup>
 
 </Project>

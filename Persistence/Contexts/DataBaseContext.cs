@@ -32,6 +32,7 @@ namespace Persistence.Contexts
         public DbSet<Salon> Salons { get; set; }
         public DbSet<Barber> Barbers { get; set; }
         public DbSet<SalonImage> SalonImages { get; set; }
+        public DbSet<FavoriteBarber> FavoriteBarbers { get; set; }
         //Address
         public DbSet<Address> addresses { get; set; }
         public DbSet<United> Uniteds { get; set; }
