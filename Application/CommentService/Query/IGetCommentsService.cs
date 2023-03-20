@@ -79,7 +79,7 @@ namespace Application.CommentService.Query
                 return new ResultDto<ResultSearchCommentDto>
                 {
                     IsSuccess = true,
-                    Message = "کامنتی وجود ندارد"
+                    Message = "آرایشگری در این سالن آرایشی موجود نیست که نظرات ثبت شده مشتریانش نمایش داده شوند"
                 };
             }
 

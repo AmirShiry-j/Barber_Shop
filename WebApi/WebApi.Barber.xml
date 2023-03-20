@@ -171,14 +171,14 @@
         </member>
         <member name="M:WebApi.Controllers.CommentController.Post(WebApi.ModelsAndDtoes.Comment.CreateCommentApiDto)">
             <summary>
-            برای ثبت یک نظر توسط کاربر (Auth)
+            برای ثبت یک نظر در مورد آرایشگر توسط کاربر (Auth)
             </summary>
             <param name="createCommentDto"></param>
             <returns></returns>
         </member>
         <member name="M:WebApi.Controllers.CommentController.Get(WebApi.ModelsAndDtoes.Comment.SearchCommentApiDto)">
             <summary>
-            برای دریافت نظرات ثبت شده برای آرایشگران یک سالن آرایشی
+            برای دریافت نظرات ثبت شده برای آرایشگران یک سالن آرایشی یا یک آرایشگر
             </summary>
             <param name="searchCommentApiDto"></param>
             <returns></returns>

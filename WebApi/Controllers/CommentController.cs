@@ -61,7 +61,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// برای دریافت نظرات ثبت شده برای آرایشگران یک سالن آرایشی
+        /// برای دریافت نظرات ثبت شده برای آرایشگران یک سالن آرایشی یا یک آرایشگر
         /// </summary>
         /// <param name="searchCommentApiDto"></param>
         /// <returns></returns>
@@ -85,7 +85,7 @@ namespace WebApi.Controllers
             };
 
             //result service
-            var resultService = await _getCommentsBySalonIdService.Execute(model);
+            var resultService = await _getCommentsService.Execute(model);
             if (resultService.IsSuccess)
             {
                 if (resultService?.Data?.Comments == null)
