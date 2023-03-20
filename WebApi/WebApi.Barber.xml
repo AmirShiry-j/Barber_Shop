@@ -203,6 +203,12 @@
             <param name="BarberId"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.FavoriteSalonController.Get">
+            <summary>
+            بر گردوندن آرایشگاه های مورد علاقه کاربر
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.FavoriteSalonController.Post(System.Int32)">
             <summary>
             برای اضافه کردن آرایشگاه به علاقه مندی های کاربر

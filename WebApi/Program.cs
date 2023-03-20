@@ -7,6 +7,7 @@ using Application.CustomerService.Command;
 using Application.FavoriteBarberService.Command;
 using Application.FavoriteBarberService.Query;
 using Application.FavoriteSalonService.Command;
+using Application.FavoriteSalonService.Query;
 using Application.Interfaces.Contexts;
 using Application.ProfileService.Command;
 using Application.ProfileService.Query;
@@ -226,6 +227,7 @@ builder.Services.AddScoped<IGetFavoriteBarberService, GetFavoriteBarberService>(
 //Favorite Salon service
 builder.Services.AddScoped<IAddFavoriteSalonService, AddFavoriteSalonService>();
 builder.Services.AddScoped<IRemoveFavoriteSalonService, RemoveFavoriteSalonService>();
+builder.Services.AddScoped<IGetFavoriteSalonService, GetFavoriteSalonService>();
 
 
 //Service email
