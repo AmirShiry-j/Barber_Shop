@@ -1,6 +1,5 @@
 ﻿using Application.Common;
 using Application.Interfaces.Contexts;
-using AutoMapper;
 using Domain.Salons;
 using System;
 using System.Collections.Generic;
@@ -10,18 +9,17 @@ using System.Threading.Tasks;
 
 namespace Application.FavoriteBarberService.Command
 {
-    public interface IAddFavoriteBarberService
+    public interface IRemoveFavoriteService
     {
         Task<ResultDto> Execute(string UserId, int BarberId);
     }
-    public class AddFavoriteBarberService : IAddFavoriteBarberService
+    public class RemoveFavoriteService : IRemoveFavoriteService
     {
         private readonly IDataBaseContext _dbContext;
-        public AddFavoriteBarberService(IDataBaseContext dbContext)
+        public RemoveFavoriteService(IDataBaseContext dbContext)
         {
             _dbContext = dbContext;
         }
-
         public async Task<ResultDto> Execute(string UserId, int BarberId)
         {
             //Find barber
@@ -38,27 +36,24 @@ namespace Application.FavoriteBarberService.Command
             }
 
             //Chech has before
-            var hasBefore = _dbContext.FavoriteBarbers.Where(p => p.BarberId.Equals(BarberId) && p.UserId.Equals(UserId)).Any();
-            if (hasBefore)
+            var FavoriteBarber = _dbContext.FavoriteBarbers.Where(p => p.BarberId.Equals(BarberId) && p.UserId.Equals(UserId)).FirstOrDefault();
+            if (FavoriteBarber == null)
             {
                 return new ResultDto
                 {
                     IsSuccess = false,
-                    Message = "این آرایشگر قبلا به علاقه مندی های این کاربر اضافه شده است"
+                    Message = "این آرایشگر قبلا به علاقه مندی های این کاربر اضافه نشده است"
                 };
             }
 
-            //Insert in db
-            var newFavorite = new FavoriteBarber
-            {
-                BarberId = BarberId,
-                UserId = UserId
-            };
-
-            _dbContext.FavoriteBarbers.Add(newFavorite);
+            //Remove in Db
+            _dbContext.FavoriteBarbers.Remove(FavoriteBarber);
             _dbContext.SaveChanges();
 
-            return new ResultDto { IsSuccess = true };
+            return new ResultDto
+            {
+                IsSuccess = true
+            };
         }
     }
 }

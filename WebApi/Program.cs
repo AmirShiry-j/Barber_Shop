@@ -4,6 +4,7 @@ using Application.BarberService.Query;
 using Application.CommentService.Command;
 using Application.CommentService.Query;
 using Application.CustomerService.Command;
+using Application.FavoriteBarberService.Command;
 using Application.Interfaces.Contexts;
 using Application.ProfileService.Command;
 using Application.ProfileService.Query;
@@ -214,6 +215,11 @@ builder.Services.AddScoped<IGetCitiesService, GetCitiesService>();
 //Comment services
 builder.Services.AddScoped<IAddCommendService, AddCommendService>();
 builder.Services.AddScoped<IGetCommentsService, GetCommentsService>();
+
+//Favorite Barber service
+builder.Services.AddScoped<IAddFavoriteBarberService, AddFavoriteBarberService>();
+builder.Services.AddScoped<IRemoveFavoriteService, RemoveFavoriteService>();
+
 
 //Service email
 builder.Services.AddScoped<IEmailService, EmailService>();

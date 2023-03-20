@@ -183,6 +183,20 @@
             <param name="searchCommentApiDto"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.FavoriteBarberController.Post(System.Int32)">
+            <summary>
+            برای اضافه کردن آرایشگر به علاقه مندی های کاربر
+            </summary>
+            <param name="BarberId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.FavoriteBarberController.Delete(System.Int32)">
+            <summary>
+            برای حذف یک آرایشگر از علاقه مندی های کاربر
+            </summary>
+            <param name="BarberId"></param>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.ProfileController.Get">
             <summary>
             بر گردوندن اطلاعات پروفایل (Auth)
