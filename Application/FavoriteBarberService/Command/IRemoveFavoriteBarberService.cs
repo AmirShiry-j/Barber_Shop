@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Application.FavoriteBarberService.Command
 {
-    public interface IRemoveFavoriteService
+    public interface IRemoveFavoriteBarberService
     {
         Task<ResultDto> Execute(string UserId, int BarberId);
     }
-    public class RemoveFavoriteService : IRemoveFavoriteService
+    public class RemoveFavoriteBarberService : IRemoveFavoriteBarberService
     {
         private readonly IDataBaseContext _dbContext;
-        public RemoveFavoriteService(IDataBaseContext dbContext)
+        public RemoveFavoriteBarberService(IDataBaseContext dbContext)
         {
             _dbContext = dbContext;
         }

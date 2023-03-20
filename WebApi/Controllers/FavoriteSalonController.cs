@@ -1,4 +1,4 @@
-﻿using Application.FavoriteBarberService.Command;
+﻿using Application.FavoriteSalonService.Command;
 using Application.SalonsService.Command;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -12,29 +12,29 @@ namespace WebApi.Controllers
     [Route("api/v{version:apiVersion}/[controller]/")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class FavoriteBarberController : ControllerBase
+    public class FavoriteSalonController : ControllerBase
     {
-        private readonly IAddFavoriteBarberService _addFavoriteBarberService;
-        private readonly IRemoveFavoriteBarberService _removeFavoriteService;
-        public FavoriteBarberController(IRemoveFavoriteBarberService removeFavoriteService, IAddFavoriteBarberService addFavoriteBarberService)
+        private readonly IAddFavoriteSalonService _addFavoriteSalonService;
+        private readonly IRemoveFavoriteSalonService _removeFavoriteSalonService;
+        public FavoriteSalonController(IRemoveFavoriteSalonService removeFavoriteSalonService, IAddFavoriteSalonService addFavoriteSalonService)
         {
-            _removeFavoriteService = removeFavoriteService;
-            _addFavoriteBarberService = addFavoriteBarberService;
+            _removeFavoriteSalonService = removeFavoriteSalonService;
+            _addFavoriteSalonService = addFavoriteSalonService;
         }
 
         /// <summary>
-        /// برای اضافه کردن آرایشگر به علاقه مندی های کاربر
+        /// برای اضافه کردن آرایشگاه به علاقه مندی های کاربر
         /// </summary>
-        /// <param name="BarberId"></param>
+        /// <param name="SalonId"></param>
         /// <returns></returns>
-        [HttpPost("{BarberId}")]
-        public async Task<IActionResult> Post(int BarberId)
+        [HttpPost("{SalonId}")]
+        public async Task<IActionResult> Post(int SalonId)
         {
             //Get UserId
             var userId = User.Claims?.FirstOrDefault(p => p.Type == "UserId")?.Value;
 
             //call service
-            var resultService = await _addFavoriteBarberService.Execute(userId, BarberId);
+            var resultService = await _addFavoriteSalonService.Execute(userId, SalonId);
             if (resultService.IsSuccess)
             {
                 return Ok();
@@ -46,18 +46,18 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// برای حذف یک آرایشگر از علاقه مندی های کاربر
+        /// برای حذف یک آرایشگاه از علاقه مندی های کاربر
         /// </summary>
-        /// <param name="BarberId"></param>
+        /// <param name="SalonId"></param>
         /// <returns></returns>
-        [HttpDelete("{BarberId}")]
-        public async Task<IActionResult> Delete(int BarberId)
+        [HttpDelete("{SalonId}")]
+        public async Task<IActionResult> Delete(int SalonId)
         {
             //Get UserId
             var userId = User.Claims?.FirstOrDefault(p => p.Type == "UserId")?.Value;
 
             //call service
-            var resultService = await _removeFavoriteService.Execute(userId, BarberId);
+            var resultService = await _removeFavoriteSalonService.Execute(userId, SalonId);
             if (resultService.IsSuccess)
             {
                 return Ok();

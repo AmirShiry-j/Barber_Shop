@@ -5,6 +5,7 @@ using Application.CommentService.Command;
 using Application.CommentService.Query;
 using Application.CustomerService.Command;
 using Application.FavoriteBarberService.Command;
+using Application.FavoriteSalonService.Command;
 using Application.Interfaces.Contexts;
 using Application.ProfileService.Command;
 using Application.ProfileService.Query;
@@ -218,7 +219,11 @@ builder.Services.AddScoped<IGetCommentsService, GetCommentsService>();
 
 //Favorite Barber service
 builder.Services.AddScoped<IAddFavoriteBarberService, AddFavoriteBarberService>();
-builder.Services.AddScoped<IRemoveFavoriteService, RemoveFavoriteService>();
+builder.Services.AddScoped<IRemoveFavoriteBarberService, RemoveFavoriteBarberService>();
+
+//Favorite Salon service
+builder.Services.AddScoped<IAddFavoriteSalonService, AddFavoriteSalonService>();
+builder.Services.AddScoped<IRemoveFavoriteSalonService, RemoveFavoriteSalonService>();
 
 
 //Service email
