@@ -185,40 +185,40 @@
         </member>
         <member name="M:WebApi.Controllers.FavoriteBarberController.Get">
             <summary>
-            بر گردوندن آرایشگر های مورد علاقه کاربر
+            بر گردوندن آرایشگر های مورد علاقه کاربر (Auth)
             </summary>
             <returns></returns>
         </member>
         <member name="M:WebApi.Controllers.FavoriteBarberController.Post(System.Int32)">
             <summary>
-            برای اضافه کردن آرایشگر به علاقه مندی های کاربر
+            برای اضافه کردن آرایشگر به علاقه مندی های کاربر (Auth)
             </summary>
             <param name="BarberId"></param>
             <returns></returns>
         </member>
         <member name="M:WebApi.Controllers.FavoriteBarberController.Delete(System.Int32)">
             <summary>
-            برای حذف یک آرایشگر از علاقه مندی های کاربر
+            برای حذف یک آرایشگر از علاقه مندی های کاربر (Auth)
             </summary>
             <param name="BarberId"></param>
             <returns></returns>
         </member>
         <member name="M:WebApi.Controllers.FavoriteSalonController.Get">
             <summary>
-            بر گردوندن آرایشگاه های مورد علاقه کاربر
+            بر گردوندن آرایشگاه های مورد علاقه کاربر (Auth)
             </summary>
             <returns></returns>
         </member>
         <member name="M:WebApi.Controllers.FavoriteSalonController.Post(System.Int32)">
             <summary>
-            برای اضافه کردن آرایشگاه به علاقه مندی های کاربر
+            برای اضافه کردن آرایشگاه به علاقه مندی های کاربر (Auth)
             </summary>
             <param name="SalonId"></param>
             <returns></returns>
         </member>
         <member name="M:WebApi.Controllers.FavoriteSalonController.Delete(System.Int32)">
             <summary>
-            برای حذف یک آرایشگاه از علاقه مندی های کاربر
+            برای حذف یک آرایشگاه از علاقه مندی های کاربر (Auth)
             </summary>
             <param name="SalonId"></param>
             <returns></returns>

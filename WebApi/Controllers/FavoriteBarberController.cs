@@ -32,7 +32,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// بر گردوندن آرایشگر های مورد علاقه کاربر
+        /// بر گردوندن آرایشگر های مورد علاقه کاربر (Auth)
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -78,7 +78,7 @@ namespace WebApi.Controllers
             }
         }
         /// <summary>
-        /// برای اضافه کردن آرایشگر به علاقه مندی های کاربر
+        /// برای اضافه کردن آرایشگر به علاقه مندی های کاربر (Auth)
         /// </summary>
         /// <param name="BarberId"></param>
         /// <returns></returns>
@@ -109,7 +109,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// برای حذف یک آرایشگر از علاقه مندی های کاربر
+        /// برای حذف یک آرایشگر از علاقه مندی های کاربر (Auth)
         /// </summary>
         /// <param name="BarberId"></param>
         /// <returns></returns>
