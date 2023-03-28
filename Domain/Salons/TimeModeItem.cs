@@ -16,5 +16,6 @@ namespace Domain.Salons
         public DateTime? TimeLastUpdate { get; set; }
         //Nave
         public int TimeModeId { get; set; }
+        public TimeMode TimeMode { get; set; }
     }
 }
