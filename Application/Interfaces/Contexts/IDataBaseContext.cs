@@ -24,12 +24,15 @@ namespace Application.Interfaces.Contexts
         DbSet<SalonImage> SalonImages { get; set; }
         DbSet<FavoriteBarber> FavoriteBarbers { get; set; }
         DbSet<FavoriteSalon> FavoriteSalons { get; set; }
+        DbSet<TimeMode> TimeModes { get; set; }
+        DbSet<TimeModeItem> TimeModeItems { get; set; }
         //Address
         public DbSet<Address> addresses { get; set; }
         public DbSet<United> Uniteds { get; set; }
         public DbSet<City> Cities { get; set; }
         //Comments
         public DbSet<Comment> Comments { get; set; }
+
         int SaveChanges();
     }
 }
