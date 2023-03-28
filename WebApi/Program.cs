@@ -16,6 +16,7 @@ using Application.SalonImageService.Query;
 using Application.SalonsService.Command;
 using Application.SalonsService.Query;
 using Application.TimeModeService.Command;
+using Application.TimeModeService.Query;
 using Application.TokenService;
 using Application.UserService;
 using Domain.Users;
@@ -234,6 +235,8 @@ builder.Services.AddScoped<IGetFavoriteSalonService, GetFavoriteSalonService>();
 builder.Services.AddScoped<IAddTimeModeService, AddTimeModeService>();
 builder.Services.AddScoped<IEditTimeModeService, EditTimeModeService>();
 builder.Services.AddScoped<IDeleteTimeModeService, DeleteTimeModeService>();
+builder.Services.AddScoped<IGetAllTimeModeForBarberService, GetAllTimeModeForBarberService>();
+builder.Services.AddScoped<IGetTimeModeByIdService, GetTimeModeByIdService>();
 
 //Service email
 builder.Services.AddScoped<IEmailService, EmailService>();
