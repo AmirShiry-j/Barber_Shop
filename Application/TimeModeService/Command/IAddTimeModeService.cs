@@ -54,6 +54,7 @@ namespace Application.TimeModeService.Command
                 Name = Dto.Name
             };
             _dbContext.TimeModes.Add(newTimeMode);
+            _dbContext.SaveChanges();
 
             return new ResultDto<int>
             {

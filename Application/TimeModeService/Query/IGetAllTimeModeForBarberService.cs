@@ -58,5 +58,6 @@ namespace Application.TimeModeService.Query
         public string Name { get; set; }
         public DateTime TimeCreate { get; set; }
         public DateTime? TimeLastUpdate { get; set; }
+        public Link Link { get; set; }
     }
 }

@@ -309,6 +309,40 @@
             <param name="Name"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.TimeModeController.Get">
+            <summary>
+            بر گردوندن گروهبندی های زمانی ایجاد شده توسط آرایشگر (Auth)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TimeModeController.Get(System.Int32)">
+            <summary>
+            برگردوندن یک گروهبندی زمانی با آیدی (Auth)
+            </summary>
+            <param name="TimeModeId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TimeModeController.Post(WebApi.ModelsAndDtoes.Barber.CreateTimeModeApiDto)">
+            <summary>
+            برای ایجاد یک گروهبندی زمانی (Auth)
+            </summary>
+            <param name="Dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TimeModeController.Put(WebApi.ModelsAndDtoes.Barber.EditTimeModeApiDto)">
+            <summary>
+            برای ویرایش یک گروهبندی زمانی (Auth)
+            </summary>
+            <param name="Dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TimeModeController.Delete(System.Int32)">
+            <summary>
+            برای حذف یک گروهبندی زمانی (Auth)
+            </summary>
+            <param name="TimeModeId"></param>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.UnitedController.Get">
             <summary>
             برگردوندن لیست استان ها برای کمبوباکس
