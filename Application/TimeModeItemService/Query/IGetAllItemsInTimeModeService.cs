@@ -67,7 +67,9 @@ namespace Application.TimeModeItemService.Query
                 TimeModeId = TimeModeId,
                 TimeCreate = p.TimeCreate,
                 TimeLastUpdate = p.TimeLastUpdate
-            }).ToList();
+            })
+            .OrderBy(p => p.Hour).ThenBy(p => p.Minute)
+            .ToList();
 
             return new ResultDto<List<TimeModeItemDto>>
             {
@@ -84,7 +86,7 @@ namespace Application.TimeModeItemService.Query
         public int Minute { get; set; }
         public DateTime TimeCreate { get; set; }
         public DateTime? TimeLastUpdate { get; set; }
-        //Nave
         public int TimeModeId { get; set; }
+        public Link Link { get; set; }
     }
 }

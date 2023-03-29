@@ -41,7 +41,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("addresses");
+                    b.ToTable("addresses", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Addresses.City", b =>
@@ -64,7 +64,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UnitedId");
 
-                    b.ToTable("Cities");
+                    b.ToTable("Cities", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Addresses.United", b =>
@@ -79,7 +79,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Uniteds");
+                    b.ToTable("Uniteds", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Comments.Comment", b =>
@@ -119,7 +119,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Salons.Barber", b =>
@@ -155,7 +155,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SalonId");
 
-                    b.ToTable("Barbers");
+                    b.ToTable("Barbers", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Salons.FavoriteBarber", b =>
@@ -179,7 +179,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FavoriteBarbers");
+                    b.ToTable("FavoriteBarbers", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Salons.FavoriteSalon", b =>
@@ -203,7 +203,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FavoriteSalons");
+                    b.ToTable("FavoriteSalons", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Salons.Salon", b =>
@@ -254,7 +254,7 @@ namespace Persistence.Migrations
                     b.HasIndex("OwnerId")
                         .IsUnique();
 
-                    b.ToTable("Salons");
+                    b.ToTable("Salons", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Salons.SalonImage", b =>
@@ -276,7 +276,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SalonId");
 
-                    b.ToTable("SalonImages");
+                    b.ToTable("SalonImages", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Salons.TimeMode", b =>
@@ -307,7 +307,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("BarberId");
 
-                    b.ToTable("TimeModes");
+                    b.ToTable("TimeModes", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Salons.TimeModeItem", b =>
@@ -341,7 +341,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("TimeModeId");
 
-                    b.ToTable("TimeModeItems");
+                    b.ToTable("TimeModeItems", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Users.Customer", b =>
@@ -361,7 +361,7 @@ namespace Persistence.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Users.Role", b =>
@@ -435,7 +435,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tokens");
+                    b.ToTable("Tokens", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Users.User", b =>

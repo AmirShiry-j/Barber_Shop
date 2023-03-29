@@ -82,7 +82,7 @@ namespace Persistence.Contexts
 
             builder.Entity<TimeMode>()
                 .HasMany(p => p.TimeModeItems)
-                .WithOne()
+                .WithOne(p=>p.TimeMode)
                 .HasForeignKey(p => p.TimeModeId)
                 .IsRequired(true);
 

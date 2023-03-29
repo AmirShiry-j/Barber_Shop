@@ -85,8 +85,8 @@ namespace Application.TimeModeItemService.Query
         public int Minute { get; set; }
         public DateTime TimeCreate { get; set; }
         public DateTime? TimeLastUpdate { get; set; }
-        //Nav
         public int TimeModeId { get; set; }
         public string TimeModeName { get; set; }
+        public List<Link> Links { get; set; }
     }
 }

@@ -57,6 +57,21 @@ namespace Application.TimeModeItemService.Command
                 };
             }
 
+            //Check is exist Item with this new hour and minute 
+            //Except for herself
+            var isExistItemWithThisHourAndMinute = _dbContext.TimeModeItems
+                .Where(p => (p.TimeModeId.Equals(timeModeItem.TimeModeId) && (p.Hour.Equals(Dto.Hour) && p.Minute.Equals(Dto.Minute))) && !p.Id.Equals(Dto.Id))
+                .Any();
+            if (isExistItemWithThisHourAndMinute)
+            {
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    Message = "در این گروهبندی زمانی قبلا نوبتی با ساعت و دقیقه ارسالی شما ایجاد شده"
+                };
+            }
+
+
             //Edit and save in db
             timeModeItem.Hour = Dto.Hour;
             timeModeItem.Minute = Dto.Minute;

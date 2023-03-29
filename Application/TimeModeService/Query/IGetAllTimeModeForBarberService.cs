@@ -43,7 +43,9 @@ namespace Application.TimeModeService.Query
                 Name = p.Name,
                 TimeCreate = p.TimeCreate,
                 TimeLastUpdate = p.TimeLastUpdate
-            }).ToList();
+            })
+            .OrderBy(p => p.TimeCreate)
+            .ToList();
 
             return new ResultDto<List<TimeModeDto>>
             {
