@@ -32,6 +32,10 @@ namespace Persistence.Contexts
         public DbSet<Salon> Salons { get; set; }
         public DbSet<Barber> Barbers { get; set; }
         public DbSet<SalonImage> SalonImages { get; set; }
+        public DbSet<FavoriteBarber> FavoriteBarbers { get; set; }
+        public DbSet<FavoriteSalon> FavoriteSalons { get; set; }
+        public DbSet<TimeMode> TimeModes { get; set; }
+        public DbSet<TimeModeItem> TimeModeItems { get; set; }
         //Address
         public DbSet<Address> addresses { get; set; }
         public DbSet<United> Uniteds { get; set; }
@@ -64,7 +68,7 @@ namespace Persistence.Contexts
                 .OnDelete(DeleteBehavior.SetNull);
 
             builder.Entity<Barber>()
-    .HasOne(p=>p.Salon)
+    .HasOne(p => p.Salon)
     .WithMany(p => p.Barbers)
     .HasForeignKey(p => p.SalonId)
     .IsRequired(false)
@@ -74,6 +78,19 @@ namespace Persistence.Contexts
                 .HasMany(p => p.SalonImages)
                 .WithOne()
                 .HasForeignKey(p => p.SalonId)
+                .IsRequired(true);
+
+            builder.Entity<TimeMode>()
+                .HasMany(p => p.TimeModeItems)
+                .WithOne(p=>p.TimeMode)
+                .HasForeignKey(p => p.TimeModeId)
+                .IsRequired(true);
+
+
+            builder.Entity<Barber>()
+                .HasMany(p => p.TimeModes)
+                .WithOne()
+                .HasForeignKey(p => p.BarberId)
                 .IsRequired(true);
 
             //Salon and owner
@@ -108,6 +125,13 @@ namespace Persistence.Contexts
                 .WithOne()
                 .HasForeignKey<Salon>(p => p.AddressId);
 
+
+            builder.Entity<FavoriteSalon>()
+                .HasOne(p => p.Salon)
+                .WithMany()
+                .HasForeignKey(p => p.SalonId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
             //Users
             builder.ApplyConfiguration(new UserConfig());
             builder.ApplyConfiguration(new RoleConfig());
@@ -117,6 +141,8 @@ namespace Persistence.Contexts
             builder.ApplyConfiguration(new BarberConfig());
             builder.ApplyConfiguration(new SalonConfig());
             builder.ApplyConfiguration(new SalonImageConfig());
+            builder.ApplyConfiguration(new TimeModeConfig());
+            builder.ApplyConfiguration(new TimeModeItemConfig());
             //Addresses
             builder.ApplyConfiguration(new AddressConfig());
             builder.ApplyConfiguration(new UnitedConfig());

@@ -2,7 +2,12 @@
 using Application.BarberService.Command;
 using Application.BarberService.Query;
 using Application.CommentService.Command;
+using Application.CommentService.Query;
 using Application.CustomerService.Command;
+using Application.FavoriteBarberService.Command;
+using Application.FavoriteBarberService.Query;
+using Application.FavoriteSalonService.Command;
+using Application.FavoriteSalonService.Query;
 using Application.Interfaces.Contexts;
 using Application.ProfileService.Command;
 using Application.ProfileService.Query;
@@ -10,6 +15,10 @@ using Application.SalonImageService.Command;
 using Application.SalonImageService.Query;
 using Application.SalonsService.Command;
 using Application.SalonsService.Query;
+using Application.TimeModeItemService.Command;
+using Application.TimeModeItemService.Query;
+using Application.TimeModeService.Command;
+using Application.TimeModeService.Query;
 using Application.TokenService;
 using Application.UserService;
 using Domain.Users;
@@ -187,7 +196,7 @@ builder.Services.AddScoped<IAddCustomerService, AddCustomerService>();
 
 //Salon services
 builder.Services.AddScoped<IAddSalonService, AddSalonService>();
-builder.Services.AddScoped<IEditSalonService,EditSalonService>();
+builder.Services.AddScoped<IEditSalonService, EditSalonService>();
 builder.Services.AddScoped<IDeleteSalonService, DeleteSalonService>();
 builder.Services.AddScoped<IGetSalonByIdService, GetSalonByIdService>();
 builder.Services.AddScoped<IGetAllSalonsService, GetAllSalonsService>();
@@ -212,7 +221,31 @@ builder.Services.AddScoped<IGetCitiesService, GetCitiesService>();
 
 //Comment services
 builder.Services.AddScoped<IAddCommendService, AddCommendService>();
+builder.Services.AddScoped<IGetCommentsService, GetCommentsService>();
 
+//Favorite Barber service
+builder.Services.AddScoped<IAddFavoriteBarberService, AddFavoriteBarberService>();
+builder.Services.AddScoped<IRemoveFavoriteBarberService, RemoveFavoriteBarberService>();
+builder.Services.AddScoped<IGetFavoriteBarberService, GetFavoriteBarberService>();
+
+//Favorite Salon service
+builder.Services.AddScoped<IAddFavoriteSalonService, AddFavoriteSalonService>();
+builder.Services.AddScoped<IRemoveFavoriteSalonService, RemoveFavoriteSalonService>();
+builder.Services.AddScoped<IGetFavoriteSalonService, GetFavoriteSalonService>();
+
+//TimeMode services
+builder.Services.AddScoped<IAddTimeModeService, AddTimeModeService>();
+builder.Services.AddScoped<IEditTimeModeService, EditTimeModeService>();
+builder.Services.AddScoped<IDeleteTimeModeService, DeleteTimeModeService>();
+builder.Services.AddScoped<IGetAllTimeModeForBarberService, GetAllTimeModeForBarberService>();
+builder.Services.AddScoped<IGetTimeModeByIdService, GetTimeModeByIdService>();
+
+//TimeModeItem services
+builder.Services.AddScoped<IAddTimeModeItemService, AddTimeModeItemService>();
+builder.Services.AddScoped<IEditTimeModeItemService, EditTimeModeItemService>();
+builder.Services.AddScoped<IDeleteTimeModeItemService, DeleteTimeModeItemService>();
+builder.Services.AddScoped<IGetTimeModeItemService, GetTimeModeItemService>();
+builder.Services.AddScoped<IGetAllItemsInTimeModeService, GetAllItemsInTimeModeService>();
 
 //Service email
 builder.Services.AddScoped<IEmailService, EmailService>();

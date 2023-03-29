@@ -171,9 +171,56 @@
         </member>
         <member name="M:WebApi.Controllers.CommentController.Post(WebApi.ModelsAndDtoes.Comment.CreateCommentApiDto)">
             <summary>
-            برای ثبت یک نظر توسط کاربر (Auth)
+            برای ثبت یک نظر در مورد آرایشگر توسط کاربر (Auth)
             </summary>
             <param name="createCommentDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.CommentController.Get(WebApi.ModelsAndDtoes.Comment.SearchCommentApiDto)">
+            <summary>
+            برای دریافت نظرات ثبت شده برای آرایشگران یک سالن آرایشی یا یک آرایشگر
+            </summary>
+            <param name="searchCommentApiDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.FavoriteBarberController.Get">
+            <summary>
+            بر گردوندن آرایشگر های مورد علاقه کاربر (Auth)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.FavoriteBarberController.Post(System.Int32)">
+            <summary>
+            برای اضافه کردن آرایشگر به علاقه مندی های کاربر (Auth)
+            </summary>
+            <param name="BarberId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.FavoriteBarberController.Delete(System.Int32)">
+            <summary>
+            برای حذف یک آرایشگر از علاقه مندی های کاربر (Auth)
+            </summary>
+            <param name="BarberId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.FavoriteSalonController.Get">
+            <summary>
+            بر گردوندن آرایشگاه های مورد علاقه کاربر (Auth)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.FavoriteSalonController.Post(System.Int32)">
+            <summary>
+            برای اضافه کردن آرایشگاه به علاقه مندی های کاربر (Auth)
+            </summary>
+            <param name="SalonId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.FavoriteSalonController.Delete(System.Int32)">
+            <summary>
+            برای حذف یک آرایشگاه از علاقه مندی های کاربر (Auth)
+            </summary>
+            <param name="SalonId"></param>
             <returns></returns>
         </member>
         <member name="M:WebApi.Controllers.ProfileController.Get">
@@ -260,6 +307,75 @@
             حذف یک تصویر از سالن آرایشی (Auth)
             </summary>
             <param name="Name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TimeModeController.Get">
+            <summary>
+            بر گردوندن گروهبندی های زمانی ایجاد شده توسط آرایشگر (Auth)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TimeModeController.Get(System.Int32)">
+            <summary>
+            برگردوندن یک گروهبندی زمانی با آیدی (Auth)
+            </summary>
+            <param name="TimeModeId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TimeModeController.Post(WebApi.ModelsAndDtoes.Barber.CreateTimeModeApiDto)">
+            <summary>
+            برای ایجاد یک گروهبندی زمانی (Auth)
+            </summary>
+            <param name="Dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TimeModeController.Put(WebApi.ModelsAndDtoes.Barber.EditTimeModeApiDto)">
+            <summary>
+            برای ویرایش یک گروهبندی زمانی (Auth)
+            </summary>
+            <param name="Dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TimeModeController.Delete(System.Int32)">
+            <summary>
+            برای حذف یک گروهبندی زمانی (Auth)
+            </summary>
+            <param name="TimeModeId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TimeModeItemController.GetAllItems(System.Int32)">
+            <summary>
+            برگردوندن نوبت های ایجاد شده در یک گروهبندی زمانی (Auth)
+            </summary>
+            <param name="TimeModeId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TimeModeItemController.Get(System.Int32)">
+            <summary>
+            برگردوندن یک نوبت از گروهبندی زمانی با آیدی (Auth)
+            </summary>
+            <param name="TimeModeItemId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TimeModeItemController.Post(WebApi.ModelsAndDtoes.Barber.CreateTimeModeItemApiDto)">
+            <summary>
+            برای ایجاد یک نوبت در گروهبندی زمانی (Auth)
+            </summary>
+            <param name="Dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TimeModeItemController.Put(WebApi.ModelsAndDtoes.Barber.EditTimeModeItemApiDto)">
+            <summary>
+            برای ویرایش یک نوبت از گروهبندی زمانی (Auth)
+            </summary>
+            <param name="Dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TimeModeItemController.Delete(System.Int32)">
+            <summary>
+            برای حذف یک نوبت از گروهبندی زمانی (Auth)
+            </summary>
+            <param name="TimeModeItemId"></param>
             <returns></returns>
         </member>
         <member name="M:WebApi.Controllers.UnitedController.Get">

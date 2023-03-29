@@ -24,6 +24,9 @@ namespace Domain.Users
         public Customer Customer { get; set; }
         public int? CustomerId { get; set; }
         public DateTime TimeCreate { get; set; }
+
+        public ICollection<FavoriteBarber> FavoriteBarbers { get; set; }
+        public ICollection<FavoriteSalon> FavoriteSalons { get; set; }
     }
     public enum Gender
     {

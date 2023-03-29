@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230320200935_Create_FavoriteBarbers_Table")]
+    partial class Create_FavoriteBarbers_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,7 +44,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("addresses", (string)null);
+                    b.ToTable("addresses");
                 });
 
             modelBuilder.Entity("Domain.Addresses.City", b =>
@@ -64,7 +67,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UnitedId");
 
-                    b.ToTable("Cities", (string)null);
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("Domain.Addresses.United", b =>
@@ -79,7 +82,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Uniteds", (string)null);
+                    b.ToTable("Uniteds");
                 });
 
             modelBuilder.Entity("Domain.Comments.Comment", b =>
@@ -119,7 +122,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Domain.Salons.Barber", b =>
@@ -155,7 +158,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SalonId");
 
-                    b.ToTable("Barbers", (string)null);
+                    b.ToTable("Barbers");
                 });
 
             modelBuilder.Entity("Domain.Salons.FavoriteBarber", b =>
@@ -179,31 +182,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FavoriteBarbers", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Salons.FavoriteSalon", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("SalonId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SalonId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("FavoriteSalons", (string)null);
+                    b.ToTable("FavoriteBarbers");
                 });
 
             modelBuilder.Entity("Domain.Salons.Salon", b =>
@@ -254,7 +233,7 @@ namespace Persistence.Migrations
                     b.HasIndex("OwnerId")
                         .IsUnique();
 
-                    b.ToTable("Salons", (string)null);
+                    b.ToTable("Salons");
                 });
 
             modelBuilder.Entity("Domain.Salons.SalonImage", b =>
@@ -276,72 +255,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SalonId");
 
-                    b.ToTable("SalonImages", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Salons.TimeMode", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BarberId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("TimeCreate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<DateTime?>("TimeLastUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BarberId");
-
-                    b.ToTable("TimeModes", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Salons.TimeModeItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Hour")
-                        .HasMaxLength(23)
-                        .HasColumnType("int");
-
-                    b.Property<int>("Minute")
-                        .HasMaxLength(59)
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("TimeCreate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<DateTime?>("TimeLastUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("TimeModeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TimeModeId");
-
-                    b.ToTable("TimeModeItems", (string)null);
+                    b.ToTable("SalonImages");
                 });
 
             modelBuilder.Entity("Domain.Users.Customer", b =>
@@ -361,7 +275,7 @@ namespace Persistence.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Domain.Users.Role", b =>
@@ -435,7 +349,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tokens", (string)null);
+                    b.ToTable("Tokens");
                 });
 
             modelBuilder.Entity("Domain.Users.User", b =>
@@ -707,22 +621,6 @@ namespace Persistence.Migrations
                     b.Navigation("Barber");
                 });
 
-            modelBuilder.Entity("Domain.Salons.FavoriteSalon", b =>
-                {
-                    b.HasOne("Domain.Salons.Salon", "Salon")
-                        .WithMany()
-                        .HasForeignKey("SalonId")
-                        .IsRequired();
-
-                    b.HasOne("Domain.Users.User", null)
-                        .WithMany("FavoriteSalons")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Salon");
-                });
-
             modelBuilder.Entity("Domain.Salons.Salon", b =>
                 {
                     b.HasOne("Domain.Addresses.Address", "Address")
@@ -747,24 +645,6 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Salons.Salon", null)
                         .WithMany("SalonImages")
                         .HasForeignKey("SalonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Salons.TimeMode", b =>
-                {
-                    b.HasOne("Domain.Salons.Barber", null)
-                        .WithMany("TimeModes")
-                        .HasForeignKey("BarberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Salons.TimeModeItem", b =>
-                {
-                    b.HasOne("Domain.Salons.TimeMode", null)
-                        .WithMany("TimeModeItems")
-                        .HasForeignKey("TimeModeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -859,8 +739,6 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Salons.Barber", b =>
                 {
-                    b.Navigation("TimeModes");
-
                     b.Navigation("User")
                         .IsRequired();
                 });
@@ -872,19 +750,12 @@ namespace Persistence.Migrations
                     b.Navigation("SalonImages");
                 });
 
-            modelBuilder.Entity("Domain.Salons.TimeMode", b =>
-                {
-                    b.Navigation("TimeModeItems");
-                });
-
             modelBuilder.Entity("Domain.Users.User", b =>
                 {
                     b.Navigation("Customer")
                         .IsRequired();
 
                     b.Navigation("FavoriteBarbers");
-
-                    b.Navigation("FavoriteSalons");
 
                     b.Navigation("Tokens");
                 });
