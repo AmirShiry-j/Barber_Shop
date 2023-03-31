@@ -16,5 +16,7 @@ namespace Domain.Salons
         //Nav
         public int BarberId { get; set; }
         public ICollection<TimeModeItem> TimeModeItems { get; set; }
+
+        public ICollection<WeekDayPlan> WeekDayPlans { get; set; }
     }
 }

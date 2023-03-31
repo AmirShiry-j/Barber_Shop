@@ -36,6 +36,7 @@ namespace Persistence.Contexts
         public DbSet<FavoriteSalon> FavoriteSalons { get; set; }
         public DbSet<TimeMode> TimeModes { get; set; }
         public DbSet<TimeModeItem> TimeModeItems { get; set; }
+        public DbSet<WeekDayPlan> WeekDayPlans { get; set; }
         //Address
         public DbSet<Address> addresses { get; set; }
         public DbSet<United> Uniteds { get; set; }
@@ -82,7 +83,7 @@ namespace Persistence.Contexts
 
             builder.Entity<TimeMode>()
                 .HasMany(p => p.TimeModeItems)
-                .WithOne(p=>p.TimeMode)
+                .WithOne(p => p.TimeMode)
                 .HasForeignKey(p => p.TimeModeId)
                 .IsRequired(true);
 
@@ -92,6 +93,22 @@ namespace Persistence.Contexts
                 .WithOne()
                 .HasForeignKey(p => p.BarberId)
                 .IsRequired(true);
+
+            builder.Entity<TimeMode>()
+    .HasMany(p => p.WeekDayPlans)
+    .WithOne(p=>p.TimeMode)
+    .HasForeignKey(p => p.TimeModeId)
+    .IsRequired(true)
+    .OnDelete(DeleteBehavior.ClientCascade);
+
+
+            builder.Entity<Barber>()
+.HasMany(p => p.WeekDayPlans)
+.WithOne()
+.HasForeignKey(p => p.BarberId)
+.IsRequired(true)
+.OnDelete(DeleteBehavior.ClientCascade);
+
 
             //Salon and owner
 
@@ -143,13 +160,14 @@ namespace Persistence.Contexts
             builder.ApplyConfiguration(new SalonImageConfig());
             builder.ApplyConfiguration(new TimeModeConfig());
             builder.ApplyConfiguration(new TimeModeItemConfig());
+            builder.ApplyConfiguration(new WeekDayPlanConfig());
             //Addresses
             builder.ApplyConfiguration(new AddressConfig());
             builder.ApplyConfiguration(new UnitedConfig());
             builder.ApplyConfiguration(new CityConfig());
             //Comments
             builder.ApplyConfiguration(new CommentConfig());
-
+            
             base.OnModelCreating(builder);
         }
     }
