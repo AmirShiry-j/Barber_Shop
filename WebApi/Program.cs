@@ -250,6 +250,7 @@ builder.Services.AddScoped<IGetAllItemsInTimeModeService, GetAllItemsInTimeModeS
 
 //WeekDayPlan Services
 builder.Services.AddScoped<ISetTimeModeToDaysOfWeekService, SetTimeModeToDaysOfWeekService>();
+builder.Services.AddScoped<IUnSetTimeModeToDaysOfWeekService, UnSetTimeModeToDaysOfWeekService>();
 
 
 
