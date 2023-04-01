@@ -21,6 +21,7 @@ using Application.TimeModeService.Command;
 using Application.TimeModeService.Query;
 using Application.TokenService;
 using Application.UserService;
+using Application.WeekDayPlanService.Command;
 using Domain.Users;
 using ExceptionHandling;
 using Infrastructure.EmailService;
@@ -246,6 +247,11 @@ builder.Services.AddScoped<IEditTimeModeItemService, EditTimeModeItemService>();
 builder.Services.AddScoped<IDeleteTimeModeItemService, DeleteTimeModeItemService>();
 builder.Services.AddScoped<IGetTimeModeItemService, GetTimeModeItemService>();
 builder.Services.AddScoped<IGetAllItemsInTimeModeService, GetAllItemsInTimeModeService>();
+
+//WeekDayPlan Services
+builder.Services.AddScoped<ISetTimeModeToDaysOfWeekService, SetTimeModeToDaysOfWeekService>();
+
+
 
 //Service email
 builder.Services.AddScoped<IEmailService, EmailService>();
