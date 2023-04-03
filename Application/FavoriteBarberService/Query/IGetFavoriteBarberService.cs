@@ -28,6 +28,7 @@ namespace Application.FavoriteBarberService.Query
         {
             //Get FavoriteBarbers
             var FavoriteBarbers = _dbContext.FavoriteBarbers
+                .Where(p=>p.UserId.Equals(UserId))
                 .Include(p => p.Barber)
                 .ThenInclude(p => p.User)
                 .Select(p => new FavoriteBarberDto
