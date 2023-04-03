@@ -36,7 +36,7 @@ namespace Application.CommentService.Command
             }
 
             ////Limiteds
-            var hasBefore = _dbContext.Comments.Where(p => p.UserId == Dto.UserId && Dto.BarberId == Dto.BarberId).Any();
+            var hasBefore = _dbContext.Comments.Where(p => p.UserId == Dto.UserId && p.BarberId == Dto.BarberId).Any();
             if (hasBefore)
             {
                 return new ResultDto
