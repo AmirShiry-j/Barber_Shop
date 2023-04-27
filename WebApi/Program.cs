@@ -15,6 +15,8 @@ using Application.SalonImageService.Command;
 using Application.SalonImageService.Query;
 using Application.SalonsService.Command;
 using Application.SalonsService.Query;
+using Application.ServiceBarberService.Command;
+using Application.ServiceBarberService.Query;
 using Application.TimeModeItemService.Command;
 using Application.TimeModeItemService.Query;
 using Application.TimeModeService.Command;
@@ -246,6 +248,13 @@ builder.Services.AddScoped<IEditTimeModeItemService, EditTimeModeItemService>();
 builder.Services.AddScoped<IDeleteTimeModeItemService, DeleteTimeModeItemService>();
 builder.Services.AddScoped<IGetTimeModeItemService, GetTimeModeItemService>();
 builder.Services.AddScoped<IGetAllItemsInTimeModeService, GetAllItemsInTimeModeService>();
+
+//Service Barber services
+builder.Services.AddScoped<IAddServiceBarberService, AddServiceBarberService>();
+builder.Services.AddScoped<IEditServiceBarberService, EditServiceBarberService>();
+builder.Services.AddScoped<IDeleteServiceBarberService, DeleteServiceBarberService>();
+builder.Services.AddScoped<IGetServiceBarberByIdService, GetServiceBarberByIdService>();
+builder.Services.AddScoped<IGetAllServiceBarberForBarber_Service, GetAllServiceBarberForBarber_Service>();
 
 //Service email
 builder.Services.AddScoped<IEmailService, EmailService>();
