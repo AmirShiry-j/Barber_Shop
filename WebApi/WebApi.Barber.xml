@@ -309,6 +309,40 @@
             <param name="Name"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.ServiceController.Get">
+            <summary>
+            برگردوندن همه خدماتی که توسط آرایشگر ارائه می شود (Auth)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.ServiceController.Get(System.Int32)">
+            <summary>
+            برگردوندن یکی از خدمات آرایشگر با آیدی (Auth)
+            </summary>
+            <param name="ServiceId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.ServiceController.Post(WebApi.ModelsAndDtoes.Service.CreateServiceApiDto)">
+            <summary>
+            برای ایجاد یک خدمت جدید (Auth)
+            </summary>
+            <param name="Dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.ServiceController.Put(WebApi.ModelsAndDtoes.Service.EditServiceApiDto)">
+            <summary>
+            برای ویرایش یک خدمت (Auth)
+            </summary>
+            <param name="Dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.ServiceController.Delete(System.Int32)">
+            <summary>
+            برای حذف یک خدمت (Auth)
+            </summary>
+            <param name="ServiceId"></param>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.TimeModeController.Get">
             <summary>
             بر گردوندن گروهبندی های زمانی ایجاد شده توسط آرایشگر (Auth)

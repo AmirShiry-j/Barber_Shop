@@ -256,6 +256,7 @@ builder.Services.AddScoped<IDeleteServiceBarberService, DeleteServiceBarberServi
 builder.Services.AddScoped<IGetServiceBarberByIdService, GetServiceBarberByIdService>();
 builder.Services.AddScoped<IGetAllServiceBarberForBarber_Service, GetAllServiceBarberForBarber_Service>();
 
+
 //Service email
 builder.Services.AddScoped<IEmailService, EmailService>();
 //Service Handler
