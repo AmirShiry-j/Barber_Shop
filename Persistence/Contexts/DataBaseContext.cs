@@ -36,6 +36,7 @@ namespace Persistence.Contexts
         public DbSet<FavoriteSalon> FavoriteSalons { get; set; }
         public DbSet<TimeMode> TimeModes { get; set; }
         public DbSet<TimeModeItem> TimeModeItems { get; set; }
+        public DbSet<Service> Services { get; set; }
         //Address
         public DbSet<Address> addresses { get; set; }
         public DbSet<United> Uniteds { get; set; }
@@ -132,6 +133,13 @@ namespace Persistence.Contexts
                 .HasForeignKey(p => p.SalonId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+            SetConfigurations(builder);
+
+            base.OnModelCreating(builder);
+        }
+
+        private void SetConfigurations(ModelBuilder builder)
+        {
             //Users
             builder.ApplyConfiguration(new UserConfig());
             builder.ApplyConfiguration(new RoleConfig());
@@ -143,14 +151,13 @@ namespace Persistence.Contexts
             builder.ApplyConfiguration(new SalonImageConfig());
             builder.ApplyConfiguration(new TimeModeConfig());
             builder.ApplyConfiguration(new TimeModeItemConfig());
+            builder.ApplyConfiguration(new ServiceConfig());
             //Addresses
             builder.ApplyConfiguration(new AddressConfig());
             builder.ApplyConfiguration(new UnitedConfig());
             builder.ApplyConfiguration(new CityConfig());
             //Comments
             builder.ApplyConfiguration(new CommentConfig());
-
-            base.OnModelCreating(builder);
         }
     }
 }

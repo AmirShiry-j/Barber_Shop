@@ -21,5 +21,6 @@ namespace Domain.Salons
         public int? SalonId { get; set; }
         public DateTime TimeCreate { get; set; }
         public ICollection<TimeMode> TimeModes { get; set; }
+        public ICollection<Service> Services { get; set; }
     }
 }
