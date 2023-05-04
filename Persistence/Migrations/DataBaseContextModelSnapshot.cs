@@ -277,7 +277,6 @@ namespace Persistence.Migrations
                     b.HasIndex("SalonId");
 
                     b.ToTable("SalonImages");
-<<<<<<< HEAD
                 });
 
             modelBuilder.Entity("Domain.Salons.Service", b =>
@@ -316,8 +315,6 @@ namespace Persistence.Migrations
                     b.HasIndex("BarberId");
 
                     b.ToTable("Services");
-=======
->>>>>>> master
                 });
 
             modelBuilder.Entity("Domain.Salons.TimeMode", b =>
@@ -383,8 +380,6 @@ namespace Persistence.Migrations
                     b.HasIndex("TimeModeId");
 
                     b.ToTable("TimeModeItems");
-<<<<<<< HEAD
-=======
                 });
 
             modelBuilder.Entity("Domain.Salons.WeekDayPlan", b =>
@@ -412,7 +407,6 @@ namespace Persistence.Migrations
                     b.HasIndex("TimeModeId");
 
                     b.ToTable("WeekDayPlans");
->>>>>>> master
                 });
 
             modelBuilder.Entity("Domain.Users.Customer", b =>
@@ -851,8 +845,6 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("TimeMode");
-<<<<<<< HEAD
-=======
                 });
 
             modelBuilder.Entity("Domain.Salons.WeekDayPlan", b =>
@@ -870,7 +862,6 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("TimeMode");
->>>>>>> master
                 });
 
             modelBuilder.Entity("Domain.Users.Customer", b =>

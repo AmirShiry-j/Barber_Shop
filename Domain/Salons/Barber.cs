@@ -21,10 +21,7 @@ namespace Domain.Salons
         public int? SalonId { get; set; }
         public DateTime TimeCreate { get; set; }
         public ICollection<TimeMode> TimeModes { get; set; }
-<<<<<<< HEAD
         public ICollection<Service> Services { get; set; }
-=======
         public ICollection<WeekDayPlan> WeekDayPlans { get; set; }
->>>>>>> master
     }
 }

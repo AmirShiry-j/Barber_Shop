@@ -36,11 +36,9 @@ namespace Persistence.Contexts
         public DbSet<FavoriteSalon> FavoriteSalons { get; set; }
         public DbSet<TimeMode> TimeModes { get; set; }
         public DbSet<TimeModeItem> TimeModeItems { get; set; }
-<<<<<<< HEAD
+
         public DbSet<Service> Services { get; set; }
-=======
         public DbSet<WeekDayPlan> WeekDayPlans { get; set; }
->>>>>>> master
         //Address
         public DbSet<Address> addresses { get; set; }
         public DbSet<United> Uniteds { get; set; }
@@ -171,22 +169,20 @@ namespace Persistence.Contexts
             builder.ApplyConfiguration(new SalonImageConfig());
             builder.ApplyConfiguration(new TimeModeConfig());
             builder.ApplyConfiguration(new TimeModeItemConfig());
-<<<<<<< HEAD
+
             builder.ApplyConfiguration(new ServiceConfig());
-=======
+
             builder.ApplyConfiguration(new WeekDayPlanConfig());
->>>>>>> master
+
             //Addresses
             builder.ApplyConfiguration(new AddressConfig());
             builder.ApplyConfiguration(new UnitedConfig());
             builder.ApplyConfiguration(new CityConfig());
             //Comments
             builder.ApplyConfiguration(new CommentConfig());
-<<<<<<< HEAD
-=======
+
             
             base.OnModelCreating(builder);
->>>>>>> master
         }
     }
 }

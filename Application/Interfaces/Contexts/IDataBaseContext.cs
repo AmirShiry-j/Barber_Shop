@@ -26,11 +26,8 @@ namespace Application.Interfaces.Contexts
         DbSet<FavoriteSalon> FavoriteSalons { get; set; }
         DbSet<TimeMode> TimeModes { get; set; }
         DbSet<TimeModeItem> TimeModeItems { get; set; }
-<<<<<<< HEAD
         DbSet<Service> Services { get; set; }
-=======
         DbSet<WeekDayPlan> WeekDayPlans { get; set; }
->>>>>>> master
         //Address
         public DbSet<Address> addresses { get; set; }
         public DbSet<United> Uniteds { get; set; }
