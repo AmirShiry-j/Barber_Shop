@@ -26,6 +26,7 @@ namespace Application.FavoriteSalonService.Query
         {
             //Get FavoriteSalons
             var favoriteSalons = _dbContext.FavoriteSalons
+                .Where(p=>p.UserId.Equals(UserId))
                 .Include(p => p.Salon)
                 .ThenInclude(p => p.SalonImages)
                 .Select(p => new FavoriteSalonDto

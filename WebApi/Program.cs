@@ -23,6 +23,7 @@ using Application.TimeModeService.Command;
 using Application.TimeModeService.Query;
 using Application.TokenService;
 using Application.UserService;
+using Application.WeekDayPlanService.Command;
 using Domain.Users;
 using ExceptionHandling;
 using Infrastructure.EmailService;
@@ -249,12 +250,19 @@ builder.Services.AddScoped<IDeleteTimeModeItemService, DeleteTimeModeItemService
 builder.Services.AddScoped<IGetTimeModeItemService, GetTimeModeItemService>();
 builder.Services.AddScoped<IGetAllItemsInTimeModeService, GetAllItemsInTimeModeService>();
 
+<<<<<<< HEAD
 //Service Barber services
 builder.Services.AddScoped<IAddServiceBarberService, AddServiceBarberService>();
 builder.Services.AddScoped<IEditServiceBarberService, EditServiceBarberService>();
 builder.Services.AddScoped<IDeleteServiceBarberService, DeleteServiceBarberService>();
 builder.Services.AddScoped<IGetServiceBarberByIdService, GetServiceBarberByIdService>();
 builder.Services.AddScoped<IGetAllServiceBarberForBarber_Service, GetAllServiceBarberForBarber_Service>();
+=======
+//WeekDayPlan Services
+builder.Services.AddScoped<ISetTimeModeToDaysOfWeekService, SetTimeModeToDaysOfWeekService>();
+builder.Services.AddScoped<IUnSetTimeModeToDaysOfWeekService, UnSetTimeModeToDaysOfWeekService>();
+
+>>>>>>> master
 
 
 //Service email

@@ -223,6 +223,20 @@
             <param name="SalonId"></param>
             <returns></returns>
         </member>
+        <member name="M:WebApi.Controllers.PlanForDaysOfWeekController.Post(WebApi.ModelsAndDtoes.Salon.SetPlanApiDto)">
+            <summary>
+            تنظیم برنامه زمانی برای روزهای هفته (Auth)
+            </summary>
+            <param name="Dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.PlanForDaysOfWeekController.Delete(WebApi.ModelsAndDtoes.Salon.UnSetPlanApiDto)">
+            <summary>
+            برای از تنظیم خارج کردن یک برنامه زمانی برای روزهایی از هفته (Auth)
+            </summary>
+            <param name="Dto"></param>
+            <returns></returns>
+        </member>
         <member name="M:WebApi.Controllers.ProfileController.Get">
             <summary>
             بر گردوندن اطلاعات پروفایل (Auth)

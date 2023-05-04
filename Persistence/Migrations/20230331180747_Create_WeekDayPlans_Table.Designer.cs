@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230331180747_Create_WeekDayPlans_Table")]
+    partial class Create_WeekDayPlans_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -277,47 +280,6 @@ namespace Persistence.Migrations
                     b.HasIndex("SalonId");
 
                     b.ToTable("SalonImages");
-<<<<<<< HEAD
-                });
-
-            modelBuilder.Entity("Domain.Salons.Service", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BarberId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("TimeCreate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<DateTime?>("TimeLastUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BarberId");
-
-                    b.ToTable("Services");
-=======
->>>>>>> master
                 });
 
             modelBuilder.Entity("Domain.Salons.TimeMode", b =>
@@ -383,8 +345,6 @@ namespace Persistence.Migrations
                     b.HasIndex("TimeModeId");
 
                     b.ToTable("TimeModeItems");
-<<<<<<< HEAD
-=======
                 });
 
             modelBuilder.Entity("Domain.Salons.WeekDayPlan", b =>
@@ -412,7 +372,6 @@ namespace Persistence.Migrations
                     b.HasIndex("TimeModeId");
 
                     b.ToTable("WeekDayPlans");
->>>>>>> master
                 });
 
             modelBuilder.Entity("Domain.Users.Customer", b =>
@@ -822,17 +781,6 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Salons.Service", b =>
-                {
-                    b.HasOne("Domain.Salons.Barber", "Barber")
-                        .WithMany("Services")
-                        .HasForeignKey("BarberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Barber");
-                });
-
             modelBuilder.Entity("Domain.Salons.TimeMode", b =>
                 {
                     b.HasOne("Domain.Salons.Barber", null)
@@ -851,8 +799,6 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("TimeMode");
-<<<<<<< HEAD
-=======
                 });
 
             modelBuilder.Entity("Domain.Salons.WeekDayPlan", b =>
@@ -870,7 +816,6 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("TimeMode");
->>>>>>> master
                 });
 
             modelBuilder.Entity("Domain.Users.Customer", b =>
@@ -963,8 +908,6 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Salons.Barber", b =>
                 {
-                    b.Navigation("Services");
-
                     b.Navigation("TimeModes");
 
                     b.Navigation("User")
