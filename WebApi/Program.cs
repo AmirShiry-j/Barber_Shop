@@ -264,6 +264,7 @@ builder.Services.AddScoped<IUnSetTimeModeToDaysOfWeekService, UnSetTimeModeToDay
 
 //Turn Service
 builder.Services.AddScoped<ITakeTurnService, TakeTurnService>();
+builder.Services.AddScoped<IGiveBackTurnService, GiveBackTurnService>();
 
 //Service email
 builder.Services.AddScoped<IEmailService, EmailService>();
