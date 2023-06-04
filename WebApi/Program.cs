@@ -22,6 +22,7 @@ using Application.TimeModeItemService.Query;
 using Application.TimeModeService.Command;
 using Application.TimeModeService.Query;
 using Application.TokenService;
+using Application.TurnService.Command;
 using Application.UserService;
 using Application.WeekDayPlanService.Command;
 using Domain.Users;
@@ -261,7 +262,8 @@ builder.Services.AddScoped<IGetAllServiceBarberForBarber_Service, GetAllServiceB
 builder.Services.AddScoped<ISetTimeModeToDaysOfWeekService, SetTimeModeToDaysOfWeekService>();
 builder.Services.AddScoped<IUnSetTimeModeToDaysOfWeekService, UnSetTimeModeToDaysOfWeekService>();
 
-
+//Turn Service
+builder.Services.AddScoped<ITakeTurnService, TakeTurnService>();
 
 //Service email
 builder.Services.AddScoped<IEmailService, EmailService>();
