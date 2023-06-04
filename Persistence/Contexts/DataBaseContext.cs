@@ -39,6 +39,7 @@ namespace Persistence.Contexts
 
         public DbSet<Service> Services { get; set; }
         public DbSet<WeekDayPlan> WeekDayPlans { get; set; }
+        public DbSet<Turn> Turns { get; set; }
         //Address
         public DbSet<Address> addresses { get; set; }
         public DbSet<United> Uniteds { get; set; }
@@ -98,7 +99,7 @@ namespace Persistence.Contexts
 
             builder.Entity<TimeMode>()
     .HasMany(p => p.WeekDayPlans)
-    .WithOne(p=>p.TimeMode)
+    .WithOne(p => p.TimeMode)
     .HasForeignKey(p => p.TimeModeId)
     .IsRequired(true)
     .OnDelete(DeleteBehavior.ClientCascade);
@@ -174,6 +175,8 @@ namespace Persistence.Contexts
 
             builder.ApplyConfiguration(new WeekDayPlanConfig());
 
+            builder.ApplyConfiguration(new TurnConfig());
+
             //Addresses
             builder.ApplyConfiguration(new AddressConfig());
             builder.ApplyConfiguration(new UnitedConfig());
@@ -181,7 +184,7 @@ namespace Persistence.Contexts
             //Comments
             builder.ApplyConfiguration(new CommentConfig());
 
-            
+
             base.OnModelCreating(builder);
         }
     }

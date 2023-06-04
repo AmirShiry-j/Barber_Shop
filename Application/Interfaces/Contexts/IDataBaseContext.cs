@@ -28,6 +28,7 @@ namespace Application.Interfaces.Contexts
         DbSet<TimeModeItem> TimeModeItems { get; set; }
         DbSet<Service> Services { get; set; }
         DbSet<WeekDayPlan> WeekDayPlans { get; set; }
+        DbSet<Turn> Turns { get; set; }
         //Address
         public DbSet<Address> addresses { get; set; }
         public DbSet<United> Uniteds { get; set; }

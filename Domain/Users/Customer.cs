@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Salons;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,6 @@ namespace Domain.Users
         //Navs
         public User User { get; set; }
         public string UserId { get; set; }
+        public ICollection<Turn> Turns { get; set; }
     }
 }
