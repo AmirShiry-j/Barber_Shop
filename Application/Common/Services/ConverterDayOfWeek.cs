@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Application.Common
+namespace Application.Common.Services
 {
     public class ConverterDayOfWeek
     {

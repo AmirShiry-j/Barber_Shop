@@ -1,4 +1,5 @@
-﻿using Application.Common;
+﻿using Application.Common.Services;
+using Application.Common;
 using Application.Interfaces.Contexts;
 using AutoMapper;
 using Domain.Salons;
